@@ -82,7 +82,7 @@ class BoardTestsExp {
 	 * Test targets with several rolls and start locations
 	 */
 	@Test
-	public void testTargetsNormal() {
+	public void testTargetsNormal3() {
 		TestBoardCell cell = board.getCell(0, 0);
 		board.calcTargets(cell, 3);
 		Set<TestBoardCell> targets = board.getTargets();
@@ -93,6 +93,17 @@ class BoardTestsExp {
 		Assert.assertTrue(targets.contains(board.getCell(1, 2)));
 		Assert.assertTrue(targets.contains(board.getCell(0, 3)));
 		Assert.assertTrue(targets.contains(board.getCell(1, 0)));
+	}
+	@Test
+	public void testTargetsNormal1() {
+		TestBoardCell cell = board.getCell(2, 1);
+		board.calcTargets(cell, 1);
+		Set<TestBoardCell> targets = board.getTargets();
+		Assert.assertEquals(4,  targets.size());
+		Assert.assertTrue(targets.contains(board.getCell(2, 0)));
+		Assert.assertTrue(targets.contains(board.getCell(1, 1)));
+		Assert.assertTrue(targets.contains(board.getCell(2, 2)));
+		Assert.assertTrue(targets.contains(board.getCell(3, 1)));
 	}
 	
 	/*
@@ -111,4 +122,7 @@ class BoardTestsExp {
 		Assert.assertTrue(targets.contains(board.getCell(2, 2)));
 		Assert.assertTrue(targets.contains(board.getCell(3, 3)));
 	}
+
+	
+	
 }
