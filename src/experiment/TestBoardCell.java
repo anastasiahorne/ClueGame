@@ -21,7 +21,6 @@ public class TestBoardCell {
 	
 	// Setter to add a cell to the adjacency list
 	public void addAdjacency(TestBoardCell cell) {
-		adjList.add(cell);
 	}
 	
 	// Returns the adjacency list for the cell
