@@ -1,16 +1,26 @@
 package experiment;
 
-import static org.junit.jupiter.api.Assertions.*;
+import java.util.Set;
 
-import org.junit.jupiter.api.Test;
-
-class TestBoard {
+public class TestBoard {
 	
-	
-
-	@Test
-	void test() {
-		fail("Not yet implemented");
+	// Constructor that sets up the board
+	public TestBoard() {
+		
 	}
-
+	
+	// Calculates legal targets for a move from startCell of length pathlength
+	public void calcTargets(TestBoardCell startCell, int pathLength) {
+		
+	}
+	
+	// Gets the targets last created by calcTargets()
+	public Set<TestBoardCell> getTargets() {
+		
+	}
+	
+	// Returns the cell from the board at row, col
+	public TestBoardCell getCell(int row, int col) {
+		
+	}
 }

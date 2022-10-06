@@ -1,12 +1,8 @@
 package experiment;
 
-import static org.junit.jupiter.api.Assertions.*;
-
 import java.util.Set;
 
-import org.junit.jupiter.api.Test;
-
-class TestBoardCell {
+public class TestBoardCell {
 	int row;
 	int column;
 	Set<TestBoardCell> adjList;
@@ -43,3 +39,4 @@ class TestBoardCell {
 	}
 
 }
+
