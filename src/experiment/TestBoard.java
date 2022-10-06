@@ -14,7 +14,7 @@ public class TestBoard {
 	
 	// Calculates legal targets for a move from startCell of length pathlength
 	public void calcTargets(TestBoardCell startCell, int pathLength) {
-	
+		
 	}
 	
 	// Gets the targets last created by calcTargets()
