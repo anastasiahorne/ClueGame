@@ -17,6 +17,11 @@ public class TestBoard {
 		grid = new TestBoardCell[ROWS][COLS];
 		targets = new HashSet<TestBoardCell>();
 		visited = new HashSet<TestBoardCell>();
+		for (int i = 0; i < ROWS; i++) {
+			for (int j = 0; j < COLS; j++) {
+				grid[i][j] = new TestBoardCell(i, j);
+			}
+		}
 	}
 	
 	// Calculates legal targets for a move from startCell of length pathlength
