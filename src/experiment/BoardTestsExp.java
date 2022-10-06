@@ -1,5 +1,14 @@
 package experiment;
 
-public class BoardTestsExp {
+import static org.junit.jupiter.api.Assertions.*;
+
+import org.junit.jupiter.api.Test;
+
+class BoardTestsExp {
+
+	@Test
+	void test() {
+		fail("Not yet implemented");
+	}
 
 }
