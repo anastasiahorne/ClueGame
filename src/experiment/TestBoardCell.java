@@ -15,8 +15,8 @@ public class TestBoardCell {
 		row = r;
 		column = c;
 		adjList = new HashSet<TestBoardCell>();
-		isRoom = getRoom();
-		isOccupied = getOccupied();
+		isRoom = false;
+		isOccupied = false;
 	}
 	
 	// Setter to add a cell to the adjacency list
