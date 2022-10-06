@@ -21,10 +21,25 @@ class TestBoardCell {
 	public void addAdjacency(TestBoardCell cell) {
 		adjList.add(cell);
 	}
-
-	@Test
-	void test() {
-		fail("Not yet implemented");
+	
+	// Indicates that a cell is part of a room
+	public void setRoom(boolean b) {
+		
+	}
+	
+	// Get whether or not a cell is part of a room
+	public boolean isRoom() {
+		return false;
+	}
+	
+	// Setter for indicating a cell is occupied by another player
+	public void setOccupied(boolean b) {
+		
+	}
+	
+	// Getter for indicating a cell is occupied by another player
+	public boolean getOccupied() {
+		return false;
 	}
 
 }
