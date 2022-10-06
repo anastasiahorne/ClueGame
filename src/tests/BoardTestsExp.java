@@ -26,11 +26,56 @@ class BoardTestsExp {
 	 * Test centers and edges
 	 */
 	@Test
-	public void testAdjacency() {
+	public void testAdjacencyTopLeft() {
+		// Test top left cell adjacency list
 		TestBoardCell cell = board.getCell(0, 0);
 		Set<TestBoardCell> testList = cell.getAdjList();
 		Assert.assertTrue(testList.contains(board.getCell(1, 0)));
 		Assert.assertTrue(testList.contains(board.getCell(0, 1)));
+		Assert.assertEquals(2, testList.size());
+	}
+	
+	@Test
+	public void testAdjacencyBottomRight() {
+		// Test bottom right cell adjacency list
+		TestBoardCell cell = board.getCell(3, 3);
+		Set<TestBoardCell> testList = cell.getAdjList();
+		Assert.assertTrue(testList.contains(board.getCell(3, 2)));
+		Assert.assertTrue(testList.contains(board.getCell(2, 3)));
+		Assert.assertEquals(2, testList.size());
+	}
+	
+	@Test
+	public void testAdjacencyRightEdge() {
+		// Test right edge cell adjacency list
+		TestBoardCell cell = board.getCell(1, 3);
+		Set<TestBoardCell> testList = cell.getAdjList();
+		Assert.assertTrue(testList.contains(board.getCell(0, 3)));
+		Assert.assertTrue(testList.contains(board.getCell(1, 2)));
+		Assert.assertTrue(testList.contains(board.getCell(2, 3)));
+		Assert.assertEquals(2, testList.size());
+	}
+	
+	@Test
+	public void testAdjacencyLeftEdge() {
+		// Test left edge cell adjacency list
+		TestBoardCell cell = board.getCell(2, 0);
+		Set<TestBoardCell> testList = cell.getAdjList();
+		Assert.assertTrue(testList.contains(board.getCell(1, 0)));
+		Assert.assertTrue(testList.contains(board.getCell(2, 1)));
+		Assert.assertTrue(testList.contains(board.getCell(3, 0)));
+		Assert.assertEquals(2, testList.size());
+	}
+	
+	@Test
+	public void testAdjacencyCenter() {
+		// Test left edge cell adjacency list
+		TestBoardCell cell = board.getCell(2, 2);
+		Set<TestBoardCell> testList = cell.getAdjList();
+		Assert.assertTrue(testList.contains(board.getCell(1, 2)));
+		Assert.assertTrue(testList.contains(board.getCell(2, 3)));
+		Assert.assertTrue(testList.contains(board.getCell(3, 2)));
+		Assert.assertTrue(testList.contains(board.getCell(2, 1)));
 		Assert.assertEquals(2, testList.size());
 	}
 	
