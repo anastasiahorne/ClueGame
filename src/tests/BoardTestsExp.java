@@ -14,7 +14,7 @@ import experiment.TestBoardCell;
 class BoardTestsExp {
 	TestBoard board;
 	
-	// @BeforeEach method to set up your BoardExp
+	// @BeforeEach method to set up
 	@BeforeEach
 	public void setUp() {
 		// board should create adjacency list
@@ -51,6 +51,9 @@ class BoardTestsExp {
 		Assert.assertTrue(targets.contains(board.getCell(1, 0)));
 	}
 	
+	/*
+	 * Test targets with occupied cell
+	 */
 	@Test
 	public void testTargetsMixed() {
 		// set up occupied cells
