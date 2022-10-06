@@ -9,7 +9,18 @@ public class TestBoard {
 	
 	// Constructor that sets up the board
 	public TestBoard() {
+<<<<<<< HEAD
 		
+=======
+		grid = new TestBoardCell[ROWS][COLS];
+		targets = new HashSet<TestBoardCell>();
+		visited = new HashSet<TestBoardCell>();
+		for (int i = 0; i < ROWS; i++) {
+			for (int j = 0; j < COLS; j++) {
+				grid[i][j] = new TestBoardCell(i, j);
+			}
+		}
+>>>>>>> 970f81b59e3ba2944fe7629111595ff02b38c11f
 	}
 	
 	// Calculates legal targets for a move from startCell of length pathlength
