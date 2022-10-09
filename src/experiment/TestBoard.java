@@ -56,6 +56,7 @@ public class TestBoard {
 				if (numSteps == 1) {
 					targets.add(adjCell);
 				}
+				//recursive call to determine possible targets if our roll is >1
 				else {
 					findAllTargets(adjCell, numSteps - 1);
 				}
