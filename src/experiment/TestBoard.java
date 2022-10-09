@@ -48,7 +48,7 @@ public class TestBoard {
 	
 	public void findAllTargets(TestBoardCell thisCell, int numSteps) {
 		for (TestBoardCell adjCell: thisCell.adjList) {
-			if (!visited.contains(adjCell) && !adjCell.getIsRoom() && !adjCell.getIsOccupied()) {
+			if (!visited.contains(adjCell) && !adjCell.getIsOccupied()) {
 				visited.add(adjCell);
 				if (numSteps == 1) {
 					targets.add(adjCell);
