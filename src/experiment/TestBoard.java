@@ -5,7 +5,6 @@ import java.util.Map;
 import java.util.Set;
 
 public class TestBoard {
-	private Map<TestBoardCell, Set<TestBoardCell>> adjMtx;
 	private Set<TestBoardCell> targets;
 	private Set<TestBoardCell> visited;
 	private TestBoardCell[][] grid;
@@ -22,12 +21,27 @@ public class TestBoard {
 				grid[i][j] = new TestBoardCell(i, j);
 			}
 		}
+		// Create adjacency list for each cell in the grid
+		for (int i = 0; i < ROWS; i++) {
+			for (int j = 0; j < COLS; j++) {
+				if (i != 0) {
+					grid[i][j].addAdjacency(grid[i-1][j]);
+				}
+				if (i != ROWS - 1) {
+					grid[i][j].addAdjacency(grid[i+1][j]);
+				}
+				if (j != 0) {
+					grid[i][j].addAdjacency(grid[i][j-1]);
+				}
+				if (j != COLS - 1) {
+					grid[i][j].addAdjacency(grid[i][j+1]);
+				}
+			}
+		}
 	}
 	
 	// Calculates legal targets for a move from startCell of length pathlength
 	public void calcTargets(TestBoardCell startCell, int pathLength) {
-		visited.clear();
-		targets.clear();
 		visited.add(startCell);
 		findAllTargets(startCell, pathLength);
 	}
