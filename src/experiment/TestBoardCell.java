@@ -21,6 +21,7 @@ public class TestBoardCell {
 	
 	// Setter to add a cell to the adjacency list
 	public void addAdjacency(TestBoardCell cell) {
+		adjList.add(cell);
 	}
 	
 	// Returns the adjacency list for the cell
@@ -29,22 +30,22 @@ public class TestBoardCell {
 	}
 	
 	// Indicates that a cell is part of a room
-	public void setRoom(boolean room) {
+	public void setIsRoom(boolean room) {
 		isRoom = room;
 	}
 	
 	// Get whether or not a cell is part of a room
-	public boolean getRoom() {
+	public boolean getIsRoom() {
 		return isRoom;
 	}
 	
 	// Setter for indicating a cell is occupied by another player
-	public void setOccupied(boolean occupied) {
+	public void setIsOccupied(boolean occupied) {
 		isOccupied = occupied;
 	}
 	
 	// Getter for indicating a cell is occupied by another player
-	public boolean getOccupied() {
+	public boolean getIsOccupied() {
 		return isOccupied;
 	}
 

@@ -126,8 +126,8 @@ class BoardTestsExp {
 	@Test
 	public void testTargetsMixed() {
 		// set up occupied cells
-		board.getCell(0, 2).setOccupied(true);
-		board.getCell(1, 2).setRoom(true);
+		board.getCell(0, 2).setIsOccupied(true);
+		board.getCell(1, 2).setIsRoom(true);
 		TestBoardCell cell = board.getCell(0, 3);
 		board.calcTargets(cell, 3);
 		Set<TestBoardCell> targets = board.getTargets();
@@ -139,8 +139,8 @@ class BoardTestsExp {
 	@Test
 	public void testTargetsMixed4() {
 		TestBoardCell cell = board.getCell(1, 1);
-		board.getCell(1, 0).setOccupied(true);
-		board.getCell(2, 0).setOccupied(true);
+		board.getCell(1, 0).setIsOccupied(true);
+		board.getCell(2, 0).setIsOccupied(true);
 		board.calcTargets(cell, 4);
 		Set<TestBoardCell> targets = board.getTargets();
 		Assert.assertEquals(6,  targets.size());

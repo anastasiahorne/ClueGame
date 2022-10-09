@@ -26,7 +26,25 @@ public class TestBoard {
 	
 	// Calculates legal targets for a move from startCell of length pathlength
 	public void calcTargets(TestBoardCell startCell, int pathLength) {
-		
+		visited.clear();
+		targets.clear();
+		visited.add(startCell);
+		findAllTargets(startCell, pathLength);
+	}
+	
+	public void findAllTargets(TestBoardCell thisCell, int numSteps) {
+		for (TestBoardCell adjCell: thisCell.adjList) {
+			if (!visited.contains(adjCell) && !adjCell.getIsRoom() && !adjCell.getIsOccupied()) {
+				visited.add(adjCell);
+				if (numSteps == 1) {
+					targets.add(adjCell);
+				}
+				else {
+					findAllTargets(adjCell, numSteps - 1);
+				}
+				visited.remove(adjCell);
+			}
+		}
 	}
 	
 	// Gets the targets last created by calcTargets()
