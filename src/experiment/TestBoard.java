@@ -51,6 +51,7 @@ public class TestBoard {
 			if (adjCell.getIsRoom()) {
 				targets.add(adjCell);
 			}
+			//add cell if not yet visited, and it is an open space
 			if (!visited.contains(adjCell) && !adjCell.getIsOccupied() && !adjCell.getIsRoom()) {
 				visited.add(adjCell);
 				if (numSteps == 1) {
