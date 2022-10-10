@@ -33,14 +33,10 @@ public class Board {
      /*
       * initialize the board (since we are using singleton pattern)
       */
-     public void initialize(){
-    	 roomMap=new HashMap<>();
+     public void initialize() throws FileNotFoundException{
+    	 this.loadSetupConfig();
+    	 this.loadLayoutConfig();
     	 grid = new BoardCell[numRows][numColumns];
- 		for (int i = 0; i < numRows; i++) {
- 			for (int j = 0; j < numColumns; j++) {
- 				grid[i][j] = new BoardCell(i, j);
- 			}
- 		}
      }
      
  	public void setConfigFiles(String layoutConfigFile,String setupConfigFile) {
@@ -48,7 +44,7 @@ public class Board {
  		this.setupConfigFile = setupConfigFile;
  	}
  
-	
+	//load our txt file so we know what character represents what room, and our room names
 	public void loadSetupConfig() throws FileNotFoundException{
 		FileReader reader=new FileReader(setupConfigFile);
 		Scanner in=new Scanner(reader);
@@ -70,7 +66,9 @@ public class Board {
 		in.close();
 		}
 	
+//load our csv file, so we know where our rooms are, where our center etc.	
 	public void loadLayoutConfig() throws FileNotFoundException {
+		roomMap=new HashMap<>();
 		FileReader reader=new FileReader(layoutConfigFile);
 		Scanner in=new Scanner(reader);
 		in.useDelimiter(",");
