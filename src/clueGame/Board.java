@@ -76,6 +76,7 @@ public class Board {
 		for (int i=0;i<numRows;++i) {
 			for (int j=0;j<numColumns;++j) {
 				designation=in.next();
+				//is not a center, or a name, or a door
 				if (designation.length()==1) {
 					
 				}
