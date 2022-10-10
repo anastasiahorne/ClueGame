@@ -42,12 +42,11 @@ public class Board {
  		}
      }
      
- 	public void setLayoutConfigFile(String layoutConfigFile) {
+ 	public void setConfigFiles(String layoutConfigFile,String setupConfigFile) {
  		this.layoutConfigFile = layoutConfigFile;
- 	}
- 	public void setSetupConfigFile(String setupConfigFile) {
  		this.setupConfigFile = setupConfigFile;
  	}
+ 
 	
 	//this should throw badconfig exception
 	public void loadSetupConfig() throws FileNotFoundException{
@@ -58,7 +57,7 @@ public class Board {
 		String Type;
 		while (in.hasNextLine()) {
 			String line=in.nextLine();
-			try {
+			
 				if (line.charAt(0)== '/') {
 					in.useDelimiter(", ");
 					Type=in.next();
@@ -67,10 +66,8 @@ public class Board {
 					roomMap.put(character,roomName);
 				}
 			}
-			catch(FileNotFoundException e) {
+		in.close();
 		}
-		
-	}
 	//this should throw badconfig exception
 	public void loadLayoutConfig() {
 		
