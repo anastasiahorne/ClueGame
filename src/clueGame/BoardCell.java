@@ -12,6 +12,10 @@ public class BoardCell {
 	private char secretPassge;
 	private Set<BoardCell> adjList;
 	
+	public BoardCell(int i, int j) {
+		// TODO Auto-generated constructor stub
+	}
+
 	public void addAdj(BoardCell adj) {
 		adjList.add(adj);
 	}
