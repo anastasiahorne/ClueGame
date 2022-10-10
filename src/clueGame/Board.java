@@ -16,7 +16,8 @@ public class Board {
 	private int numColumns;
 	private String layoutConfigFile;
 	private String setupConfigFile;
-	private Map<Character, String> roomMap;
+	private Map<Character, Room> roomMap;
+	private Map<Character,String> roomKey;
 	   /*
      * variable and methods used for singleton pattern
      */
@@ -52,6 +53,7 @@ public class Board {
 	public void loadSetupConfig() throws FileNotFoundException{
 		FileReader reader=new FileReader(setupConfigFile);
 		Scanner in=new Scanner(reader);
+		 roomKey=new HashMap<>();
 		char character;
 		String roomName;
 		String Type;
@@ -63,7 +65,7 @@ public class Board {
 					Type=in.next();
 					roomName=in.next();
 					character=in.nextLine().charAt(0);
-					roomMap.put(character,roomName);
+					roomKey.put(character,roomName);
 				}
 			}
 		in.close();
