@@ -49,7 +49,6 @@ public class Board {
  	}
  
 	
-	//this should throw badconfig exception
 	public void loadSetupConfig() throws FileNotFoundException{
 		FileReader reader=new FileReader(setupConfigFile);
 		Scanner in=new Scanner(reader);
@@ -70,8 +69,19 @@ public class Board {
 			}
 		in.close();
 		}
-	//this should throw badconfig exception
-	public void loadLayoutConfig() {
-		
+	
+	public void loadLayoutConfig() throws FileNotFoundException {
+		FileReader reader=new FileReader(layoutConfigFile);
+		Scanner in=new Scanner(reader);
+		in.useDelimiter(",");
+		String designation;
+		for (int i=0;i<numRows;++i) {
+			for (int j=0;j<numColumns;++j) {
+				designation=in.next();
+				if (designation.length()==1) {
+					
+				}
+			}
+		}
 	}
 }
