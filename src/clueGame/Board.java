@@ -18,7 +18,7 @@ public class Board {
 	private String setupConfigFile;
 	private Map<Character, Room> roomMap;
 	private Map<Character,String> roomKey;
-	   /*
+	  /*
      * variable and methods used for singleton pattern
      */
      private static Board theInstance = new Board();
