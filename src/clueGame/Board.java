@@ -18,26 +18,29 @@ public class Board {
 	private String setupConfigFile;
 	private Map<Character, Room> roomMap;
 	private Map<Character,String> roomKey;
-	  /*
+	
+	/*
      * variable and methods used for singleton pattern
      */
-     private static Board theInstance = new Board();
-     // constructor is private to ensure only one can be created
-     private Board() {
-            super() ;
-     }
-     // this method returns the only Board
-     public static Board getInstance() {
-            return theInstance;
-     }
-     /*
-      * initialize the board (since we are using singleton pattern)
-      */
-     public void initialize() throws FileNotFoundException{
-    	 this.loadSetupConfig();
-    	 this.loadLayoutConfig();
-    	 grid = new BoardCell[numRows][numColumns];
-     }
+    private static Board theInstance = new Board();
+    // constructor is private to ensure only one can be created
+    private Board() {
+    	super() ;
+    }
+    
+    // this method returns the only Board
+    public static Board getInstance() {
+    	return theInstance;
+    }
+    
+    /*
+     * initialize the board (since we are using singleton pattern)
+     */
+    public void initialize() throws FileNotFoundException{
+    	this.loadSetupConfig();
+    	this.loadLayoutConfig();
+    	grid = new BoardCell[numRows][numColumns];
+    }
      
  	public void setConfigFiles(String layoutConfigFile,String setupConfigFile) {
  		this.layoutConfigFile = layoutConfigFile;
@@ -48,13 +51,12 @@ public class Board {
 	public void loadSetupConfig() throws FileNotFoundException{
 		FileReader reader=new FileReader(setupConfigFile);
 		Scanner in=new Scanner(reader);
-		 roomKey=new HashMap<>();
+		roomKey=new HashMap<>();
 		char character;
 		String roomName;
 		String Type;
 		while (in.hasNextLine()) {
 			String line=in.nextLine();
-			
 				if (line.charAt(0)== '/') {
 					in.useDelimiter(", ");
 					Type=in.next();
@@ -62,11 +64,11 @@ public class Board {
 					character=in.nextLine().charAt(0);
 					roomKey.put(character,roomName);
 				}
-			}
-		in.close();
 		}
+		in.close();
+	}
 	
-//load our csv file, so we know where our rooms are, where our center etc.	
+	//load our csv file, so we know where our rooms are, where our center etc.	
 	public void loadLayoutConfig() throws FileNotFoundException {
 		roomMap=new HashMap<>();
 		FileReader reader=new FileReader(layoutConfigFile);
@@ -83,4 +85,3 @@ public class Board {
 			}
 		}
 	}
-}
