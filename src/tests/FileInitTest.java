@@ -148,4 +148,21 @@ class FileInitTest {
 			assertFalse( cell.isLabel() );
 			
 		}
+		
+		@Test
+		public void testNumRooms() {
+			int count = board.getNumRooms();
+			assertEquals(9, count);
+		}
+		
+		@Test
+		public void testFirstAndLastInFile() {
+			
+		}
+		
+		@Test
+		public void testRoomSymbol() {
+			
+		}
+		
 }

@@ -116,4 +116,8 @@ public class Board {
 	public Room getRoom(BoardCell cell) {
 		return new Room();
 	}
+
+	public int getNumRooms() {
+		return 0;
+	}
 }
