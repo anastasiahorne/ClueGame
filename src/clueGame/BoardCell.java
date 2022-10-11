@@ -62,5 +62,9 @@ public class BoardCell {
 			return 0;
 		}
 
+		public char getInitial() {
+			return initial;
+		}
+
 		
 }

@@ -113,7 +113,8 @@ public class Board {
 	}
 
 	public Room getRoom(BoardCell cell) {
-		return new Room();
+		char symbol = cell.getInitial();
+		return getRoom(symbol);
 	}
 
 	public int getNumRooms() {
