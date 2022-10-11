@@ -100,7 +100,7 @@ public class Board {
 	}
 
 	public Room getRoom(char c) {
-		return new Room();
+		return roomMap.get(c);
 	}
 
 	public BoardCell getCell(int i, int j) {
