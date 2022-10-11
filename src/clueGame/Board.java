@@ -83,11 +83,24 @@ public class Board {
 			Scanner in=new Scanner(reader);
 			List<String[]> cellValues=new ArrayList<>();
 			while (in.hasNextLine()) {
-				numRows+=1;
 				cellValues.add(in.nextLine().split(","));
 			}
-			numColumns=cellValues.size() / numRows;
+			numRows=cellValues.size();
+			numColumns=cellValues.get(0).length;
 			in.close();
+			
+			grid=new BoardCell[numRows][numColumns];
+			//iterate first through rows then columns
+			int listLocation=0;
+			for (int i=0;i<numRows;++i) {
+				String[] row=cellValues.get(listLocation);
+				for (int j=0;j<numColumns;++j) {
+					String cellData=row[j];
+					if (cellData.length()==1) {
+						
+					}
+				}
+			}
 		}
 		catch (Exception e) {
 			System.out.println("Could not find " + layoutConfigFile);
