@@ -157,16 +157,16 @@ class FileInitTest {
 		
 		@Test
 		public void testRoomSymbol() {
-			assertEquals('T', board.getRoom("CTLM"));
-			assertEquals('K', board.getRoom("CoorsTek"));
-			assertEquals('M', board.getRoom("Marquez"));
-			assertEquals('B', board.getRoom("Brown"));
-			assertEquals('C', board.getRoom("Coolbaugh"));
-			assertEquals('G', board.getRoom("Green Center"));
-			assertEquals('S', board.getRoom("Stratton"));
-			assertEquals('L', board.getRoom("Library"));
-			assertEquals('H', board.getRoom("Chauvenet"));
-			assertEquals('W', board.getRoom("Walkway"));
+			assertEquals('T', board.getRoom("CTLM").getSymbol());
+			assertEquals('K', board.getRoom("CoorsTek").getSymbol());
+			assertEquals('M', board.getRoom("Marquez").getSymbol());
+			assertEquals('B', board.getRoom("Brown").getSymbol());
+			assertEquals('C', board.getRoom("Coolbaugh").getSymbol());
+			assertEquals('G', board.getRoom("Green Center").getSymbol());
+			assertEquals('S', board.getRoom("Stratton").getSymbol());
+			assertEquals('L', board.getRoom("Library").getSymbol());
+			assertEquals('H', board.getRoom("Chauvenet").getSymbol());
+			assertEquals('W', board.getRoom("Walkway").getSymbol());
 		}
 		
 }

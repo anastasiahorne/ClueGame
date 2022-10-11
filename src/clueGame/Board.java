@@ -19,7 +19,6 @@ public class Board {
 	private String layoutConfigFile;
 	private String setupConfigFile;
 	private Map<Character, Room> roomMap;
-	private int numRooms;
 	
 	/*
      * variable and methods used for singleton pattern
@@ -85,8 +84,11 @@ public class Board {
 			while (in.hasNextLine()) {
 				cellValues.add(in.nextLine().split(","));
 			}
+<<<<<<< HEAD
+=======
 			numRows=cellValues.size();
 			numColumns=cellValues.get(0).length;
+>>>>>>> a57331f2a118891ac6c51e7efcd867ec70856412
 			in.close();
 			
 			grid=new BoardCell[numRows][numColumns];
@@ -157,8 +159,23 @@ public class Board {
 		return getRoom(symbol);
 	}
 	
-	// Return the number of rooms on the board
+	// Return the number of rooms on the board by counting the elements in the map
 	public int getNumRooms() {
-		return numRooms;
+		return roomMap.size();
+	}
+	
+	// Return the room that has the roomName as its label
+	public Room getRoom(String roomName) {
+		try {
+			for (Room value: roomMap.values()) {
+				if (value.getName().equals(roomName)) {
+					return value;
+				}
+			}
+		}
+		catch (Exception e) {
+			System.out.println("No room exists with label " + roomName);
+		}
+		return null;
 	}
 }
