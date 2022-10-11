@@ -84,7 +84,27 @@ public class Board {
 			while (in.hasNextLine()) {
 				cellValues.add(in.nextLine().split(","));
 			}
+<<<<<<< HEAD
+=======
+			numRows=cellValues.size();
+			numColumns=cellValues.get(0).length;
+>>>>>>> a57331f2a118891ac6c51e7efcd867ec70856412
 			in.close();
+			
+			grid=new BoardCell[numRows][numColumns];
+			//iterate first through rows then columns
+			int listLocation=0;
+			for (int i=0;i<numRows;++i) {
+				String[] row=cellValues.get(listLocation);
+				for (int j=0;j<numColumns;++j) {
+					String cellData=row[j];
+					if (cellData.length()==1) {
+						BoardCell cell= new BoardCell(i,j);
+						//might need to add more that sets the cell to have no door and also if it is a room or not
+						grid[i][j]=cell;
+					}
+				}
+			}
 		}
 		catch (Exception e) {
 			System.out.println("Could not find " + layoutConfigFile);
