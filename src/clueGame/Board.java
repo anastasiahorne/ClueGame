@@ -19,6 +19,7 @@ public class Board {
 	private String layoutConfigFile;
 	private String setupConfigFile;
 	private Map<Character, Room> roomMap;
+	private int numRooms;
 	
 	/*
      * variable and methods used for singleton pattern
@@ -92,33 +93,35 @@ public class Board {
 			System.out.println("Could not find " + layoutConfigFile);
 		}
 	}
-
+	
+	// Return the number of rows in the game board
 	public int getNumRows() {
 		return numRows;
 	}
 	
+	// Return the number of columns in the game board
 	public int getNumColumns() {
 		return numColumns;
 	}
-
+	
+	// Return the room given by the character that represents the room
 	public Room getRoom(char c) {
 		return roomMap.get(c);
 	}
-
+	
+	// Return the cell at position i, j
 	public BoardCell getCell(int i, int j) {
-		return new BoardCell(i, j);
+		return grid[i][j];
 	}
-
+	
+	// Return the room at the given cell on the board
 	public Room getRoom(BoardCell cell) {
 		char symbol = cell.getInitial();
 		return getRoom(symbol);
 	}
-
+	
+	// Return the number of rooms on the board
 	public int getNumRooms() {
-		return 0;
-	}
-
-	public Room getRoom(String string) {
-		return new Room();
+		return numRooms;
 	}
 }
