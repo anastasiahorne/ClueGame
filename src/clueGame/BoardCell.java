@@ -27,6 +27,14 @@ public class BoardCell {
 		isRoom = room;
 	}
 		
+	public void setDoorDirection(DoorDirection doorDirection) {
+		this.doorDirection = doorDirection;
+	}
+
+	public void setInitial(char initial) {
+		this.initial = initial;
+	}
+
 	// Get whether or not a cell is part of a room
 	public boolean getIsRoom() {
 		return isRoom;
