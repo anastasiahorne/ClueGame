@@ -157,7 +157,7 @@ class FileInitTest {
 		
 		@Test
 		public void testRoomSymbol() {
-			assertEquals('T', board.getRoom("CTLM"));
+			assertEquals('T', board.getRoom("CTLM").getInitial());
 			assertEquals('K', board.getRoom("CoorsTek"));
 			assertEquals('M', board.getRoom("Marquez"));
 			assertEquals('B', board.getRoom("Brown"));

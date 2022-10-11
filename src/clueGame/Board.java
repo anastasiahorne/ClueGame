@@ -122,4 +122,19 @@ public class Board {
 	public int getNumRooms() {
 		return numRooms;
 	}
+	
+	// Return the room that has the roomName as its label
+	public Room getRoom(String roomName) {
+		try {
+			for (Room value: roomMap.values()) {
+				if (value.getName().equals(roomName)) {
+					return value;
+				}
+			}
+		}
+		catch (Exception e) {
+			System.out.println("No room exists with label " + roomName);
+		}
+		return null;
+	}
 }
