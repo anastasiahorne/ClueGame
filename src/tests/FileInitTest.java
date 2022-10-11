@@ -156,13 +156,17 @@ class FileInitTest {
 		}
 		
 		@Test
-		public void testFirstAndLastInFile() {
-			
-		}
-		
-		@Test
 		public void testRoomSymbol() {
-			
+			assertEquals('T', board.getRoom("CTLM"));
+			assertEquals('K', board.getRoom("CoorsTek"));
+			assertEquals('M', board.getRoom("Marquez"));
+			assertEquals('B', board.getRoom("Brown"));
+			assertEquals('C', board.getRoom("Coolbaugh"));
+			assertEquals('G', board.getRoom("Green Center"));
+			assertEquals('S', board.getRoom("Stratton"));
+			assertEquals('L', board.getRoom("Library"));
+			assertEquals('H', board.getRoom("Chauvenet"));
+			assertEquals('W', board.getRoom("Walkway"));
 		}
 		
 }

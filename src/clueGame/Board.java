@@ -120,4 +120,8 @@ public class Board {
 	public int getNumRooms() {
 		return 0;
 	}
+
+	public Room getRoom(String string) {
+		return new Room();
+	}
 }
