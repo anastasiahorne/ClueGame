@@ -97,7 +97,9 @@ public class Board {
 				for (int j=0;j<numColumns;++j) {
 					String cellData=row[j];
 					if (cellData.length()==1) {
-						
+						BoardCell cell= new BoardCell(i,j);
+						//might need to add more that sets the cell to have no door and also if it is a room or not
+						grid[i][j]=cell;
 					}
 				}
 			}
