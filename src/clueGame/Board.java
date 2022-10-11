@@ -14,7 +14,7 @@ import experiment.TestBoardCell;
 public class Board {
 
 	private BoardCell[][] grid;
-	private int numRows=0;
+	private int numRows;
 	private int numColumns;
 	private String layoutConfigFile;
 	private String setupConfigFile;
@@ -83,10 +83,8 @@ public class Board {
 			Scanner in=new Scanner(reader);
 			List<String[]> cellValues=new ArrayList<>();
 			while (in.hasNextLine()) {
-				numRows+=1;
 				cellValues.add(in.nextLine().split(","));
 			}
-			numColumns=cellValues.size() / numRows;
 			in.close();
 		}
 		catch (Exception e) {
@@ -122,7 +120,7 @@ public class Board {
 	
 	// Return the number of rooms on the board
 	public int getNumRooms() {
-		return numRooms;
+		return roomMap.size();
 	}
 	
 	// Return the room that has the roomName as its label
