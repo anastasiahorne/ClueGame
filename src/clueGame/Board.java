@@ -17,7 +17,6 @@ public class Board {
 	private String layoutConfigFile;
 	private String setupConfigFile;
 	private Map<Character, Room> roomMap;
-	private Map<Character,String> roomKey;
 	
 	/*
      * variable and methods used for singleton pattern
@@ -52,7 +51,6 @@ public class Board {
 		try {
 			FileReader reader=new FileReader(setupConfigFile);
 			Scanner in=new Scanner(reader);
-			roomKey=new HashMap<>();
 			char character;
 			String roomName;
 			String Type;
@@ -63,7 +61,6 @@ public class Board {
 					Type=in.next();
 					roomName=in.next();
 					character=in.nextLine().charAt(0);
-					roomKey.put(character,roomName);
 				}
 			}
 			in.close();
