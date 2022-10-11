@@ -85,4 +85,24 @@ public class Board {
 			}
 		}
 	}
+
+	public int getNumRows() {
+		return numRows;
+	}
+	
+	public int getNumColumns() {
+		return numColumns;
+	}
+
+	public Room getRoom(char c) {
+		return new Room();
+	}
+
+	public BoardCell getCell(int i, int j) {
+		return new BoardCell(i, j);
+	}
+
+	public Room getRoom(BoardCell cell) {
+		return new Room();
+	}
 }

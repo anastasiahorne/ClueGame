@@ -1,6 +1,7 @@
 package clueGame;
 
 import java.util.Set;
+import java.util.function.BooleanSupplier;
 
 public class BoardCell {
 	private int row;
@@ -41,5 +42,25 @@ public class BoardCell {
 			return isOccupied;
 		}
 
-	
+		public boolean isDoorway() {
+			return false;
+		}
+
+		public DoorDirection getDoorDirection() {
+			return DoorDirection.NONE;
+		}
+
+		public boolean isLabel() {
+			return false;
+		}
+
+		public boolean isRoomCenter() {
+			return false;
+		}
+
+		public char getSecretPassage() {
+			return 0;
+		}
+
+		
 }
