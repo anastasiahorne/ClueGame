@@ -23,48 +23,46 @@ public class BoardCell {
 		adjList.add(adj);
 	}
 	// Indicates that a cell is part of a room
-		public void setIsRoom(boolean room) {
-			isRoom = room;
-		}
+	public void setIsRoom(boolean room) {
+		isRoom = room;
+	}
 		
-		// Get whether or not a cell is part of a room
-		public boolean getIsRoom() {
-			return isRoom;
-		}
+	// Get whether or not a cell is part of a room
+	public boolean getIsRoom() {
+		return isRoom;
+	}
 		
-		// Setter for indicating a cell is occupied by another player
-		public void setIsOccupied(boolean occupied) {
-			isOccupied = occupied;
-		}
+	// Setter for indicating a cell is occupied by another player
+	public void setIsOccupied(boolean occupied) {
+		isOccupied = occupied;
+	}
 		
-		// Getter for indicating a cell is occupied by another player
-		public boolean getIsOccupied() {
-			return isOccupied;
-		}
+	// Getter for indicating a cell is occupied by another player
+	public boolean getIsOccupied() {
+		return isOccupied;
+	}
 
-		public boolean isDoorway() {
-			return false;
-		}
+	public boolean isDoorway() {
+		return false;
+	}
 
-		public DoorDirection getDoorDirection() {
-			return DoorDirection.NONE;
-		}
+	public DoorDirection getDoorDirection() {
+		return DoorDirection.NONE;
+	}
 
-		public boolean isLabel() {
-			return false;
-		}
+	public boolean isLabel() {
+		return false;
+	}
 
-		public boolean isRoomCenter() {
-			return false;
-		}
+	public boolean isRoomCenter() {
+		return false;
+	}
 
-		public char getSecretPassage() {
-			return 0;
-		}
+	public char getSecretPassage() {
+		return 0;
+	}
 
-		public char getInitial() {
-			return initial;
-		}
-
-		
+	public char getInitial() {
+		return initial;
+	}	
 }
