@@ -19,7 +19,6 @@ public class Board {
 	private String layoutConfigFile;
 	private String setupConfigFile;
 	private Map<Character, Room> roomMap;
-	private int numRooms;
 	
 	/*
      * variable and methods used for singleton pattern
@@ -118,7 +117,7 @@ public class Board {
 		return getRoom(symbol);
 	}
 	
-	// Return the number of rooms on the board
+	// Return the number of rooms on the board by counting the elements in the map
 	public int getNumRooms() {
 		return roomMap.size();
 	}

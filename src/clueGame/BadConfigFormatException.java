@@ -1,7 +1,11 @@
 package clueGame;
 
 public class BadConfigFormatException extends RuntimeException {
-	public BadConfigFormatException (String message, Throwable error) {
-		super(message, error);
+	public BadConfigFormatException () {
+		super();
+	}
+	
+	public BadConfigFormatException (String message) {
+		super(message);
 	}
 }
