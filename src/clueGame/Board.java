@@ -61,6 +61,8 @@ public class Board {
 					Type=in.next();
 					roomName=in.next();
 					character=in.nextLine().charAt(0);
+					Room room = new Room(roomName);
+					roomMap.put(character, room);
 				}
 			}
 			in.close();
