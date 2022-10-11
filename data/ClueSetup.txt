@@ -1,0 +1,14 @@
+// Rooms and room cards
+Room, CTLM, T
+Room, CoorsTek, K
+Room, Marquez, M
+Room, Brown, B
+Room, Coolbaugh, C
+Room, Green Center, G
+Room, Stratton, S
+Room, Library, L
+Room, Chauvenet, H
+
+// Other spaces on board
+Space, Unused, X
+Space, Walkway, W
