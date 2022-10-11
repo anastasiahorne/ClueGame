@@ -107,9 +107,9 @@ public class Board {
 		return roomMap.get(c);
 	}
 	
-	// 
+	// Return the cell at position i, j
 	public BoardCell getCell(int i, int j) {
-		return new BoardCell(i, j);
+		return grid[i][j];
 	}
 	
 	// Return the room at the given cell on the board
