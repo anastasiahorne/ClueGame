@@ -2,8 +2,10 @@ package clueGame;
 
 import java.io.FileNotFoundException;
 import java.io.FileReader;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Map;
 import java.util.Scanner;
 
@@ -79,16 +81,9 @@ public class Board {
 		try {
 			FileReader reader=new FileReader(layoutConfigFile);
 			Scanner in=new Scanner(reader);
-			in.useDelimiter(",");
-			String designation;
-			for (int i=0;i<numRows;++i) {
-				for (int j=0;j<numColumns;++j) {
-					designation=in.next();
-					//is not a center, or a name, or a door
-					if (designation.length()==1) {
-						
-					}
-				}
+			List<String[]> cellValues=new ArrayList<>();
+			while (in.hasNextLine()) {
+				cellValues.add(in.nextLine().split(","));
 			}
 			in.close();
 		}
