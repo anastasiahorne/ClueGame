@@ -36,7 +36,7 @@ public class Board {
     /*
      * initialize the board (since we are using singleton pattern)
      */
-    public void initialize() throws FileNotFoundException{
+    public void initialize() throws FileNotFoundException {
     	this.loadSetupConfig();
     	this.loadLayoutConfig();
     	grid = new BoardCell[numRows][numColumns];
@@ -48,15 +48,16 @@ public class Board {
  	}
  
 	//load our txt file so we know what character represents what room, and our room names
-	public void loadSetupConfig() throws FileNotFoundException{
-		FileReader reader=new FileReader(setupConfigFile);
-		Scanner in=new Scanner(reader);
-		roomKey=new HashMap<>();
-		char character;
-		String roomName;
-		String Type;
-		while (in.hasNextLine()) {
-			String line=in.nextLine();
+	public void loadSetupConfig() throws FileNotFoundException {
+		try {
+			FileReader reader=new FileReader(setupConfigFile);
+			Scanner in=new Scanner(reader);
+			roomKey=new HashMap<>();
+			char character;
+			String roomName;
+			String Type;
+			while (in.hasNextLine()) {
+				String line=in.nextLine();
 				if (line.charAt(0)== '/') {
 					in.useDelimiter(", ");
 					Type=in.next();
@@ -64,25 +65,35 @@ public class Board {
 					character=in.nextLine().charAt(0);
 					roomKey.put(character,roomName);
 				}
+			}
+			in.close();
 		}
-		in.close();
+		catch (Exception e) {
+			System.out.println("Could not find " + setupConfigFile);
+		}
 	}
 	
 	//load our csv file, so we know where our rooms are, where our center etc.	
 	public void loadLayoutConfig() throws FileNotFoundException {
 		roomMap=new HashMap<>();
-		FileReader reader=new FileReader(layoutConfigFile);
-		Scanner in=new Scanner(reader);
-		in.useDelimiter(",");
-		String designation;
-		for (int i=0;i<numRows;++i) {
-			for (int j=0;j<numColumns;++j) {
-				designation=in.next();
-				//is not a center, or a name, or a door
-				if (designation.length()==1) {
-					
+		try {
+			FileReader reader=new FileReader(layoutConfigFile);
+			Scanner in=new Scanner(reader);
+			in.useDelimiter(",");
+			String designation;
+			for (int i=0;i<numRows;++i) {
+				for (int j=0;j<numColumns;++j) {
+					designation=in.next();
+					//is not a center, or a name, or a door
+					if (designation.length()==1) {
+						
+					}
 				}
 			}
+			in.close();
+		}
+		catch (Exception e) {
+			System.out.println("Could not find " + layoutConfigFile);
 		}
 	}
 
