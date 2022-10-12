@@ -16,20 +16,33 @@ public class Room {
 		this.symbol = symbol;
 	}
 	
+	// Returns name of the room
 	public String getName() {
 		return name;
 	}
 	
+	// Returns symbol associated with the room
 	public char getSymbol() {
 		return symbol;
 	}
-
+	
+	// Return labelCell
 	public BoardCell getLabelCell() {
-		return new BoardCell(0, 0);
+		return labelCell;
+	}
+	
+	// Setter for private instance variable labelCell
+	public void setLabelCell(BoardCell labelCell) {
+		this.labelCell = labelCell;
+	}
+	
+	// Return centerCell
+	public BoardCell getCenterCell() {
+		return centerCell;
 	}
 
-	public BoardCell getCenterCell() {
-		// TODO Auto-generated method stub
-		return new BoardCell(0, 0);
+	// Setter for private instance variable centerCell
+	public void setCenterCell(BoardCell centerCell) {
+		this.centerCell = centerCell;
 	}
 }
