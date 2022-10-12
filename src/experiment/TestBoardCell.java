@@ -19,7 +19,7 @@ public class TestBoardCell {
 		isOccupied = false;
 	}
 	
-	// Setter to add a cell to the adjacency list
+	// Add a cell to the adjacency list
 	public void addAdjacency(TestBoardCell cell) {
 		adjList.add(cell);
 	}

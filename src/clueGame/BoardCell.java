@@ -32,6 +32,16 @@ public class BoardCell {
 		isDoorway = false;
 	}
 	
+	// Add cell to the adjacency list for the cell
+	public void addAdjacency(BoardCell cell) {
+		adjList.add(cell);
+	}
+	
+	// Returns the adjacency list for the cell
+	public Set<BoardCell> getAdjList() {
+		return adjList;
+	}
+	
 	public void setIsDoorway(boolean isDoorway) {
 		this.isDoorway = isDoorway;
 	}
