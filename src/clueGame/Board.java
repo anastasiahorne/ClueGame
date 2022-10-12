@@ -97,8 +97,30 @@ public class Board {
 					String cellData=row[j];
 					if (cellData.length()==1) {
 						BoardCell cell= new BoardCell(i,j);
+						cell.setInitial(cellData.charAt(0));
+						cell.setDoorDirection(DoorDirection.NONE);
 						//might need to add more that sets the cell to have no door and also if it is a room or not
 						grid[i][j]=cell;
+					}
+					else {
+						char name=cellData.charAt(0);
+						char specChar=cellData.charAt(1);
+						BoardCell cell= new BoardCell(i,j);
+						cell.setInitial(name);
+						
+							switch(specChar) {
+							case '<':
+								cell.setDoorDirection(DoorDirection.LEFT);
+							case '>':
+								cell.setDoorDirection(DoorDirection.RIGHT);
+							case 'v':
+								cell.setDoorDirection(DoorDirection.DOWN);
+							case '^':
+								cell.setDoorDirection(DoorDirection.UP);
+							default:
+								cell.setDoorDirection(DoorDirection.NONE);
+							}
+						
 					}
 				}
 			}
