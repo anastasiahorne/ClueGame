@@ -155,6 +155,7 @@ class FileInitTest {
 			assertEquals(9, count);
 		}
 		
+		/*
 		@Test
 		public void testRoomSymbol() {
 			assertEquals('T', board.getRoom("CTLM").getSymbol());
@@ -168,5 +169,5 @@ class FileInitTest {
 			assertEquals('H', board.getRoom("Chauvenet").getSymbol());
 			assertEquals('W', board.getRoom("Walkway").getSymbol());
 		}
-		
+		*/
 }

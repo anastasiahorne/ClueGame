@@ -36,7 +36,6 @@ public class Board {
      * initialize the board (since we are using singleton pattern)
      */
     public void initialize() throws FileNotFoundException {
-    	roomMap=new HashMap<>();
     	try {
     		this.loadSetupConfig();
     	} catch (BadConfigFormatException e) {
@@ -63,13 +62,13 @@ public class Board {
 			char character;
 			String roomName;
 			String Type;
-			String line=in.nextLine();
 			while (in.hasNextLine()) {
+				String line=in.nextLine();
 				if (!(line.charAt(0)== '/')) {
-					in.useDelimiter(", ");
-					Type=in.next();
-					roomName=in.next();
-					character=in.nextLine().charAt(0);
+					String[] lineDesc = line.split(", ");
+					Type=lineDesc[0];
+					roomName=lineDesc[1];
+					character=lineDesc[2].charAt(0);
 					Room room = new Room(roomName, character);
 					roomMap.put(character, room);
 				}
@@ -192,20 +191,5 @@ public class Board {
 	// Return the number of rooms on the board by counting the elements in the map
 	public int getNumRooms() {
 		return roomMap.size();
-	}
-	
-	// Return the room that has the roomName as its label
-	public Room getRoom(String roomName) {
-		try {
-			for (Room value: roomMap.values()) {
-				if (value.getName().equals(roomName)) {
-					return value;
-				}
-			}
-		}
-		catch (Exception e) {
-			System.out.println("No room exists with label " + roomName);
-		}
-		return null;
 	}
 }
