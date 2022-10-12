@@ -84,11 +84,8 @@ public class Board {
 			while (in.hasNextLine()) {
 				cellValues.add(in.nextLine().split(","));
 			}
-<<<<<<< HEAD
-=======
 			numRows=cellValues.size();
 			numColumns=cellValues.get(0).length;
->>>>>>> a57331f2a118891ac6c51e7efcd867ec70856412
 			in.close();
 			
 			grid=new BoardCell[numRows][numColumns];
