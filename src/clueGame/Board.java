@@ -36,13 +36,14 @@ public class Board {
      * initialize the board (since we are using singleton pattern)
      */
     public void initialize() throws FileNotFoundException {
+    	roomMap=new HashMap<>();
     	try {
-    		loadSetupConfig();
+    		this.loadSetupConfig();
     	} catch (BadConfigFormatException e) {
     		System.out.println("Bad format in " + layoutConfigFile);
     	}
     	try {
-    		loadLayoutConfig();
+    		this.loadLayoutConfig();
     	} catch (BadConfigFormatException e) {
     		System.out.println("Bad format in " + setupConfigFile);
     	}
@@ -62,8 +63,8 @@ public class Board {
 			char character;
 			String roomName;
 			String Type;
+			String line=in.nextLine();
 			while (in.hasNextLine()) {
-				String line=in.nextLine();
 				if (!(line.charAt(0)== '/')) {
 					in.useDelimiter(", ");
 					Type=in.next();
@@ -72,6 +73,7 @@ public class Board {
 					Room room = new Room(roomName, character);
 					roomMap.put(character, room);
 				}
+				line=in.nextLine();
 			}
 			in.close();
 		} catch (FileNotFoundException e) {
@@ -81,11 +83,11 @@ public class Board {
 	
 	//load our csv file, so we know where our rooms are, where our center etc.	
 	public void loadLayoutConfig() throws FileNotFoundException {
-		roomMap=new HashMap<>();
 		try {
 			FileReader reader=new FileReader(layoutConfigFile);
 			Scanner in=new Scanner(reader);
 			ArrayList<String[]> cellValues=new ArrayList<>();
+			cellValues.add(in.nextLine().split(","));
 			while (in.hasNextLine()) {
 				cellValues.add(in.nextLine().split(","));
 			}
