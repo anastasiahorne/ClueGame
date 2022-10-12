@@ -38,9 +38,16 @@ public class Board {
      * initialize the board (since we are using singleton pattern)
      */
     public void initialize() throws FileNotFoundException {
-    	this.loadSetupConfig();
-    	this.loadLayoutConfig();
-    	grid = new BoardCell[numRows][numColumns];
+    	try {
+    		loadSetupConfig();
+    	} catch (BadConfigFormatException e) {
+    		System.out.println("Bad format in " + layoutConfigFile);
+    	}
+    	try {
+    		loadLayoutConfig();
+    	} catch (BadConfigFormatException e) {
+    		System.out.println("Bad format in " + setupConfigFile);
+    	}
     }
      
  	public void setConfigFiles(String layoutConfigFile,String setupConfigFile) {
@@ -50,6 +57,7 @@ public class Board {
  
 	//load our txt file so we know what character represents what room, and our room names
 	public void loadSetupConfig() throws FileNotFoundException {
+		roomMap = new HashMap<Character, Room>();
 		try {
 			FileReader reader=new FileReader(setupConfigFile);
 			Scanner in=new Scanner(reader);
@@ -58,19 +66,18 @@ public class Board {
 			String Type;
 			while (in.hasNextLine()) {
 				String line=in.nextLine();
-				if (line.charAt(0)== '/') {
+				if (!(line.charAt(0)== '/')) {
 					in.useDelimiter(", ");
 					Type=in.next();
 					roomName=in.next();
 					character=in.nextLine().charAt(0);
-					Room room = new Room(roomName);
+					Room room = new Room(roomName, character);
 					roomMap.put(character, room);
 				}
 			}
 			in.close();
-		}
-		catch (Exception e) {
-			System.out.println("Could not find " + setupConfigFile);
+		} catch (FileNotFoundException e) {
+			System.out.println("Could not open " + setupConfigFile);
 		}
 	}
 	
@@ -80,7 +87,7 @@ public class Board {
 		try {
 			FileReader reader=new FileReader(layoutConfigFile);
 			Scanner in=new Scanner(reader);
-			List<String[]> cellValues=new ArrayList<>();
+			ArrayList<String[]> cellValues=new ArrayList<>();
 			while (in.hasNextLine()) {
 				cellValues.add(in.nextLine().split(","));
 			}
@@ -90,16 +97,22 @@ public class Board {
 			
 			grid=new BoardCell[numRows][numColumns];
 			//iterate first through rows then columns
-			int listLocation=0;
 			for (int i=0;i<numRows;++i) {
-				String[] row=cellValues.get(listLocation);
+				String[] row=cellValues.get(i);
 				for (int j=0;j<numColumns;++j) {
 					String cellData=row[j];
 					if (cellData.length()==1) {
 						BoardCell cell= new BoardCell(i,j);
 						cell.setInitial(cellData.charAt(0));
 						cell.setDoorDirection(DoorDirection.NONE);
-						//might need to add more that sets the cell to have no door and also if it is a room or not
+						cell.setIsOccupied(false);
+						// Test if cell is a walkway or unused space
+						if (!cellData.equals("W") && !cellData.equals("X")) {
+							cell.setIsRoom(true);
+						}
+						else {
+							cell.setIsRoom(false);
+						}
 						grid[i][j]=cell;
 					}
 					else {
@@ -107,25 +120,49 @@ public class Board {
 						char specChar=cellData.charAt(1);
 						BoardCell cell= new BoardCell(i,j);
 						cell.setInitial(name);
-						
+						if (name == 'W') {
+							cell.setIsRoom(false);
+							cell.setRoomCenter(false);
+							cell.setRoomLabel(false);
+							cell.setIsDoorway(true);
 							switch(specChar) {
 							case '<':
 								cell.setDoorDirection(DoorDirection.LEFT);
+								break;
 							case '>':
 								cell.setDoorDirection(DoorDirection.RIGHT);
+								break;
 							case 'v':
 								cell.setDoorDirection(DoorDirection.DOWN);
+								break;
 							case '^':
 								cell.setDoorDirection(DoorDirection.UP);
+								break;
+							}
+						}
+						else {
+							cell.setIsRoom(true);
+							switch(specChar) {
+							case '#':
+								cell.setRoomCenter(false);
+								cell.setRoomLabel(true);
+								break;
+							case '*':
+								cell.setRoomCenter(true);
+								cell.setRoomLabel(false);
+								break;
 							default:
 								cell.setDoorDirection(DoorDirection.NONE);
+								cell.setRoomCenter(false);
+								cell.setRoomLabel(false);
+								cell.setSecretPassage(specChar);
+								break;
 							}
-						
+						}
 					}
 				}
 			}
-		}
-		catch (Exception e) {
+		} catch (FileNotFoundException e) {
 			System.out.println("Could not find " + layoutConfigFile);
 		}
 	}

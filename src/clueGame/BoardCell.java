@@ -1,7 +1,10 @@
 package clueGame;
 
+import java.util.HashSet;
 import java.util.Set;
 import java.util.function.BooleanSupplier;
+
+import experiment.TestBoardCell;
 
 public class BoardCell {
 	private int row;
@@ -10,13 +13,47 @@ public class BoardCell {
 	private DoorDirection doorDirection;
 	private boolean roomLabel;
 	private boolean roomCenter;
-	private char secretPassge;
+	private char secretPassage;
 	private Set<BoardCell> adjList;
 	private boolean isRoom;
 	private boolean isOccupied;
+	private boolean isDoorway;
 	
+	// Constructor that specifies the row and column and sets all variables to the default
 	public BoardCell(int i, int j) {
-		// TODO Auto-generated constructor stub
+		row = i;
+		col = j;
+		adjList = new HashSet<BoardCell>();
+		roomLabel = false;
+		roomCenter = false;
+		doorDirection = DoorDirection.NONE;
+		isRoom = false;
+		isOccupied = false;
+		isDoorway = false;
+	}
+	
+	public void setIsDoorway(boolean isDoorway) {
+		this.isDoorway = isDoorway;
+	}
+	
+	public boolean getIsDoorway() {
+		return isDoorway;
+	}
+	
+	public boolean isRoomLabel() {
+		return roomLabel;
+	}
+
+	public void setRoomLabel(boolean roomLabel) {
+		this.roomLabel = roomLabel;
+	}
+
+	public void setSecretPassage(char secretPassage) {
+		this.secretPassage = secretPassage;
+	}
+
+	public void setRoomCenter(boolean roomCenter) {
+		this.roomCenter = roomCenter;
 	}
 
 	public void addAdj(BoardCell adj) {
