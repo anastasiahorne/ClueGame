@@ -25,7 +25,7 @@ class FileInitTest {
 		// NOTE: I made Board static because I only want to set it up one
 		// time (using @BeforeAll), no need to do setup before each test.
 		private static Board board;
-
+//debugging
 		@BeforeAll
 		public static void setUp() throws FileNotFoundException {
 			// Board is singleton, get the only instance
