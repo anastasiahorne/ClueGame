@@ -9,8 +9,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.Scanner;
 
-import experiment.TestBoardCell;
-
 public class Board {
 
 	private BoardCell[][] grid;
@@ -51,8 +49,8 @@ public class Board {
     }
      
  	public void setConfigFiles(String layoutConfigFile,String setupConfigFile) {
- 		this.layoutConfigFile = layoutConfigFile;
- 		this.setupConfigFile = setupConfigFile;
+ 		this.layoutConfigFile = "data/" + layoutConfigFile;
+ 		this.setupConfigFile = "data/" + setupConfigFile;
  	}
  
 	//load our txt file so we know what character represents what room, and our room names
@@ -101,8 +99,8 @@ public class Board {
 				String[] row=cellValues.get(i);
 				for (int j=0;j<numColumns;++j) {
 					String cellData=row[j];
+					BoardCell cell= new BoardCell(i,j);
 					if (cellData.length()==1) {
-						BoardCell cell= new BoardCell(i,j);
 						cell.setInitial(cellData.charAt(0));
 						cell.setDoorDirection(DoorDirection.NONE);
 						cell.setIsOccupied(false);
@@ -110,15 +108,10 @@ public class Board {
 						if (!cellData.equals("W") && !cellData.equals("X")) {
 							cell.setIsRoom(true);
 						}
-						else {
-							cell.setIsRoom(false);
-						}
-						grid[i][j]=cell;
 					}
 					else {
 						char name=cellData.charAt(0);
 						char specChar=cellData.charAt(1);
-						BoardCell cell= new BoardCell(i,j);
 						cell.setInitial(name);
 						if (name == 'W') {
 							cell.setIsRoom(false);
@@ -160,6 +153,7 @@ public class Board {
 							}
 						}
 					}
+					grid[i][j]= cell;
 				}
 			}
 		} catch (FileNotFoundException e) {
