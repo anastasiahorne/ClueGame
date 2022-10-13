@@ -36,6 +36,7 @@ public class Board {
      * initialize the board (since we are using singleton pattern)
      */
     public void initialize() throws FileNotFoundException {
+    	roomMap=new HashMap<Character, Room>();
     	try {
     		this.loadSetupConfig();
     	} catch (BadConfigFormatException e) {
@@ -55,20 +56,19 @@ public class Board {
  
 	//load our txt file so we know what character represents what room, and our room names
 	public void loadSetupConfig() throws FileNotFoundException {
-		roomMap = new HashMap<Character, Room>();
 		try {
 			FileReader reader=new FileReader(setupConfigFile);
 			Scanner in=new Scanner(reader);
 			char character;
 			String roomName;
-			String Type;
+			String type;
+			String line=in.nextLine();
 			while (in.hasNextLine()) {
-				String line=in.nextLine();
 				if (!(line.charAt(0)== '/')) {
-					String[] lineDesc = line.split(", ");
-					Type=lineDesc[0];
-					roomName=lineDesc[1];
-					character=lineDesc[2].charAt(0);
+					String[] parts = line.split(", ");
+					type = parts[0];
+					roomName = parts[1];
+					character = parts[2].charAt(0);
 					Room room = new Room(roomName, character);
 					roomMap.put(character, room);
 				}

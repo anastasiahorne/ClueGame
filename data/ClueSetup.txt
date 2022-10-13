@@ -8,7 +8,6 @@ Room, Green Center, G
 Room, Stratton, S
 Room, Library, L
 Room, Chauvenet, H
-
 // Other spaces on board
-Space, Unused, X
 Space, Walkway, W
+Space, Unused, X
