@@ -35,17 +35,21 @@ public class Board {
     /*
      * initialize the board (since we are using singleton pattern)
      */
-    public void initialize() throws FileNotFoundException {
+    public void initialize() {
     	roomMap=new HashMap<Character, Room>();
     	try {
     		this.loadSetupConfig();
     	} catch (BadConfigFormatException e) {
     		System.out.println("Bad format in " + layoutConfigFile);
+    	} catch (FileNotFoundException e) {
+    		System.out.println("Could not find " + layoutConfigFile);
     	}
     	try {
     		this.loadLayoutConfig();
     	} catch (BadConfigFormatException e) {
     		System.out.println("Bad format in " + setupConfigFile);
+    	} catch (FileNotFoundException e) {
+    		System.out.println("Could not find " + setupConfigFile);
     	}
     }
      
