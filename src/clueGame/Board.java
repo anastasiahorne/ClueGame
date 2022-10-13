@@ -39,16 +39,20 @@ public class Board {
     	roomMap=new HashMap<Character, Room>();
     	try {
     		this.loadSetupConfig();
-    	} catch (BadConfigFormatException e) {
+    	} 
+    	catch (BadConfigFormatException e) {
     		System.out.println("Bad format in " + layoutConfigFile);
-    	} catch (FileNotFoundException e) {
+    	}
+    	catch (FileNotFoundException e) {
     		System.out.println("Could not find " + layoutConfigFile);
     	}
     	try {
     		this.loadLayoutConfig();
-    	} catch (BadConfigFormatException e) {
+    	}
+    	catch (BadConfigFormatException e) {
     		System.out.println("Bad format in " + setupConfigFile);
-    	} catch (FileNotFoundException e) {
+    	}
+    	catch (FileNotFoundException e) {
     		System.out.println("Could not find " + setupConfigFile);
     	}
     }
@@ -91,7 +95,7 @@ public class Board {
 	}
 	
 	//load our csv file, so we know where our rooms are, where our center etc.	
-	public void loadLayoutConfig() throws FileNotFoundException {
+	public void loadLayoutConfig() throws FileNotFoundException, BadConfigFormatException {
 		try {
 			FileReader reader=new FileReader(layoutConfigFile);
 			Scanner in=new Scanner(reader);
