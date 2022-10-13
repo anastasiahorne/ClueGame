@@ -42,44 +42,9 @@ public class BoardCell {
 		return adjList;
 	}
 	
-	public void setIsDoorway(boolean isDoorway) {
-		this.isDoorway = isDoorway;
-	}
-	
-	public boolean getIsDoorway() {
-		return isDoorway;
-	}
-	
-	public boolean isRoomLabel() {
-		return roomLabel;
-	}
-
-	public void setRoomLabel(boolean roomLabel) {
-		this.roomLabel = roomLabel;
-	}
-
-	public void setSecretPassage(char secretPassage) {
-		this.secretPassage = secretPassage;
-	}
-
-	public void setRoomCenter(boolean roomCenter) {
-		this.roomCenter = roomCenter;
-	}
-
-	public void addAdj(BoardCell adj) {
-		adjList.add(adj);
-	}
 	// Indicates that a cell is part of a room
 	public void setIsRoom(boolean room) {
 		isRoom = room;
-	}
-		
-	public void setDoorDirection(DoorDirection doorDirection) {
-		this.doorDirection = doorDirection;
-	}
-
-	public void setInitial(char initial) {
-		this.initial = initial;
 	}
 
 	// Get whether or not a cell is part of a room
@@ -98,26 +63,50 @@ public class BoardCell {
 	}
 
 	public boolean isDoorway() {
-		return false;
+		return isDoorway;
+	}
+	
+	public void setIsDoorway(boolean isDoorway) {
+		this.isDoorway = isDoorway;
 	}
 
 	public DoorDirection getDoorDirection() {
-		return DoorDirection.NONE;
+		return doorDirection;
+	}
+	
+	public void setDoorDirection(DoorDirection doorDirection) {
+		this.doorDirection = doorDirection;
 	}
 
 	public boolean isLabel() {
-		return false;
+		return roomLabel;
+	}
+	
+	public void setRoomLabel(boolean roomLabel) {
+		this.roomLabel = roomLabel;
 	}
 
 	public boolean isRoomCenter() {
-		return false;
+		return roomCenter;
+	}
+	
+	public void setRoomCenter(boolean roomCenter) {
+		this.roomCenter = roomCenter;
 	}
 
 	public char getSecretPassage() {
-		return 0;
+		return secretPassage;
+	}
+	
+	public void setSecretPassage(char secretPassage) {
+		this.secretPassage = secretPassage;
 	}
 
 	public char getInitial() {
 		return initial;
-	}	
+	}
+	
+	public void setInitial(char initial) {
+		this.initial = initial;
+	}
 }

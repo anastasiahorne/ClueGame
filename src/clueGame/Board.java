@@ -136,14 +136,17 @@ public class Board {
 						}
 						else {
 							cell.setIsRoom(true);
+							Room room = roomMap.get(name);
 							switch(specChar) {
 							case '#':
 								cell.setRoomCenter(false);
 								cell.setRoomLabel(true);
+								room.setLabelCell(cell);
 								break;
 							case '*':
 								cell.setRoomCenter(true);
 								cell.setRoomLabel(false);
+								room.setCenterCell(cell);
 								break;
 							default:
 								cell.setDoorDirection(DoorDirection.NONE);
