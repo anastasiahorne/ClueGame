@@ -38,15 +38,10 @@ public class Board {
     public void initialize() {
     	try {
     		this.loadSetupConfig();
+    		this.loadLayoutConfig();
     	} 
     	catch (BadConfigFormatException e) {
-    		System.out.println("Bad format in file " + layoutConfigFile);
-    	}
-    	try {
-    		this.loadLayoutConfig();
-    	}
-    	catch (BadConfigFormatException e) {
-    		System.out.println("Bad format in file " + setupConfigFile);
+    		System.out.println("Bad format in file(s)");
     	}
     }
      
@@ -63,33 +58,38 @@ public class Board {
 			Scanner in=new Scanner(reader);
 			char character;
 			String roomName;
-			String type;
+			String roomType;
 			String line=in.nextLine();
 			while (in.hasNextLine()) {
 				if (!(line.charAt(0)== '/')) {
-					String[] parts = line.split(", ");
-					type = parts[0];
-					// Throw exception if type is not Room or Space
-					if (!(type.equals("Room")) && !(type.equals("Space"))) {
-						throw new BadConfigFormatException();
-					}
-					roomName = parts[1];
-					character = parts[2].charAt(0);
-					Room room = new Room(roomName, character);
-					roomMap.put(character, room);
+					getRoomInformation(line);
 				}
 				line=in.nextLine();
 			}
-			String[] parts = line.split(", ");
-			type = parts[0];
-			roomName = parts[1];
-			character = parts[2].charAt(0);
-			Room room = new Room(roomName, character);
-			roomMap.put(character, room);
+			getRoomInformation(line);
 			in.close();
 		} catch (FileNotFoundException e) {
 			System.out.println("Could not find " + setupConfigFile);
 		}
+	}
+
+	/*
+	 * From line, extract information about room or space and put it into roomMap
+	 */
+	private void getRoomInformation(String line) {
+		char character;
+		String roomName;
+		String type;
+		String[] parts = line.split(", ");
+		type = parts[0];
+		// Throw exception if type is not Room or Space
+		if (!(type.equals("Room")) && !(type.equals("Space"))) {
+			throw new BadConfigFormatException();
+		}
+		roomName = parts[1];
+		character = parts[2].charAt(0);
+		Room room = new Room(roomName, character);
+		roomMap.put(character, room);
 	}
 	
 	//load our csv file, so we know where our rooms are, where our center etc.	
@@ -124,11 +124,6 @@ public class Board {
 					}
 					if (cellData.length()==1) {
 						cell.setInitial(cellData.charAt(0));
-						cell.setDoorDirection(DoorDirection.NONE);
-						cell.setIsOccupied(false);
-						cell.setRoomCenter(false);
-						cell.setRoomLabel(false);
-						cell.setIsDoorway(false);
 						// Test if cell is a walkway or unused space
 						if (!cellData.equals("W") && !cellData.equals("X")) {
 							cell.setIsRoom(true);
@@ -142,9 +137,6 @@ public class Board {
 						char specChar=cellData.charAt(1);
 						cell.setInitial(name);
 						if (name == 'W') {
-							cell.setIsRoom(false);
-							cell.setRoomCenter(false);
-							cell.setRoomLabel(false);
 							cell.setIsDoorway(true);
 							switch(specChar) {
 							case '<':
@@ -222,7 +214,8 @@ public class Board {
 	public int getNumRooms() {
 		return roomMap.size();
 	}
-
+	
+	// Getter for roomMap variable
 	public Map<Character, Room> getRoomMap() {
 		return roomMap;
 	}
