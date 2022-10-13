@@ -112,6 +112,9 @@ public class Board {
 			//iterate first through rows then columns
 			for (int i=0;i<numRows;++i) {
 				String[] row=cellValues.get(i);
+				if (row.length != numColumns) {
+					throw new BadConfigFormatException();
+				}
 				for (int j=0;j<numColumns;++j) {
 					String cellData=row[j];
 					BoardCell cell= new BoardCell(i,j);
