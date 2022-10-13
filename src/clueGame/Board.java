@@ -56,9 +56,6 @@ public class Board {
 		try {
 			FileReader reader=new FileReader(setupConfigFile);
 			Scanner in=new Scanner(reader);
-			char character;
-			String roomName;
-			String roomType;
 			String line=in.nextLine();
 			while (in.hasNextLine()) {
 				if (!(line.charAt(0)== '/')) {
