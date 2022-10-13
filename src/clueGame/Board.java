@@ -115,6 +115,9 @@ public class Board {
 				for (int j=0;j<numColumns;++j) {
 					String cellData=row[j];
 					BoardCell cell= new BoardCell(i,j);
+					if (!roomMap.containsKey(cellData.charAt(0))) {
+						throw new BadConfigFormatException();
+					}
 					if (cellData.length()==1) {
 						cell.setInitial(cellData.charAt(0));
 						cell.setDoorDirection(DoorDirection.NONE);
