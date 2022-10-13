@@ -136,6 +136,7 @@ public class Board {
 						char name=cellData.charAt(0);
 						char specChar=cellData.charAt(1);
 						cell.setInitial(name);
+						// If doorway, set direction
 						if (name == 'W') {
 							cell.setIsDoorway(true);
 							switch(specChar) {
@@ -158,16 +159,19 @@ public class Board {
 							Room room = roomMap.get(name);
 							switch(specChar) {
 							case '#':
+								// Set cell to be room label
 								cell.setRoomCenter(false);
 								cell.setRoomLabel(true);
 								room.setLabelCell(cell);
 								break;
 							case '*':
+								// Set cell to be room center
 								cell.setRoomCenter(true);
 								cell.setRoomLabel(false);
 								room.setCenterCell(cell);
 								break;
 							default:
+								// Set cell to be secretPassage
 								cell.setDoorDirection(DoorDirection.NONE);
 								cell.setRoomCenter(false);
 								cell.setRoomLabel(false);
