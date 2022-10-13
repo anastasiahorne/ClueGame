@@ -74,6 +74,12 @@ public class Board {
 				}
 				line=in.nextLine();
 			}
+			String[] parts = line.split(", ");
+			type = parts[0];
+			roomName = parts[1];
+			character = parts[2].charAt(0);
+			Room room = new Room(roomName, character);
+			roomMap.put(character, room);
 			in.close();
 		} catch (FileNotFoundException e) {
 			System.out.println("Could not open " + setupConfigFile);

@@ -152,7 +152,7 @@ class FileInitTest {
 		@Test
 		public void testNumRooms() {
 			int count = board.getNumRooms();
-			assertEquals(9, count);
+			assertEquals(10, count);
 		}
 		
 		/*
