@@ -1,16 +1,17 @@
 package clueGame;
 
 public class Room {
-
 	private String name;
 	private char symbol;
 	private BoardCell centerCell;
 	private BoardCell labelCell;
 	
+	// Constructor that takes only the name of the room as an argument
 	public Room(String name) {
 		this.name = name;
 	}
 	
+	// Constructor that takes name and the symbol as arguments
 	public Room(String name, char symbol) {
 		this.name = name;
 		this.symbol = symbol;

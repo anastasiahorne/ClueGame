@@ -62,50 +62,62 @@ public class BoardCell {
 		return isOccupied;
 	}
 
+	// Getter for isDoorway variable
 	public boolean isDoorway() {
 		return isDoorway;
 	}
 	
+	// Setter for isDoorway variable
 	public void setIsDoorway(boolean isDoorway) {
 		this.isDoorway = isDoorway;
 	}
 
+	// Getter for doorDirection variable
 	public DoorDirection getDoorDirection() {
 		return doorDirection;
 	}
 	
+	// Setter for doorDirection variable
 	public void setDoorDirection(DoorDirection doorDirection) {
 		this.doorDirection = doorDirection;
 	}
 
+	// Getter for roomLabel variable
 	public boolean isLabel() {
 		return roomLabel;
 	}
 	
+	// Setter for roomLabel variable
 	public void setRoomLabel(boolean roomLabel) {
 		this.roomLabel = roomLabel;
 	}
 
+	// Getter for roomCenter variable
 	public boolean isRoomCenter() {
 		return roomCenter;
 	}
 	
+	// Setter for roomCenter variable
 	public void setRoomCenter(boolean roomCenter) {
 		this.roomCenter = roomCenter;
 	}
-
+	
+	// Getter for secretPassage variable
 	public char getSecretPassage() {
 		return secretPassage;
 	}
 	
+	// Setter for secretPassage variable
 	public void setSecretPassage(char secretPassage) {
 		this.secretPassage = secretPassage;
 	}
 
+	// Getter for initial variable
 	public char getInitial() {
 		return initial;
 	}
 	
+	// Setter for initial variable
 	public void setInitial(char initial) {
 		this.initial = initial;
 	}

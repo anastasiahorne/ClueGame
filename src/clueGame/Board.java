@@ -69,6 +69,7 @@ public class Board {
 				if (!(line.charAt(0)== '/')) {
 					String[] parts = line.split(", ");
 					type = parts[0];
+					// Throw exception if type is not Room or Space
 					if (!(type.equals("Room")) && !(type.equals("Space"))) {
 						throw new BadConfigFormatException();
 					}
@@ -101,20 +102,23 @@ public class Board {
 			while (in.hasNextLine()) {
 				cellValues.add(in.nextLine().split(","));
 			}
+			// number of rows is the size of the arrayList read in
 			numRows=cellValues.size();
+			// The number of columns is the size of the first array in the arrayList
 			numColumns=cellValues.get(0).length;
 			in.close();
-			
 			grid=new BoardCell[numRows][numColumns];
 			//iterate first through rows then columns
 			for (int i=0;i<numRows;++i) {
 				String[] row=cellValues.get(i);
+				// If all rows do not have the same number of elements, throw exception
 				if (row.length != numColumns) {
 					throw new BadConfigFormatException();
 				}
 				for (int j=0;j<numColumns;++j) {
 					String cellData=row[j];
 					BoardCell cell= new BoardCell(i,j);
+					// Throw exception if the character read in is not a key in the map
 					if (!roomMap.containsKey(cellData.charAt(0))) {
 						throw new BadConfigFormatException();
 					}
