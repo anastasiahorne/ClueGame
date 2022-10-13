@@ -111,6 +111,8 @@ public class Board {
 						cell.setInitial(cellData.charAt(0));
 						cell.setDoorDirection(DoorDirection.NONE);
 						cell.setIsOccupied(false);
+						cell.setRoomCenter(false);
+						cell.setRoomLabel(false);
 						// Test if cell is a walkway or unused space
 						if (!cellData.equals("W") && !cellData.equals("X")) {
 							cell.setIsRoom(true);
