@@ -69,9 +69,9 @@ public class Board {
 				if (!(line.charAt(0)== '/')) {
 					String[] parts = line.split(", ");
 					type = parts[0];
-					//if (!(type.equals("Room")) || !(type.equals("Space"))) {
-						//throw new BadConfigFormatException();
-					//}
+					if (!(type.equals("Room")) && !(type.equals("Space"))) {
+						throw new BadConfigFormatException();
+					}
 					roomName = parts[1];
 					character = parts[2].charAt(0);
 					Room room = new Room(roomName, character);
