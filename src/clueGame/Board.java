@@ -38,10 +38,12 @@ public class Board {
     public void initialize() {
     	try {
     		this.loadSetupConfig();
+    		this.loadLayoutConfig();
     	} 
     	catch (BadConfigFormatException e) {
-    		System.out.println("Bad format in " + layoutConfigFile);
+    		System.out.println("Bad format in file");
     	}
+    	/*
     	catch (FileNotFoundException e) {
     		System.out.println("Could not find " + layoutConfigFile);
     	}
@@ -54,6 +56,7 @@ public class Board {
     	catch (FileNotFoundException e) {
     		System.out.println("Could not find " + setupConfigFile);
     	}
+    	*/
     }
      
  	public void setConfigFiles(String layoutConfigFile,String setupConfigFile) {
@@ -62,7 +65,7 @@ public class Board {
  	}
  
 	//load our txt file so we know what character represents what room, and our room names
-	public void loadSetupConfig() throws FileNotFoundException {
+	public void loadSetupConfig() {
 		roomMap=new HashMap<Character, Room>();
 		try {
 			FileReader reader=new FileReader(setupConfigFile);
@@ -89,13 +92,13 @@ public class Board {
 			Room room = new Room(roomName, character);
 			roomMap.put(character, room);
 			in.close();
-		} catch (BadConfigFormatException e) {
-			System.out.println("Bad format in " + setupConfigFile);
+		} catch (FileNotFoundException e) {
+			System.out.println("Could not find " + setupConfigFile);
 		}
 	}
 	
 	//load our csv file, so we know where our rooms are, where our center etc.	
-	public void loadLayoutConfig() throws FileNotFoundException, BadConfigFormatException {
+	public void loadLayoutConfig() {
 		try {
 			FileReader reader=new FileReader(layoutConfigFile);
 			Scanner in=new Scanner(reader);
@@ -183,8 +186,8 @@ public class Board {
 					grid[i][j]= cell;
 				}
 			}
-		} catch (BadConfigFormatException e) {
-			System.out.println("Bad format in " + layoutConfigFile);
+		} catch (FileNotFoundException e) {
+			System.out.println("Could not find " + setupConfigFile);
 		}
 	}
 	
