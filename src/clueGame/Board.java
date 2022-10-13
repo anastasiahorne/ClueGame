@@ -38,25 +38,16 @@ public class Board {
     public void initialize() {
     	try {
     		this.loadSetupConfig();
-    		this.loadLayoutConfig();
     	} 
     	catch (BadConfigFormatException e) {
-    		System.out.println("Bad format in file");
-    	}
-    	/*
-    	catch (FileNotFoundException e) {
-    		System.out.println("Could not find " + layoutConfigFile);
+    		System.out.println("Bad format in file " + layoutConfigFile);
     	}
     	try {
     		this.loadLayoutConfig();
     	}
     	catch (BadConfigFormatException e) {
-    		System.out.println("Bad format in " + setupConfigFile);
+    		System.out.println("Bad format in file " + setupConfigFile);
     	}
-    	catch (FileNotFoundException e) {
-    		System.out.println("Could not find " + setupConfigFile);
-    	}
-    	*/
     }
      
  	public void setConfigFiles(String layoutConfigFile,String setupConfigFile) {
