@@ -86,13 +86,15 @@ class FileInitTest {
 		@Test
 		public void testNumberOfDoorways() {
 			int numDoors = 0;
-			for (int row = 0; row < board.getNumRows(); row++)
+			for (int row = 0; row < board.getNumRows(); row++) {
 				for (int col = 0; col < board.getNumColumns(); col++) {
 					BoardCell cell = board.getCell(row, col);
-					if (cell.isDoorway())
+					if (cell.isDoorway()) {
 						numDoors++;
+					}
 				}
-			Assert.assertEquals(19, numDoors);
+			}
+			Assert.assertEquals(21, numDoors);
 		}
 
 		// Test a few room cells to ensure the room initial is correct.
@@ -152,22 +154,21 @@ class FileInitTest {
 		@Test
 		public void testNumRooms() {
 			int count = board.getNumRooms();
-			assertEquals(10, count);
+			assertEquals(11, count);
 		}
 		
-		/*
+		// Make sure all values are not zero or empty
 		@Test
-		public void testRoomSymbol() {
-			assertEquals('T', board.getRoom("CTLM").getSymbol());
-			assertEquals('K', board.getRoom("CoorsTek").getSymbol());
-			assertEquals('M', board.getRoom("Marquez").getSymbol());
-			assertEquals('B', board.getRoom("Brown").getSymbol());
-			assertEquals('C', board.getRoom("Coolbaugh").getSymbol());
-			assertEquals('G', board.getRoom("Green Center").getSymbol());
-			assertEquals('S', board.getRoom("Stratton").getSymbol());
-			assertEquals('L', board.getRoom("Library").getSymbol());
-			assertEquals('H', board.getRoom("Chauvenet").getSymbol());
-			assertEquals('W', board.getRoom("Walkway").getSymbol());
+		public void testNotEmpty() {
+			int numDoors = 0;
+			for (int row = 0; row < board.getNumRows(); row++) {
+				for (int col = 0; col < board.getNumColumns(); col++) {
+					BoardCell cell = board.getCell(row, col);
+					if (cell.isDoorway())
+						numDoors++;
+				}
+			}
+			assertFalse(numDoors == 0);
+			assertFalse(board.getRoomMap().isEmpty());
 		}
-		*/
 }

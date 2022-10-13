@@ -201,4 +201,8 @@ public class Board {
 	public int getNumRooms() {
 		return roomMap.size();
 	}
+
+	public Map<Character, Room> getRoomMap() {
+		return roomMap;
+	}
 }
