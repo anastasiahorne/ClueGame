@@ -36,7 +36,6 @@ public class Board {
      * initialize the board (since we are using singleton pattern)
      */
     public void initialize() {
-    	roomMap=new HashMap<Character, Room>();
     	try {
     		this.loadSetupConfig();
     	} 
@@ -64,6 +63,7 @@ public class Board {
  
 	//load our txt file so we know what character represents what room, and our room names
 	public void loadSetupConfig() throws FileNotFoundException {
+		roomMap=new HashMap<Character, Room>();
 		try {
 			FileReader reader=new FileReader(setupConfigFile);
 			Scanner in=new Scanner(reader);
@@ -89,8 +89,8 @@ public class Board {
 			Room room = new Room(roomName, character);
 			roomMap.put(character, room);
 			in.close();
-		} catch (FileNotFoundException e) {
-			System.out.println("Could not open " + setupConfigFile);
+		} catch (BadConfigFormatException e) {
+			System.out.println("Bad format in " + setupConfigFile);
 		}
 	}
 	
@@ -180,8 +180,8 @@ public class Board {
 					grid[i][j]= cell;
 				}
 			}
-		} catch (FileNotFoundException e) {
-			System.out.println("Could not find " + layoutConfigFile);
+		} catch (BadConfigFormatException e) {
+			System.out.println("Bad format in " + layoutConfigFile);
 		}
 	}
 	
