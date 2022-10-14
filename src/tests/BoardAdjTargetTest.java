@@ -28,7 +28,7 @@ class BoardAdjTargetTest {
 			board.initialize();
 		}
 
-		// Ensure that player does not move around within room
+		// Ensure that player does not move around within room,
 		// These cells are LIGHT ORANGE on the planning spreadsheet
 		@Test
 		public void testAdjacenciesRooms()
