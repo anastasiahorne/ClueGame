@@ -214,7 +214,7 @@ class BoardAdjTargetTest {
 			// test a roll of 4
 			board.calcTargets(board.getCell(6, 16), 4);
 			targets= board.getTargets();
-			assertEquals(15, targets.size());
+			assertEquals(11, targets.size());
 			assertTrue(targets.contains(board.getCell(3, 16)));
 			assertTrue(targets.contains(board.getCell(7, 13)));
 			assertTrue(targets.contains(board.getCell(8, 14)));	
@@ -231,40 +231,56 @@ class BoardAdjTargetTest {
 		@Test
 		public void testTargetsInWalkway1() {
 			// test a roll of 1
-			board.calcTargets(board.getCell(11, 2), 1);
+			board.calcTargets(board.getCell(6, 12), 1);
 			Set<BoardCell> targets= board.getTargets();
-			assertEquals(2, targets.size());
-			assertTrue(targets.contains(board.getCell(11, 1)));
-			assertTrue(targets.contains(board.getCell(11, 3)));	
+			assertEquals(4, targets.size());
+			assertTrue(targets.contains(board.getCell(5, 12)));
+			assertTrue(targets.contains(board.getCell(6, 11)));
+			assertTrue(targets.contains(board.getCell(6, 13)));
+			assertTrue(targets.contains(board.getCell(7, 12)));
 			
 			// test a roll of 3
-			board.calcTargets(board.getCell(11, 2), 3);
+			board.calcTargets(board.getCell(6, 12), 3);
 			targets= board.getTargets();
-			assertEquals(3, targets.size());
-			assertTrue(targets.contains(board.getCell(14, 2)));
-			assertTrue(targets.contains(board.getCell(8, 2)));
-			assertTrue(targets.contains(board.getCell(11, 5)));	
+			assertEquals(9, targets.size());
+			assertTrue(targets.contains(board.getCell(2, 9)));
+			assertTrue(targets.contains(board.getCell(3, 12)));
+			assertTrue(targets.contains(board.getCell(7, 10)));
+			assertTrue(targets.contains(board.getCell(8, 11)));
+			assertTrue(targets.contains(board.getCell(7, 12)));
+			assertTrue(targets.contains(board.getCell(7, 14)));
+			assertTrue(targets.contains(board.getCell(5, 12)));
+			assertTrue(targets.contains(board.getCell(4, 13)));
+			assertTrue(targets.contains(board.getCell(8, 13)));
 			
 			// test a roll of 4
-			board.calcTargets(board.getCell(11, 2), 4);
+			board.calcTargets(board.getCell(6, 12), 4);
 			targets= board.getTargets();
-			assertEquals(3, targets.size());
-			assertTrue(targets.contains(board.getCell(14, 2)));
-			assertTrue(targets.contains(board.getCell(8, 2)));
-			assertTrue(targets.contains(board.getCell(11, 6)));	
+			assertEquals(11, targets.size());
+			assertTrue(targets.contains(board.getCell(2, 9)));
+			assertTrue(targets.contains(board.getCell(3, 16)));
+			assertTrue(targets.contains(board.getCell(2, 12)));
+			assertTrue(targets.contains(board.getCell(5, 13)));
+			assertTrue(targets.contains(board.getCell(7, 9)));
+			assertTrue(targets.contains(board.getCell(8, 10)));
+			assertTrue(targets.contains(board.getCell(8, 12)));
+			assertTrue(targets.contains(board.getCell(8, 14)));
+			assertTrue(targets.contains(board.getCell(4, 12)));
+			assertTrue(targets.contains(board.getCell(5, 12)));
+			assertTrue(targets.contains(board.getCell(7, 15)));
 		}
 
 		@Test
 		public void testTargetsInWalkway2() {
 			// test a roll of 1
-			board.calcTargets(board.getCell(13, 7), 1);
+			board.calcTargets(board.getCell(), 1);
 			Set<BoardCell> targets= board.getTargets();
 			assertEquals(4, targets.size());
 			assertTrue(targets.contains(board.getCell(13, 6)));
 			assertTrue(targets.contains(board.getCell(12, 7)));	
 			
 			// test a roll of 3
-			board.calcTargets(board.getCell(13, 7), 3);
+			board.calcTargets(board.getCell(), 3);
 			targets= board.getTargets();
 			assertEquals(10, targets.size());
 			assertTrue(targets.contains(board.getCell(15, 6)));
@@ -272,7 +288,7 @@ class BoardAdjTargetTest {
 			assertTrue(targets.contains(board.getCell(11, 8)));	
 			
 			// test a roll of 4
-			board.calcTargets(board.getCell(13, 7), 4);
+			board.calcTargets(board.getCell(), 4);
 			targets= board.getTargets();
 			assertEquals(15, targets.size());
 			assertTrue(targets.contains(board.getCell(14, 2)));
