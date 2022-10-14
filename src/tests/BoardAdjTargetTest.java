@@ -312,38 +312,47 @@ class BoardAdjTargetTest {
 		// test to make sure occupied locations do not cause problems
 		public void testTargetsOccupied() {
 			// test a roll of 4 blocked 2 down
-			board.getCell(15, 7).setOccupied(true);
-			board.calcTargets(board.getCell(13, 7), 4);
-			board.getCell(15, 7).setOccupied(false);
+			board.getCell(19, 17).setOccupied(true);
+			board.calcTargets(board.getCell(18, 17), 4);
+			board.getCell(19, 17).setOccupied(false);
 			Set<BoardCell> targets = board.getTargets();
-			assertEquals(13, targets.size());
-			assertTrue(targets.contains(board.getCell(14, 2)));
-			assertTrue(targets.contains(board.getCell(15, 9)));
-			assertTrue(targets.contains(board.getCell(11, 5)));	
-			assertFalse( targets.contains( board.getCell(15, 7))) ;
-			assertFalse( targets.contains( board.getCell(17, 7))) ;
+			assertEquals(15, targets.size());
+			assertTrue(targets.contains(board.getCell(21, 11)));
+			assertTrue(targets.contains(board.getCell(21, 16)));
+			assertTrue(targets.contains(board.getCell(21, 18)));	
+			assertFalse(targets.contains(board.getCell(18, 19)));
+			assertFalse(targets.contains(board.getCell(17, 16)));
+			assertTrue(targets.contains(board.getCell(17, 18)));	
+			assertFalse(targets.contains(board.getCell(17, 14)));
+			assertFalse(targets.contains(board.getCell(16, 15)));
+			assertTrue(targets.contains(board.getCell(17, 20)));	
+			assertFalse(targets.contains(board.getCell(14, 17)));
+			assertFalse(targets.contains(board.getCell(16, 19)));
+			assertFalse(targets.contains(board.getCell(19, 16)));
+			assertFalse(targets.contains(board.getCell(19, 18)));
+			assertFalse(targets.contains(board.getCell(17, 16)));
+			assertFalse(targets.contains(board.getCell(17, 18)));
 		
 			// we want to make sure we can get into a room, even if flagged as occupied
-			board.getCell(12, 20).setOccupied(true);
-			board.getCell(8, 18).setOccupied(true);
-			board.calcTargets(board.getCell(8, 17), 1);
-			board.getCell(12, 20).setOccupied(false);
-			board.getCell(8, 18).setOccupied(false);
+			board.getCell(21, 11).setOccupied(true);
+			board.calcTargets(board.getCell(18, 9), 1);
+			board.getCell(21, 11).setOccupied(false);
 			targets= board.getTargets();
 			assertEquals(3, targets.size());
-			assertTrue(targets.contains(board.getCell(7, 17)));	
-			assertTrue(targets.contains(board.getCell(8, 16)));	
-			assertTrue(targets.contains(board.getCell(12, 20)));	
+			assertTrue(targets.contains(board.getCell(18, 8)));	
+			assertTrue(targets.contains(board.getCell(17, 9)));	
+			assertTrue(targets.contains(board.getCell(21, 11)));	
 			
 			// check leaving a room with a blocked doorway
-			board.getCell(12, 15).setOccupied(true);
-			board.calcTargets(board.getCell(12, 20), 3);
-			board.getCell(12, 15).setOccupied(false);
+			board.getCell(18, 9).setOccupied(true);
+			board.calcTargets(board.getCell(21, 11), 3);
+			board.getCell(18, 9).setOccupied(false);
 			targets= board.getTargets();
 			assertEquals(5, targets.size());
-			assertTrue(targets.contains(board.getCell(6, 17)));
-			assertTrue(targets.contains(board.getCell(8, 19)));	
-			assertTrue(targets.contains(board.getCell(8, 15)));
-
+			assertTrue(targets.contains(board.getCell(17, 8)));
+			assertTrue(targets.contains(board.getCell(16, 9)));	
+			assertTrue(targets.contains(board.getCell(17, 10)));
+			assertTrue(targets.contains(board.getCell(19, 8)));	
+			assertTrue(targets.contains(board.getCell(18, 7)));
 		}
 }
