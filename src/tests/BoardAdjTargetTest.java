@@ -85,31 +85,32 @@ class BoardAdjTargetTest {
 		public void testAdjacencyWalkways()
 		{
 			// Test on bottom edge of board, just one walkway piece
-			Set<BoardCell> testList = board.getAdjList(24, 14);
+			Set<BoardCell> testList = board.getAdjList(24, 15);
 			assertEquals(1, testList.size());
-			assertTrue(testList.contains(board.getCell(23, 14)));
+			assertTrue(testList.contains(board.getCell(23, 15)));
 			
 			// Test near a door but not adjacent
-			testList = board.getAdjList(18, 4);
-			assertEquals(3, testList.size());
-			assertTrue(testList.contains(board.getCell(18, 3)));
-			assertTrue(testList.contains(board.getCell(17, 4)));
+			testList = board.getAdjList(18, 6);
+			assertEquals(4, testList.size());
+			assertTrue(testList.contains(board.getCell(17, 6)));
 			assertTrue(testList.contains(board.getCell(18, 5)));
+			assertTrue(testList.contains(board.getCell(18, 7)));
+			assertTrue(testList.contains(board.getCell(19, 6)));
 
 			// Test adjacent to walkways
-			testList = board.getAdjList(19, 6);
+			testList = board.getAdjList(11, 7);
 			assertEquals(4, testList.size());
-			assertTrue(testList.contains(board.getCell(19, 5)));
-			assertTrue(testList.contains(board.getCell(19, 7)));
-			assertTrue(testList.contains(board.getCell(18, 6)));
-			assertTrue(testList.contains(board.getCell(20, 6)));
+			assertTrue(testList.contains(board.getCell(11, 6)));
+			assertTrue(testList.contains(board.getCell(10, 7)));
+			assertTrue(testList.contains(board.getCell(11, 8)));
+			assertTrue(testList.contains(board.getCell(12, 7)));
 
 			// Test next to closet
-			testList = board.getAdjList(9,14);
+			testList = board.getAdjList(15,14);
 			assertEquals(3, testList.size());
-			assertTrue(testList.contains(board.getCell(9, 15)));
-			assertTrue(testList.contains(board.getCell(8, 14)));
-			assertTrue(testList.contains(board.getCell(10, 14)));
+			assertTrue(testList.contains(board.getCell(15, 13)));
+			assertTrue(testList.contains(board.getCell(15, 15)));
+			assertTrue(testList.contains(board.getCell(16, 14)));
 		
 		}
 		
