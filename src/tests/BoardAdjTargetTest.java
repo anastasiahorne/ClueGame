@@ -52,6 +52,10 @@ class BoardAdjTargetTest {
 			assertTrue(testList.contains(board.getCell(0, 0)));
 			assertTrue(testList.contains(board.getCell(5, 5)));
 			assertTrue(testList.contains(board.getCell(7, 3)));
+			
+			// Test room cell that is not the center (should be empty)
+			testList = board.getAdjList(10, 5);
+			assertEquals(0, testList.size());
 		}
 
 		
