@@ -111,6 +111,13 @@ class BoardAdjTargetTest {
 			assertTrue(testList.contains(board.getCell(15, 13)));
 			assertTrue(testList.contains(board.getCell(15, 15)));
 			assertTrue(testList.contains(board.getCell(16, 14)));
+			
+			// Test next to room without doorway
+			testList = board.getAdjList(7, 22);
+			assertEquals(3, testList.size());
+			assertTrue(testList.contains(board.getCell(7, 21)));
+			assertTrue(testList.contains(board.getCell(7, 23)));
+			assertTrue(testList.contains(board.getCell(8, 22)));
 		
 		}
 		
