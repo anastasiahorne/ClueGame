@@ -8,6 +8,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Scanner;
+import java.util.Set;
 
 public class Board {
 
@@ -219,5 +220,16 @@ public class Board {
 	// Getter for roomMap variable
 	public Map<Character, Room> getRoomMap() {
 		return roomMap;
+	}
+
+	public void calcTargets(BoardCell cell, int i) {
+	}
+
+	public Set<BoardCell> getTargets() {
+		return new HashSet<BoardCell>();
+	}
+
+	public Set<BoardCell> getAdjList(int i, int j) {
+		return new HashSet<BoardCell>();
 	}
 }

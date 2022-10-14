@@ -53,7 +53,7 @@ public class BoardCell {
 	}
 		
 	// Setter for indicating a cell is occupied by another player
-	public void setIsOccupied(boolean occupied) {
+	public void setOccupied(boolean occupied) {
 		isOccupied = occupied;
 	}
 		
