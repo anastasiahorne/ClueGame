@@ -10,6 +10,8 @@ import java.util.Map;
 import java.util.Scanner;
 import java.util.Set;
 
+import experiment.TestBoardCell;
+
 public class Board {
 
 	private BoardCell[][] grid;
@@ -18,6 +20,8 @@ public class Board {
 	private String layoutConfigFile;
 	private String setupConfigFile;
 	private Map<Character, Room> roomMap;
+	private Set<BoardCell> visited;
+	private Set<BoardCell> targets;
 	
 	/*
      * variable and methods used for singleton pattern
@@ -37,6 +41,11 @@ public class Board {
      * initialize the board (since we are using singleton pattern)
      */
     public void initialize() {
+    	// Initialize board variables
+    	visited = new HashSet<BoardCell>();
+    	targets = new HashSet<BoardCell>();
+    	
+    	// Load configuration
     	try {
     		this.loadSetupConfig();
     		this.loadLayoutConfig();
@@ -114,8 +123,11 @@ public class Board {
 					throw new BadConfigFormatException();
 				}
 				for (int j=0;j<numColumns;++j) {
-					String cellData=row[j];
 					BoardCell cell= new BoardCell(i,j);
+					// Calculate adjacencies for each cell
+					calculateAdjacencies(i, j);
+					
+					String cellData=row[j];
 					// Throw exception if the character read in is not a key in the map
 					if (!roomMap.containsKey(cellData.charAt(0))) {
 						throw new BadConfigFormatException();
@@ -185,6 +197,24 @@ public class Board {
 			System.out.println("Could not find " + setupConfigFile);
 		}
 	}
+
+	/*
+	 * Calculate adjacency list for each cell
+	 */
+	private void calculateAdjacencies(int i, int j) {
+		if (i != 0) {
+			grid[i][j].addAdjacency(grid[i-1][j]);
+		}
+		if (i != numRows - 1) {
+			grid[i][j].addAdjacency(grid[i+1][j]);
+		}
+		if (j != 0) {
+			grid[i][j].addAdjacency(grid[i][j-1]);
+		}
+		if (j != numColumns - 1) {
+			grid[i][j].addAdjacency(grid[i][j+1]);
+		}
+	}
 	
 	// Return the number of rows in the game board
 	public int getNumRows() {
@@ -222,7 +252,29 @@ public class Board {
 		return roomMap;
 	}
 
-	public void calcTargets(BoardCell cell, int i) {
+	public void calcTargets(BoardCell startCell, int pathLength) {
+		visited.add(startCell);
+		findAllTargets(startCell, pathLength);
+	}
+	
+	public void findAllTargets(BoardCell thisCell, int numSteps) {
+		for (BoardCell adjCell: thisCell.getAdjList()) {
+			if (adjCell.getIsRoom()) {
+				targets.add(adjCell);
+			}
+			//add cell if not yet visited and it is an open space
+			if (!visited.contains(adjCell) && !adjCell.getIsOccupied() && !adjCell.getIsRoom()) {
+				visited.add(adjCell);
+				if (numSteps == 1) {
+					targets.add(adjCell);
+				}
+				//recursive call to determine possible targets if our roll is >1
+				else {
+					findAllTargets(adjCell, numSteps - 1);
+				}
+				visited.remove(adjCell);
+			}
+		}
 	}
 
 	public Set<BoardCell> getTargets() {
