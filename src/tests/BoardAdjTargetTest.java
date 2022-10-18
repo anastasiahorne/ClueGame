@@ -34,7 +34,7 @@ class BoardAdjTargetTest {
 		public void testAdjacenciesRooms()
 		{
 			// we want to test a couple of different rooms.
-			// First, CTLM that only has a single door but a secret room
+			// First, CTLM that only has a two doors and a secret room
 			Set<BoardCell> testList = board.getAdjList(21, 2);
 			assertEquals(3, testList.size());
 			assertTrue(testList.contains(board.getCell(21, 5)));
@@ -43,14 +43,15 @@ class BoardAdjTargetTest {
 			
 			// now test Green Center which has two doors and no secret passage
 			testList = board.getAdjList(12, 21);
-			assertEquals(2, testList.size());
+			assertEquals(3, testList.size());
 			assertTrue(testList.contains(board.getCell(10, 17)));
 			assertTrue(testList.contains(board.getCell(14, 17)));
+			assertTrue(testList.contains(board.getCell(16, 21)));
 			
 			// Test Chauvenet, two doors and a secret passage
 			testList = board.getAdjList(3, 2);
 			assertEquals(3, testList.size());
-			assertTrue(testList.contains(board.getCell(0, 0)));
+			assertTrue(testList.contains(board.getCell(21, 22)));
 			assertTrue(testList.contains(board.getCell(5, 5)));
 			assertTrue(testList.contains(board.getCell(7, 3)));
 			
@@ -78,7 +79,7 @@ class BoardAdjTargetTest {
 			assertTrue(testList.contains(board.getCell(21, 2)));
 			
 			testList = board.getAdjList(18, 20);
-			assertEquals(4, testList.size());
+			assertEquals(3, testList.size());
 			assertTrue(testList.contains(board.getCell(17, 20)));
 			assertTrue(testList.contains(board.getCell(18, 19)));
 			assertTrue(testList.contains(board.getCell(21, 22)));

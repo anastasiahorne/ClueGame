@@ -248,7 +248,7 @@ public class Board {
 				}
 			}
 		}
-		BoardCell cell = getCell(21, 2);
+		BoardCell cell = getCell(18, 20);
 		System.out.println("Cells in adjacency list for cell: " + cell);
 		for (BoardCell c: cell.getAdjList()) {
 			System.out.println(c);
@@ -317,7 +317,7 @@ public class Board {
 	}
 
 	public Set<BoardCell> getTargets() {
-		return new HashSet<BoardCell>();
+		return targets;
 	}
 
 	// Return the adjacency list for the cell at row i and column j
