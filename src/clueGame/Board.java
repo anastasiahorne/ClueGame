@@ -248,6 +248,11 @@ public class Board {
 				}
 			}
 		}
+		BoardCell cell = getCell(21, 2);
+		System.out.println("Cells in adjacency list for cell: " + cell);
+		for (BoardCell c: cell.getAdjList()) {
+			System.out.println(c);
+		}
 	}
 	
 	// Return the number of rows in the game board
@@ -315,7 +320,8 @@ public class Board {
 		return new HashSet<BoardCell>();
 	}
 
+	// Return the adjacency list for the cell at row i and column j
 	public Set<BoardCell> getAdjList(int i, int j) {
-		return new HashSet<BoardCell>();
+		return getCell(i, j).getAdjList();
 	}
 }

@@ -36,9 +36,10 @@ class BoardAdjTargetTest {
 			// we want to test a couple of different rooms.
 			// First, CTLM that only has a single door but a secret room
 			Set<BoardCell> testList = board.getAdjList(21, 2);
-			assertEquals(2, testList.size());
-			assertTrue(testList.contains(board.getCell(23, 0)));
+			assertEquals(3, testList.size());
+			assertTrue(testList.contains(board.getCell(21, 5)));
 			assertTrue(testList.contains(board.getCell(18, 4)));
+			assertTrue(testList.contains(board.getCell(3, 22)));
 			
 			// now test Green Center which has two doors and no secret passage
 			testList = board.getAdjList(12, 21);
