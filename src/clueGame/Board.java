@@ -183,9 +183,9 @@ public class Board {
 								break;
 							default:
 								// Set cell to be secretPassage
-								cell.setDoorDirection(DoorDirection.NONE);
 								cell.setRoomCenter(false);
 								cell.setRoomLabel(false);
+								cell.setSecretPassage(true);
 								cell.setSecretPassage(specChar);
 								break;
 							}
@@ -219,9 +219,29 @@ public class Board {
 					if ((j != numColumns - 1) && (grid[i-1][j].getInitial() == 'W')) {
 						grid[i][j].addAdjacency(grid[i][j+1]);
 					}
+					if (cell.isDoorway()) {
+						DoorDirection direction = cell.getDoorDirection();
+						switch (direction) {
+						case RIGHT:
+							grid[i][j].addAdjacency(grid[i+1][j]);
+							break;
+						case LEFT:
+							grid[i][j].addAdjacency(grid[i-1][j]);
+							break;
+						case UP:
+							grid[i][j].addAdjacency(grid[i][j+1]);
+							break;
+						case DOWN:
+							grid[i][j].addAdjacency(grid[i][j-1]);
+							break;
+						}
+					}
 				}
 				else {
-					if (cell)
+					if (cell.isSecretPassage()) {
+						// If room has a secret passage add the attached room's center cell to the center room's center cell
+						getRoom(cell).getCenterCell().addAdjacency(getRoom(cell.getSecretPassage()).getCenterCell());
+					}
 				}
 			}
 		}
