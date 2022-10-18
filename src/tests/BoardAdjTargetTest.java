@@ -22,8 +22,8 @@ class BoardAdjTargetTest {
 		public static void setUp() {
 			// Board is singleton, get the only instance
 			board = Board.getInstance();
-			// set the file names to use my config files
-			board.setConfigFiles("ClueLayout306.csv", "ClueSetup306.txt");		
+			// set the file names to use our config files
+			board.setConfigFiles("ClueLayout.csv", "ClueSetup.txt");		
 			// Initialize will load config files 
 			board.initialize();
 		}
@@ -34,7 +34,7 @@ class BoardAdjTargetTest {
 		public void testAdjacenciesRooms()
 		{
 			// we want to test a couple of different rooms.
-			// First, CoorsTek that only has a single door but a secret room
+			// First, CTLM that only has a single door but a secret room
 			Set<BoardCell> testList = board.getAdjList(21, 2);
 			assertEquals(2, testList.size());
 			assertTrue(testList.contains(board.getCell(23, 0)));

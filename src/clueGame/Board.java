@@ -126,7 +126,7 @@ public class Board {
 					throw new BadConfigFormatException();
 				}
 				for (int j=0;j<numColumns;++j) {
-					BoardCell cell= new BoardCell(i,j);
+					BoardCell cell = new BoardCell(i,j);
 					String cellData=row[j];
 					// Throw exception if the character read in is not a key in the map
 					if (!roomMap.containsKey(cellData.charAt(0))) {
@@ -144,11 +144,11 @@ public class Board {
 						}
 					}
 					else {
-						char name=cellData.charAt(0);
+						char initial=cellData.charAt(0);
 						char specChar=cellData.charAt(1);
-						cell.setInitial(name);
+						cell.setInitial(initial);
 						// If doorway, set direction
-						if (name == 'W') {
+						if (initial == 'W') {
 							cell.setIsDoorway(true);
 							switch(specChar) {
 							case '<':
@@ -167,24 +167,21 @@ public class Board {
 						}
 						else {
 							cell.setIsRoom(true);
-							Room room = roomMap.get(name);
+							Room room = roomMap.get(initial);
 							switch(specChar) {
 							case '#':
 								// Set cell to be room label
-								cell.setRoomCenter(false);
 								cell.setRoomLabel(true);
 								room.setLabelCell(cell);
 								break;
 							case '*':
 								// Set cell to be room center
 								cell.setRoomCenter(true);
-								cell.setRoomLabel(false);
 								room.setCenterCell(cell);
+								System.out.println("Room: " + room + ", Center: " + room.getCenterCell());
 								break;
 							default:
 								// Set cell to be secretPassage
-								cell.setRoomCenter(false);
-								cell.setRoomLabel(false);
 								cell.setSecretPassage(true);
 								cell.setSecretPassage(specChar);
 								break;
@@ -197,6 +194,10 @@ public class Board {
 		} catch (FileNotFoundException e) {
 			System.out.println("Could not find " + setupConfigFile);
 		}
+		// Check label, name, and center of each room
+		roomMap.forEach((initial, room) -> {
+			System.out.println("Symbol: " + initial + ", Room: " + room + ", Center: " + room.getCenterCell());
+		});
 	}
 
 	/*
@@ -208,31 +209,38 @@ public class Board {
 				BoardCell cell = grid[i][j];
 				if (cell.getInitial() == 'W') {
 					if ((i != 0) && (grid[i-1][j].getInitial() == 'W')) {
-						grid[i][j].addAdjacency(grid[i-1][j]);
+						cell.addAdjacency(grid[i-1][j]);
 					}
-					if ((i != numRows - 1) && (grid[i-1][j].getInitial() == 'W')) {
-						grid[i][j].addAdjacency(grid[i+1][j]);
+					if ((i != numRows - 1) && (grid[i+1][j].getInitial() == 'W')) {
+						cell.addAdjacency(grid[i+1][j]);
 					}
-					if ((j != 0) && (grid[i-1][j].getInitial() == 'W')) {
-						grid[i][j].addAdjacency(grid[i][j-1]);
+					if ((j != 0) && (grid[i][j-1].getInitial() == 'W')) {
+						cell.addAdjacency(grid[i][j-1]);
 					}
-					if ((j != numColumns - 1) && (grid[i-1][j].getInitial() == 'W')) {
-						grid[i][j].addAdjacency(grid[i][j+1]);
+					if ((j != numColumns - 1) && (grid[i][j+1].getInitial() == 'W')) {
+						cell.addAdjacency(grid[i][j+1]);
 					}
 					if (cell.isDoorway()) {
+						// If cell is a door, add room center to door's adjList and and add the door to the room center's adjList
 						DoorDirection direction = cell.getDoorDirection();
 						switch (direction) {
 						case RIGHT:
-							grid[i][j].addAdjacency(grid[i+1][j]);
+							cell.addAdjacency(getRoom(grid[i][j+1]).getCenterCell());
+							(getRoom(grid[i][j+1]).getCenterCell()).addAdjacency(cell);
 							break;
 						case LEFT:
-							grid[i][j].addAdjacency(grid[i-1][j]);
+							cell.addAdjacency(getRoom(grid[i][j-1]).getCenterCell());
+							(getRoom(grid[i][j-1]).getCenterCell()).addAdjacency(cell);
 							break;
 						case UP:
-							grid[i][j].addAdjacency(grid[i][j+1]);
+							cell.addAdjacency(getRoom(grid[i-1][j]).getCenterCell());
+							(getRoom(grid[i-1][j]).getCenterCell()).addAdjacency(cell);
 							break;
 						case DOWN:
-							grid[i][j].addAdjacency(grid[i][j-1]);
+							cell.addAdjacency(getRoom(grid[i+1][j]).getCenterCell());
+							(getRoom(grid[i+1][j]).getCenterCell()).addAdjacency(cell);
+							break;
+						default:
 							break;
 						}
 					}

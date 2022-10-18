@@ -131,4 +131,9 @@ public class BoardCell {
 	public void setInitial(char initial) {
 		this.initial = initial;
 	}
+	
+	@Override
+	public String toString() {
+		return "(" + row + ", " + col + ")";
+	}
 }

@@ -46,4 +46,9 @@ public class Room {
 	public void setCenterCell(BoardCell centerCell) {
 		this.centerCell = centerCell;
 	}
+
+	@Override
+	public String toString() {
+		return name;
+	}
 }
