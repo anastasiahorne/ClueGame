@@ -18,6 +18,7 @@ public class BoardCell {
 	private boolean isRoom;
 	private boolean isOccupied;
 	private boolean isDoorway;
+	private boolean isSecretPassage;
 	
 	// Constructor that specifies the row and column and sets all variables to the default
 	public BoardCell(int i, int j) {
@@ -30,8 +31,17 @@ public class BoardCell {
 		isRoom = false;
 		isOccupied = false;
 		isDoorway = false;
+		isSecretPassage = false;
 	}
 	
+	public boolean isSecretPassage() {
+		return isSecretPassage;
+	}
+
+	public void setSecretPassage(boolean isSecretPassage) {
+		this.isSecretPassage = isSecretPassage;
+	}
+
 	// Add cell to the adjacency list for the cell
 	public void addAdjacency(BoardCell cell) {
 		adjList.add(cell);

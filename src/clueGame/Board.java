@@ -53,6 +53,9 @@ public class Board {
     	catch (BadConfigFormatException e) {
     		System.out.println("Bad format in file(s)");
     	}
+    	
+    	// Calculate adjacencies for each cell
+    	calculateAdjacencies();
     }
      
  	public void setConfigFiles(String layoutConfigFile,String setupConfigFile) {
@@ -124,14 +127,12 @@ public class Board {
 				}
 				for (int j=0;j<numColumns;++j) {
 					BoardCell cell= new BoardCell(i,j);
-					// Calculate adjacencies for each cell
-					calculateAdjacencies(i, j);
-					
 					String cellData=row[j];
 					// Throw exception if the character read in is not a key in the map
 					if (!roomMap.containsKey(cellData.charAt(0))) {
 						throw new BadConfigFormatException();
 					}
+					// Determine type of cell and set attributes for the cell
 					if (cellData.length()==1) {
 						cell.setInitial(cellData.charAt(0));
 						// Test if cell is a walkway or unused space
@@ -201,18 +202,28 @@ public class Board {
 	/*
 	 * Calculate adjacency list for each cell
 	 */
-	private void calculateAdjacencies(int i, int j) {
-		if (i != 0) {
-			grid[i][j].addAdjacency(grid[i-1][j]);
-		}
-		if (i != numRows - 1) {
-			grid[i][j].addAdjacency(grid[i+1][j]);
-		}
-		if (j != 0) {
-			grid[i][j].addAdjacency(grid[i][j-1]);
-		}
-		if (j != numColumns - 1) {
-			grid[i][j].addAdjacency(grid[i][j+1]);
+	private void calculateAdjacencies() {
+		for (int i = 0; i < numRows; i++) {
+			for (int j = 0; j < numColumns; j++) {
+				BoardCell cell = grid[i][j];
+				if (cell.getInitial() == 'W') {
+					if ((i != 0) && (grid[i-1][j].getInitial() == 'W')) {
+						grid[i][j].addAdjacency(grid[i-1][j]);
+					}
+					if ((i != numRows - 1) && (grid[i-1][j].getInitial() == 'W')) {
+						grid[i][j].addAdjacency(grid[i+1][j]);
+					}
+					if ((j != 0) && (grid[i-1][j].getInitial() == 'W')) {
+						grid[i][j].addAdjacency(grid[i][j-1]);
+					}
+					if ((j != numColumns - 1) && (grid[i-1][j].getInitial() == 'W')) {
+						grid[i][j].addAdjacency(grid[i][j+1]);
+					}
+				}
+				else {
+					if (cell)
+				}
+			}
 		}
 	}
 	
