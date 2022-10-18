@@ -178,7 +178,6 @@ public class Board {
 								// Set cell to be room center
 								cell.setRoomCenter(true);
 								room.setCenterCell(cell);
-								System.out.println("Room: " + room + ", Center: " + room.getCenterCell());
 								break;
 							default:
 								// Set cell to be secretPassage
@@ -194,10 +193,6 @@ public class Board {
 		} catch (FileNotFoundException e) {
 			System.out.println("Could not find " + setupConfigFile);
 		}
-		// Check label, name, and center of each room
-		roomMap.forEach((initial, room) -> {
-			System.out.println("Symbol: " + initial + ", Room: " + room + ", Center: " + room.getCenterCell());
-		});
 	}
 
 	/*
@@ -248,7 +243,7 @@ public class Board {
 				else {
 					if (cell.isSecretPassage()) {
 						// If room has a secret passage add the attached room's center cell to the center room's center cell
-						getRoom(cell).getCenterCell().addAdjacency(getRoom(cell.getSecretPassage()).getCenterCell());
+						(getRoom(cell).getCenterCell()).addAdjacency(getRoom(cell.getSecretPassage()).getCenterCell());
 					}
 				}
 			}
