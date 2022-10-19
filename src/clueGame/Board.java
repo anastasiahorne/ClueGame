@@ -296,6 +296,7 @@ public class Board {
 		targets.clear();
 		visited.add(startCell);
 		findAllTargets(startCell, pathLength);
+		targets.remove(startCell);
 	}
 	
 	public void findAllTargets(BoardCell thisCell, int numSteps) {
@@ -319,6 +320,9 @@ public class Board {
 	}
 
 	public Set<BoardCell> getTargets() {
+		for (BoardCell i: targets) {
+			System.out.println(i);
+		}
 		return targets;
 	}
 
