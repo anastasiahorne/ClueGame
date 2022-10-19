@@ -292,6 +292,8 @@ public class Board {
 	}
 
 	public void calcTargets(BoardCell startCell, int pathLength) {
+		visited.clear();
+		targets.clear();
 		visited.add(startCell);
 		findAllTargets(startCell, pathLength);
 	}
