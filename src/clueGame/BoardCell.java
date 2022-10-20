@@ -81,6 +81,24 @@ public class BoardCell {
 	public void setIsDoorway(boolean isDoorway) {
 		this.isDoorway = isDoorway;
 	}
+	
+	public void setDoorwayAttributes(BoardCell cell, char specChar) {
+		cell.setIsDoorway(true);
+		switch(specChar) {
+		case '<':
+			cell.setDoorDirection(DoorDirection.LEFT);
+			break;
+		case '>':
+			cell.setDoorDirection(DoorDirection.RIGHT);
+			break;
+		case 'v':
+			cell.setDoorDirection(DoorDirection.DOWN);
+			break;
+		case '^':
+			cell.setDoorDirection(DoorDirection.UP);
+			break;
+		}
+	}
 
 	// Getter for doorDirection variable
 	public DoorDirection getDoorDirection() {

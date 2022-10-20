@@ -159,21 +159,7 @@ public class Board {
 			cell.setInitial(initial);
 			// If doorway, set direction
 			if (initial == 'W') {
-				cell.setIsDoorway(true);
-				switch(specChar) {
-				case '<':
-					cell.setDoorDirection(DoorDirection.LEFT);
-					break;
-				case '>':
-					cell.setDoorDirection(DoorDirection.RIGHT);
-					break;
-				case 'v':
-					cell.setDoorDirection(DoorDirection.DOWN);
-					break;
-				case '^':
-					cell.setDoorDirection(DoorDirection.UP);
-					break;
-				}
+				cell.setDoorwayAttributes(cell, specChar);
 			}
 			else {
 				cell.setIsRoom(true);
