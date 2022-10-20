@@ -133,65 +133,72 @@ public class Board {
 						throw new BadConfigFormatException();
 					}
 					// Determine type of cell and set attributes for the cell
-					if (cellData.length()==1) {
-						cell.setInitial(cellData.charAt(0));
-						// Test if cell is a walkway or unused space
-						if (!cellData.equals("W") && !cellData.equals("X")) {
-							cell.setIsRoom(true);
-						}
-						else {
-							cell.setIsRoom(false);
-						}
-					}
-					else {
-						char initial=cellData.charAt(0);
-						char specChar=cellData.charAt(1);
-						cell.setInitial(initial);
-						// If doorway, set direction
-						if (initial == 'W') {
-							cell.setIsDoorway(true);
-							switch(specChar) {
-							case '<':
-								cell.setDoorDirection(DoorDirection.LEFT);
-								break;
-							case '>':
-								cell.setDoorDirection(DoorDirection.RIGHT);
-								break;
-							case 'v':
-								cell.setDoorDirection(DoorDirection.DOWN);
-								break;
-							case '^':
-								cell.setDoorDirection(DoorDirection.UP);
-								break;
-							}
-						}
-						else {
-							cell.setIsRoom(true);
-							Room room = roomMap.get(initial);
-							switch(specChar) {
-							case '#':
-								// Set cell to be room label
-								cell.setRoomLabel(true);
-								room.setLabelCell(cell);
-								break;
-							case '*':
-								// Set cell to be room center
-								cell.setRoomCenter(true);
-								room.setCenterCell(cell);
-								break;
-							default:
-								// Set cell to be secretPassage
-								cell.setSecretPassage(true);
-								cell.setSecretPassage(specChar);
-								break;
-							}
-						}
-					}
+					setCellAttributes(cell, cellData);
 					grid[i][j]= cell;
 				}
 			}
 		} catch (FileNotFoundException e) {
 			System.out.println("Could not find " + setupConfigFile);
+		}
+	}
+
+	/*
+	 * Determine the cell's type and set the corresponding attributes
+	 */
+	private void setCellAttributes(BoardCell cell, String cellData) {
+		if (cellData.length()==1) {
+			cell.setInitial(cellData.charAt(0));
+			// Test if cell is a walkway or unused space
+			if (!cellData.equals("W") && !cellData.equals("X")) {
+				cell.setIsRoom(true);
+			}
+			else {
+				cell.setIsRoom(false);
+			}
+		}
+		else {
+			char initial=cellData.charAt(0);
+			char specChar=cellData.charAt(1);
+			cell.setInitial(initial);
+			// If doorway, set direction
+			if (initial == 'W') {
+				cell.setIsDoorway(true);
+				switch(specChar) {
+				case '<':
+					cell.setDoorDirection(DoorDirection.LEFT);
+					break;
+				case '>':
+					cell.setDoorDirection(DoorDirection.RIGHT);
+					break;
+				case 'v':
+					cell.setDoorDirection(DoorDirection.DOWN);
+					break;
+				case '^':
+					cell.setDoorDirection(DoorDirection.UP);
+					break;
+				}
+			}
+			else {
+				cell.setIsRoom(true);
+				Room room = roomMap.get(initial);
+				switch(specChar) {
+				case '#':
+					// Set cell to be room label
+					cell.setRoomLabel(true);
+					room.setLabelCell(cell);
+					break;
+				case '*':
+					// Set cell to be room center
+					cell.setRoomCenter(true);
+					room.setCenterCell(cell);
+					break;
+				default:
+					// Set cell to be secretPassage
+					cell.setSecretPassage(true);
+					cell.setSecretPassage(specChar);
+					break;
+				}
+			}
 		}
 	}
 
