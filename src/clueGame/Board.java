@@ -116,22 +116,22 @@ public class Board {
 			in.close();
 			grid = new BoardCell[numRows][numColumns];
 			//iterate first through rows then columns
-			for (int i = 0; i < numRows; ++i) {
-				String[] row = cellValues.get(i);
+			for (int row = 0; row < numRows; ++row) {
+				String[] rowArray = cellValues.get(row);
 				// If all rows do not have the same number of elements, throw exception
-				if (row.length != numColumns) {
+				if (rowArray.length != numColumns) {
 					throw new BadConfigFormatException();
 				}
-				for (int j = 0; j < numColumns; ++j) {
-					BoardCell cell = new BoardCell(i,j);
-					String cellData=row[j];
+				for (int col = 0; col < numColumns; ++col) {
+					BoardCell cell = new BoardCell(row,col);
+					String cellData = rowArray[col];
 					// Throw exception if the character read in is not a key in the map
 					if (!roomMap.containsKey(cellData.charAt(0))) {
 						throw new BadConfigFormatException();
 					}
 					// Determine type of cell and set attributes for the cell
 					setCellAttributes(cell, cellData);
-					grid[i][j]= cell;
+					grid[row][col]= cell;
 				}
 			}
 		} catch (FileNotFoundException e) {
