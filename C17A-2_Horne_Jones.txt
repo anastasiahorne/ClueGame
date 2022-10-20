@@ -1,0 +1,8 @@
+calculateAdjacencies variables updated to be more specific:
+Before:
+for (int i = 0; i < numRows; i++) {
+			for (int j = 0; j < numColumns; j++) {
+
+After:
+for (int row = 0; row < numRows; row++) {
+			for (int col = 0; col < numColumns; col++) {
