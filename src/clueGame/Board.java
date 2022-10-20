@@ -102,36 +102,36 @@ public class Board {
 	//load our csv file, so we know where our rooms are, where our center etc.	
 	public void loadLayoutConfig() {
 		try {
-			FileReader reader=new FileReader(layoutConfigFile);
-			Scanner in=new Scanner(reader);
-			ArrayList<String[]> cellValues=new ArrayList<>();
+			FileReader reader = new FileReader(layoutConfigFile);
+			Scanner in = new Scanner(reader);
+			ArrayList<String[]> cellValues = new ArrayList<>();
 			cellValues.add(in.nextLine().split(","));
 			while (in.hasNextLine()) {
 				cellValues.add(in.nextLine().split(","));
 			}
 			// number of rows is the size of the arrayList read in
-			numRows=cellValues.size();
+			numRows = cellValues.size();
 			// The number of columns is the size of the first array in the arrayList
-			numColumns=cellValues.get(0).length;
+			numColumns = cellValues.get(0).length;
 			in.close();
-			grid=new BoardCell[numRows][numColumns];
+			grid = new BoardCell[numRows][numColumns];
 			//iterate first through rows then columns
-			for (int i=0;i<numRows;++i) {
-				String[] row=cellValues.get(i);
+			for (int row = 0; row < numRows; ++row) {
+				String[] rowArray = cellValues.get(row);
 				// If all rows do not have the same number of elements, throw exception
-				if (row.length != numColumns) {
+				if (rowArray.length != numColumns) {
 					throw new BadConfigFormatException();
 				}
-				for (int j=0;j<numColumns;++j) {
-					BoardCell cell = new BoardCell(i,j);
-					String cellData=row[j];
+				for (int col = 0; col < numColumns; ++col) {
+					BoardCell cell = new BoardCell(row,col);
+					String cellData = rowArray[col];
 					// Throw exception if the character read in is not a key in the map
 					if (!roomMap.containsKey(cellData.charAt(0))) {
 						throw new BadConfigFormatException();
 					}
 					// Determine type of cell and set attributes for the cell
 					setCellAttributes(cell, cellData);
-					grid[i][j]= cell;
+					grid[row][col]= cell;
 				}
 			}
 		} catch (FileNotFoundException e) {
@@ -285,8 +285,8 @@ public class Board {
 	}
 	
 	// Return the cell at position i, j
-	public BoardCell getCell(int i, int j) {
-		return grid[i][j];
+	public BoardCell getCell(int row, int col) {
+		return grid[row][col];
 	}
 	
 	// Return the room at the given cell on the board
@@ -305,6 +305,7 @@ public class Board {
 		return roomMap;
 	}
 
+	// Getter for the set of BoardCells that is targets
 	public Set<BoardCell> getTargets() {
 		return targets;
 	}
