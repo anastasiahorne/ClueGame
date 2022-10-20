@@ -203,41 +203,41 @@ public class Board {
 	 * Calculate adjacency list for each cell
 	 */
 	private void calculateAdjacencies() {
-		for (int i = 0; i < numRows; i++) {
-			for (int j = 0; j < numColumns; j++) {
-				BoardCell cell = grid[i][j];
+		for (int row = 0; row < numRows; row++) {
+			for (int col = 0; col < numColumns; col++) {
+				BoardCell cell = grid[row][col];
 				if (cell.getInitial() == 'W') {
-					if ((i != 0) && (grid[i-1][j].getInitial() == 'W')) {
-						cell.addAdjacency(grid[i-1][j]);
+					if ((row != 0) && (grid[row-1][col].getInitial() == 'W')) {
+						cell.addAdjacency(grid[row-1][col]);
 					}
-					if ((i != numRows - 1) && (grid[i+1][j].getInitial() == 'W')) {
-						cell.addAdjacency(grid[i+1][j]);
+					if ((row != numRows - 1) && (grid[row+1][col].getInitial() == 'W')) {
+						cell.addAdjacency(grid[row+1][col]);
 					}
-					if ((j != 0) && (grid[i][j-1].getInitial() == 'W')) {
-						cell.addAdjacency(grid[i][j-1]);
+					if ((col != 0) && (grid[row][col-1].getInitial() == 'W')) {
+						cell.addAdjacency(grid[row][col-1]);
 					}
-					if ((j != numColumns - 1) && (grid[i][j+1].getInitial() == 'W')) {
-						cell.addAdjacency(grid[i][j+1]);
+					if ((col != numColumns - 1) && (grid[row][col+1].getInitial() == 'W')) {
+						cell.addAdjacency(grid[row][col+1]);
 					}
 					if (cell.isDoorway()) {
 						// If cell is a door, add room center to door's adjList and and add the door to the room center's adjList
 						DoorDirection direction = cell.getDoorDirection();
 						switch (direction) {
 						case RIGHT:
-							cell.addAdjacency(getRoom(grid[i][j+1]).getCenterCell());
-							(getRoom(grid[i][j+1]).getCenterCell()).addAdjacency(cell);
+							cell.addAdjacency(getRoom(grid[row][col+1]).getCenterCell());
+							(getRoom(grid[row][col+1]).getCenterCell()).addAdjacency(cell);
 							break;
 						case LEFT:
-							cell.addAdjacency(getRoom(grid[i][j-1]).getCenterCell());
-							(getRoom(grid[i][j-1]).getCenterCell()).addAdjacency(cell);
+							cell.addAdjacency(getRoom(grid[row][col-1]).getCenterCell());
+							(getRoom(grid[row][col-1]).getCenterCell()).addAdjacency(cell);
 							break;
 						case UP:
-							cell.addAdjacency(getRoom(grid[i-1][j]).getCenterCell());
-							(getRoom(grid[i-1][j]).getCenterCell()).addAdjacency(cell);
+							cell.addAdjacency(getRoom(grid[row-1][col]).getCenterCell());
+							(getRoom(grid[row-1][col]).getCenterCell()).addAdjacency(cell);
 							break;
 						case DOWN:
-							cell.addAdjacency(getRoom(grid[i+1][j]).getCenterCell());
-							(getRoom(grid[i+1][j]).getCenterCell()).addAdjacency(cell);
+							cell.addAdjacency(getRoom(grid[row+1][col]).getCenterCell());
+							(getRoom(grid[row+1][col]).getCenterCell()).addAdjacency(cell);
 							break;
 						default:
 							break;
