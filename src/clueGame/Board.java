@@ -248,11 +248,7 @@ public class Board {
 				}
 			}
 		}
-		BoardCell cell = getCell(18, 20);
-		System.out.println("Cells in adjacency list for cell: " + cell);
-		for (BoardCell c: cell.getAdjList()) {
-			System.out.println(c);
-		}
+		
 	}
 	
 	// Return the number of rows in the game board
