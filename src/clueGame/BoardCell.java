@@ -2,9 +2,7 @@ package clueGame;
 
 import java.util.HashSet;
 import java.util.Set;
-import java.util.function.BooleanSupplier;
 
-import experiment.TestBoardCell;
 
 public class BoardCell {
 	private int row;
