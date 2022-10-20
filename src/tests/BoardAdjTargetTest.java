@@ -341,22 +341,25 @@ class BoardAdjTargetTest {
 			board.calcTargets(board.getCell(18, 17), 4);
 			board.getCell(19, 17).setOccupied(false);
 			Set<BoardCell> targets = board.getTargets();
-			assertEquals(15, targets.size());
+			assertEquals(17, targets.size());
 			assertTrue(targets.contains(board.getCell(21, 11)));
 			assertTrue(targets.contains(board.getCell(21, 16)));
-			assertTrue(targets.contains(board.getCell(21, 18)));	
-			assertFalse(targets.contains(board.getCell(18, 19)));
-			assertFalse(targets.contains(board.getCell(17, 16)));
+			assertTrue(targets.contains(board.getCell(21, 18)));
+			assertTrue(targets.contains(board.getCell(21, 22)));
+			assertTrue(targets.contains(board.getCell(20, 17)));
+			assertTrue(targets.contains(board.getCell(18, 19)));
+			assertTrue(targets.contains(board.getCell(17, 16)));
 			assertTrue(targets.contains(board.getCell(17, 18)));	
-			assertFalse(targets.contains(board.getCell(17, 14)));
-			assertFalse(targets.contains(board.getCell(16, 15)));
+			assertTrue(targets.contains(board.getCell(17, 14)));
+			assertTrue(targets.contains(board.getCell(16, 15)));
 			assertTrue(targets.contains(board.getCell(17, 20)));	
-			assertFalse(targets.contains(board.getCell(14, 17)));
-			assertFalse(targets.contains(board.getCell(16, 19)));
-			assertFalse(targets.contains(board.getCell(19, 16)));
-			assertFalse(targets.contains(board.getCell(19, 18)));
-			assertFalse(targets.contains(board.getCell(17, 16)));
-			assertFalse(targets.contains(board.getCell(17, 18)));
+			assertTrue(targets.contains(board.getCell(14, 17)));
+			assertTrue(targets.contains(board.getCell(16, 19)));
+			assertTrue(targets.contains(board.getCell(19, 16)));
+			assertTrue(targets.contains(board.getCell(19, 18)));
+			assertTrue(targets.contains(board.getCell(17, 16)));
+			assertTrue(targets.contains(board.getCell(17, 18)));
+			assertFalse(targets.contains(board.getCell(22, 17)));
 		
 			// we want to make sure we can get into a room, even if flagged as occupied
 			board.getCell(21, 11).setOccupied(true);
@@ -373,11 +376,14 @@ class BoardAdjTargetTest {
 			board.calcTargets(board.getCell(21, 11), 3);
 			board.getCell(18, 9).setOccupied(false);
 			targets= board.getTargets();
-			assertEquals(5, targets.size());
+			assertEquals(9, targets.size());
 			assertTrue(targets.contains(board.getCell(17, 8)));
-			assertTrue(targets.contains(board.getCell(16, 9)));	
-			assertTrue(targets.contains(board.getCell(17, 10)));
-			assertTrue(targets.contains(board.getCell(19, 8)));	
+			assertTrue(targets.contains(board.getCell(17, 16)));	
+			assertTrue(targets.contains(board.getCell(17, 8)));
+			assertTrue(targets.contains(board.getCell(19, 6)));	
 			assertTrue(targets.contains(board.getCell(18, 7)));
+			assertTrue(targets.contains(board.getCell(20, 7)));
+			assertFalse(targets.contains(board.getCell(18, 9)));
+			
 		}
 }
