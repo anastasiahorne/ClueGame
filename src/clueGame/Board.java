@@ -102,27 +102,27 @@ public class Board {
 	//load our csv file, so we know where our rooms are, where our center etc.	
 	public void loadLayoutConfig() {
 		try {
-			FileReader reader=new FileReader(layoutConfigFile);
-			Scanner in=new Scanner(reader);
-			ArrayList<String[]> cellValues=new ArrayList<>();
+			FileReader reader = new FileReader(layoutConfigFile);
+			Scanner in = new Scanner(reader);
+			ArrayList<String[]> cellValues = new ArrayList<>();
 			cellValues.add(in.nextLine().split(","));
 			while (in.hasNextLine()) {
 				cellValues.add(in.nextLine().split(","));
 			}
 			// number of rows is the size of the arrayList read in
-			numRows=cellValues.size();
+			numRows = cellValues.size();
 			// The number of columns is the size of the first array in the arrayList
-			numColumns=cellValues.get(0).length;
+			numColumns = cellValues.get(0).length;
 			in.close();
-			grid=new BoardCell[numRows][numColumns];
+			grid = new BoardCell[numRows][numColumns];
 			//iterate first through rows then columns
-			for (int i=0;i<numRows;++i) {
-				String[] row=cellValues.get(i);
+			for (int i = 0; i < numRows; ++i) {
+				String[] row = cellValues.get(i);
 				// If all rows do not have the same number of elements, throw exception
 				if (row.length != numColumns) {
 					throw new BadConfigFormatException();
 				}
-				for (int j=0;j<numColumns;++j) {
+				for (int j = 0; j < numColumns; ++j) {
 					BoardCell cell = new BoardCell(i,j);
 					String cellData=row[j];
 					// Throw exception if the character read in is not a key in the map
@@ -299,8 +299,8 @@ public class Board {
 	}
 	
 	// Return the cell at position i, j
-	public BoardCell getCell(int i, int j) {
-		return grid[i][j];
+	public BoardCell getCell(int row, int col) {
+		return grid[row][col];
 	}
 	
 	// Return the room at the given cell on the board
@@ -319,6 +319,7 @@ public class Board {
 		return roomMap;
 	}
 
+	// Getter for the set of BoardCells that is targets
 	public Set<BoardCell> getTargets() {
 		return targets;
 	}
