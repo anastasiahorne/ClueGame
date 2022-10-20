@@ -251,6 +251,34 @@ public class Board {
 		
 	}
 	
+	public void calcTargets(BoardCell startCell, int pathLength) {
+		visited.clear();
+		targets.clear();
+		visited.add(startCell);
+		findAllTargets(startCell, pathLength);
+		targets.remove(startCell);
+	}
+	
+	public void findAllTargets(BoardCell thisCell, int numSteps) {
+		for (BoardCell adjCell: thisCell.getAdjList()) {
+			if (adjCell.getIsRoom()) {
+				targets.add(adjCell);
+			}
+			//add cell if not yet visited and it is an open space
+			if (!visited.contains(adjCell) && !adjCell.getIsOccupied() && !adjCell.getIsRoom()) {
+				visited.add(adjCell);
+				if (numSteps == 1) {
+					targets.add(adjCell);
+				}
+				//recursive call to determine possible targets if our roll is >1
+				else {
+					findAllTargets(adjCell, numSteps - 1);
+				}
+				visited.remove(adjCell);
+			}
+		}
+	}
+	
 	// Return the number of rows in the game board
 	public int getNumRows() {
 		return numRows;
@@ -287,38 +315,7 @@ public class Board {
 		return roomMap;
 	}
 
-	public void calcTargets(BoardCell startCell, int pathLength) {
-		visited.clear();
-		targets.clear();
-		visited.add(startCell);
-		findAllTargets(startCell, pathLength);
-		targets.remove(startCell);
-	}
-	
-	public void findAllTargets(BoardCell thisCell, int numSteps) {
-		for (BoardCell adjCell: thisCell.getAdjList()) {
-			if (adjCell.getIsRoom()) {
-				targets.add(adjCell);
-			}
-			//add cell if not yet visited and it is an open space
-			if (!visited.contains(adjCell) && !adjCell.getIsOccupied() && !adjCell.getIsRoom()) {
-				visited.add(adjCell);
-				if (numSteps == 1) {
-					targets.add(adjCell);
-				}
-				//recursive call to determine possible targets if our roll is >1
-				else {
-					findAllTargets(adjCell, numSteps - 1);
-				}
-				visited.remove(adjCell);
-			}
-		}
-	}
-
 	public Set<BoardCell> getTargets() {
-		for (BoardCell i: targets) {
-			System.out.println(i);
-		}
 		return targets;
 	}
 
