@@ -139,9 +139,7 @@ public class Board {
 		}
 	}
 
-	/*
-	 * Determine the cell's type and set the corresponding attributes
-	 */
+	// Determine the cell's type and set the corresponding attributes
 	private void setCellAttributes(BoardCell cell, String cellData) {
 		if (cellData.length()==1) {
 			cell.setInitial(cellData.charAt(0));
