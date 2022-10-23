@@ -234,8 +234,7 @@ public class Board {
 					secretPassageAdj(cell);
 				}
 			}
-		}
-		
+		}	
 	}
 
 	public void secretPassageAdj(BoardCell cell) {
