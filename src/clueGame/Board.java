@@ -206,14 +206,17 @@ public class Board {
 					}
 				}
 				else {
-					if (cell.isSecretPassage()) {
-						// If room has a secret passage add the attached room's center cell to the center room's center cell
-						(getRoom(cell).getCenterCell()).addAdjacency(getRoom(cell.getSecretPassage()).getCenterCell());
-					}
+					secretPassageAdj(cell);
 				}
 			}
+		}	
+	}
+
+	public void secretPassageAdj(BoardCell cell) {
+		if (cell.isSecretPassage()) {
+			// If room has a secret passage add the attached room's center cell to the center room's center cell
+			(getRoom(cell).getCenterCell()).addAdjacency(getRoom(cell.getSecretPassage()).getCenterCell());
 		}
-		
 	}
 	
 	// Clear sets and make a call to findAllTargets
