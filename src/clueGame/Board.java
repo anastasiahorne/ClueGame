@@ -241,6 +241,7 @@ public class Board {
 		
 	}
 	
+	// Clear sets and make a call to findAllTargets
 	public void calcTargets(BoardCell startCell, int pathLength) {
 		visited.clear();
 		targets.clear();
@@ -249,6 +250,7 @@ public class Board {
 		targets.remove(startCell);
 	}
 	
+	// Get all cells that are pathLength cells away from thisCell
 	public void findAllTargets(BoardCell thisCell, int numSteps) {
 		for (BoardCell adjCell: thisCell.getAdjList()) {
 			if (adjCell.getIsRoom()) {
