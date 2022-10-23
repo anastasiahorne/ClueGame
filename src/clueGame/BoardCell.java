@@ -80,9 +80,10 @@ public class BoardCell {
 		this.isDoorway = isDoorway;
 	}
 	
-	public void setDoorwayAttributes(BoardCell cell, char specChar) {
+	// Set door direction
+	public void setDoorwayAttributes(BoardCell cell, char doorDirection) {
 		cell.setIsDoorway(true);
-		switch(specChar) {
+		switch(doorDirection) {
 		case '<':
 			cell.setDoorDirection(DoorDirection.LEFT);
 			break;
