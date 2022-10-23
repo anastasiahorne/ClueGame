@@ -153,4 +153,34 @@ public class BoardCell {
 	public String toString() {
 		return "(" + row + ", " + col + ")";
 	}
+	
+	// Set attributes of cells with special characters
+	void setSpecialRoomAttributes(Board board, char initial, char specChar) {
+		setInitial(initial);
+		// If doorway, set direction
+		if (initial == 'W') {
+			setDoorwayAttributes(this, specChar);
+		}
+		else {
+			setIsRoom(true);
+			Room room = board.getRoomMap().get(initial);
+			switch(specChar) {
+			case '#':
+				// Set cell to be room label
+				setRoomLabel(true);
+				room.setLabelCell(this);
+				break;
+			case '*':
+				// Set cell to be room center
+				setRoomCenter(true);
+				room.setCenterCell(this);
+				break;
+			default:
+				// Set cell to be secretPassage
+				setSecretPassage(true);
+				setSecretPassage(specChar);
+				break;
+			}
+		}
+	}
 }

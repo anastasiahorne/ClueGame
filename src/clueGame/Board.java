@@ -16,7 +16,7 @@ public class Board {
 	private int numColumns;
 	private String layoutConfigFile;
 	private String setupConfigFile;
-	private Map<Character, Room> roomMap;
+	Map<Character, Room> roomMap;
 	private Set<BoardCell> visited;
 	private Set<BoardCell> targets;
 	
@@ -156,32 +156,7 @@ public class Board {
 		else {
 			char initial=cellData.charAt(0);
 			char specChar=cellData.charAt(1);
-			cell.setInitial(initial);
-			// If doorway, set direction
-			if (initial == 'W') {
-				cell.setDoorwayAttributes(cell, specChar);
-			}
-			else {
-				cell.setIsRoom(true);
-				Room room = roomMap.get(initial);
-				switch(specChar) {
-				case '#':
-					// Set cell to be room label
-					cell.setRoomLabel(true);
-					room.setLabelCell(cell);
-					break;
-				case '*':
-					// Set cell to be room center
-					cell.setRoomCenter(true);
-					room.setCenterCell(cell);
-					break;
-				default:
-					// Set cell to be secretPassage
-					cell.setSecretPassage(true);
-					cell.setSecretPassage(specChar);
-					break;
-				}
-			}
+			cell.setSpecialRoomAttributes(this, initial, specChar);
 		}
 	}
 
