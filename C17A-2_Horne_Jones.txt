@@ -1,3 +1,5 @@
+Anastasia Horne, Rachel Jones, Section C
+
 calculateAdjacencies variables updated to be more specific:
 Before:
 for (int i = 0; i < numRows; i++) {
@@ -27,3 +29,120 @@ cell.setIsDoorway(true);
 					break; 
 After: 
 cell.setDoorwayAttributes(cell, specChar);
+
+
+
+
+GITLOG:
+commit 9d797598ea9b128e3ec858c1a2ddccdf1a832751
+Author: Rachel Jones <racheljones@mines.edu>
+Date:   Sun Oct 23 14:39:27 2022 -0600
+
+    I, Rachel Jones, certify that I participated equitably in the creation of this assignment C17A-2, dated 2022
+
+commit b3f73f1008f29ddc2441aaaf746b51dac934cc21
+Merge: d95d0ec 0dbc7ca
+Author: Rachel Jones <racheljones@mines.edu>
+Date:   Sun Oct 23 14:37:39 2022 -0600
+
+    Merge branch 'main' of https://github.com/anastasiahorne/ClueGame
+
+commit d95d0ec221c01a317424c494675f2e3f7b99529d
+Author: Rachel Jones <racheljones@mines.edu>
+Date:   Sun Oct 23 14:35:39 2022 -0600
+
+    Added method in Board and moved to BoardCell
+
+commit 0dbc7ca65aa1661cf06efc09e158d2a309205457
+Merge: 39cc461 421e66b
+Author: Anastasia Horne <anastasiahorne@mines.edu>
+Date:   Sun Oct 23 14:24:51 2022 -0600
+
+    Merge branch 'main' of https://github.com/anastasiahorne/ClueGame
+
+commit 39cc4619b4602e074b64c9e9f79b9057c66f836e
+Author: Anastasia Horne <anastasiahorne@mines.edu>
+Date:   Sun Oct 23 14:24:30 2022 -0600
+
+    I, Anastasia Horne, certify that I participated equitably in the creation of this assignment, C17A-2, dated October 2022
+
+commit 421e66bbb571cb41630bc2894994a2ff16bd0e8e
+Author: Rachel Jones <racheljones@mines.edu>
+Date:   Sun Oct 23 14:22:42 2022 -0600
+
+    Added commenting to methods in Board and BoardCell
+
+commit 1c4b2d71cba57f9d56c71b9be3b463f80599c674
+Author: Anastasia Horne <anastasiahorne@mines.edu>
+Date:   Sun Oct 23 14:22:04 2022 -0600
+
+    refactored code into a new method secretPassageAdj within Board.java
+
+commit fcd832bd5dbf9891584b7201cdecaaf7ecd5e11b
+Author: Anastasia Horne <anastasiahorne@mines.edu>
+Date:   Thu Oct 20 13:38:20 2022 -0600
+
+    updated txt file to show before/after of DoorWay Attributes
+
+commit 7171ba1ac2b8f0c424f35587895913faad1ff9be
+Merge: ddd127d 624e15f
+Author: Anastasia Horne <anastasiahorne@mines.edu>
+Date:   Thu Oct 20 13:32:15 2022 -0600
+
+    Merge branch 'main' of https://github.com/anastasiahorne/ClueGame
+
+commit ddd127d5f75465bddd9099084ce999739bebd6e5
+Author: Anastasia Horne <anastasiahorne@mines.edu>
+Date:   Thu Oct 20 13:32:11 2022 -0600
+
+    Removed unused import statements from BoardCell
+
+commit 624e15ff43c78e08287eb92d599175d3390284fe
+Author: Rachel Jones <racheljones@mines.edu>
+Date:   Thu Oct 20 13:31:19 2022 -0600
+
+    Updated variables in loadLayoutConfig to be more specific
+
+commit 642a3de4c6dbd712c4ea4b1927223e5fa4446aa2
+Merge: eb41a67 9674d75
+Author: Rachel Jones <racheljones@mines.edu>
+Date:   Thu Oct 20 13:28:39 2022 -0600
+
+    Merge branch 'main' of https://github.com/anastasiahorne/ClueGame
+
+commit eb41a67c791f4bbeb18d0043de37d0fbc04302ea
+Author: Rachel Jones <racheljones@mines.edu>
+Date:   Thu Oct 20 13:28:18 2022 -0600
+
+    Updated spacing
+
+commit 9674d7564a21c7c9d668e7307efce545842a6e42
+Merge: 3191d9c baeed65
+Author: Anastasia Horne <anastasiahorne@mines.edu>
+Date:   Thu Oct 20 13:25:27 2022 -0600
+
+    Merge branch 'main' of https://github.com/anastasiahorne/ClueGame
+
+commit 3191d9c8f716c969a0db454e9e4a6c251f6e309a
+Author: Anastasia Horne <anastasiahorne@mines.edu>
+Date:   Thu Oct 20 13:25:05 2022 -0600
+
+    refactored setCellAttributes, so when we have a doorway we call one method from BoardCell.java that assigns all doorWay attributes
+
+commit baeed6528d12b99b1266e2160408061d96bfca28
+Author: Rachel Jones <racheljones@mines.edu>
+Date:   Thu Oct 20 13:21:52 2022 -0600
+
+    Updated variables in calculateAdjacencies to be more specific
+
+commit afbacdeb7c519a7aa6e7d49f8aae5ce34a389349
+Author: Rachel Jones <racheljones@mines.edu>
+Date:   Thu Oct 20 13:17:07 2022 -0600
+
+    Added txt file for assignment C17A-2
+
+commit b1e25fa11dc813c22d8634c514048b97c394d8b9
+Author: Anastasia Horne <anastasiahorne@mines.edu>
+Date:   Thu Oct 20 13:13:20 2022 -0600
+
+    removed unused import statements
