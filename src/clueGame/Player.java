@@ -5,5 +5,5 @@ abstract public class Player {
 	private String color;
 	private int row, column;
 	
-	
+	abstract void updateHand(Card card);
 }

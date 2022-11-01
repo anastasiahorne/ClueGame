@@ -11,3 +11,17 @@ Room, Chauvenet, H
 // Other spaces on board
 Space, Walkway, W
 Space, Unused, X
+// Players
+Player, PCJ, Yellow, 0, 13
+Player, Blaster, Blue, 0, 19
+Player, Marvin, White, 7, 24
+Player, Baldwin, Purple, 16, 0
+Player, Kelly, Red, 24, 6
+Player, Bartel, Green, 24, 15
+// Weapons
+Weapon, Final Exam
+Weapon, Midterm Exam
+Weapon, Microscope
+Weapon, Hammer
+Weapon, Dynamite
+Weapon, Computer
