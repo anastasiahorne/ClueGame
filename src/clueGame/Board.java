@@ -17,6 +17,8 @@ public class Board {
 	private String layoutConfigFile;
 	private String setupConfigFile;
 	Map<Character, Room> roomMap;
+	private Set<Player> players;
+	private Set<String> weapons;
 	private Set<BoardCell> visited;
 	private Set<BoardCell> targets;
 	
@@ -62,13 +64,15 @@ public class Board {
  
 	//load our txt file so we know what character represents what room, and our room names
 	public void loadSetupConfig() {
-		roomMap=new HashMap<Character, Room>();
+		roomMap = new HashMap<Character, Room>();
+		players = new HashSet<Player>();
+		weapons = new HashSet<String>();
 		try {
-			FileReader reader=new FileReader(setupConfigFile);
+			FileReader reader = new FileReader(setupConfigFile);
 			Scanner in=new Scanner(reader);
 			String line=in.nextLine();
 			while (in.hasNextLine()) {
-				if (!(line.charAt(0)== '/')) {
+				if (!(line.charAt(0) == '/')) {
 					getRoomInformation(line);
 				}
 				line=in.nextLine();
@@ -89,14 +93,23 @@ public class Board {
 		String type;
 		String[] parts = line.split(", ");
 		type = parts[0];
-		// Throw exception if type is not Room or Space
-		if (!(type.equals("Room")) && !(type.equals("Space"))) {
+		// Throw exception if type is not Room, Space, Player, or Weapon
+		if (!(type.equals("Room")) && !(type.equals("Space")) && !(type.equals("Player")) && !(type.equals("Weapon"))) {
 			throw new BadConfigFormatException();
 		}
-		roomName = parts[1];
-		character = parts[2].charAt(0);
-		Room room = new Room(roomName, character);
-		roomMap.put(character, room);
+		if (type.equals("Room") || type.equals("Space")) {
+			roomName = parts[1];
+			character = parts[2].charAt(0);
+			Room room = new Room(roomName, character);
+			roomMap.put(character, room);
+		}
+		else if (type.equals("Player")) {
+			// Create new player and add attributes
+			// Add the Player to the set of Players
+		}
+		else {
+			// Add the weapon to the weapons set
+		}
 	}
 	
 	//load our csv file, so we know where our rooms are, where our center etc.	
@@ -291,5 +304,13 @@ public class Board {
 	// Return the adjacency list for the cell at row i and column j
 	public Set<BoardCell> getAdjList(int i, int j) {
 		return getCell(i, j).getAdjList();
+	}
+
+	public Set<Player> getPlayers() {
+		return players;
+	}
+
+	public Set<String> getWeapons() {
+		return weapons;
 	}
 }
