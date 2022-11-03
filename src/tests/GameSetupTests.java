@@ -28,6 +28,12 @@ class GameSetupTests {
 		assertEquals(6, board.getPlayers().size());
 	}
 	
+	// Test that all weapons were loaded in
+	@Test
+	void testWeaponsLoaded() {
+		assertEquals(6, board.getWeapons().size());
+	}
+	
 	// Proper Human or Computer player is initialized based on people data
 	@Test
 	void testPlayersInititialized() {
@@ -56,6 +62,7 @@ class GameSetupTests {
 	@Test
 	void testSolution() {
 		// Test that solution variables are not empty
+		// Test the types/classes in Solution to make sure you have one room, one weapon, and one person
 		// Test number of rooms, weapons, and people left in the deck
 	}
 	
