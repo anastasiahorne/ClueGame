@@ -7,6 +7,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import clueGame.Board;
+import clueGame.Player;
 
 class GameSetupTests {
 	private static Board board;
@@ -28,6 +29,23 @@ class GameSetupTests {
 	}
 	
 	// Proper Human or Computer player is initialized based on people data
+	@Test
+	void testPlayersInititialized() {
+		int countHuman = 0;
+		int countComputer = 0;
+		for (Player p: board.getPlayers()) {
+			Class c = p.getClass();
+			if (c.getName().equals("HumanPlayer")) {
+				countHuman++;
+			}
+			else {
+				countComputer++;
+			}
+		}
+		assertEquals(5, countComputer);
+		assertEquals(1, countHuman);
+	}
+	
 	// Deck of all cards is created (composed of rooms, weapons, and people)
 	// The solution to the game is dealt
 	// The other cards are dealt to the players.
