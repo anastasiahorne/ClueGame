@@ -8,6 +8,7 @@ import org.junit.jupiter.api.Test;
 
 import clueGame.Board;
 import clueGame.Card;
+import clueGame.CardType;
 import clueGame.Player;
 import clueGame.Solution;
 
@@ -57,7 +58,27 @@ class GameSetupTests {
 	// Deck of all cards is created (composed of rooms, weapons, and people)
 	@Test
 	void testDeck() {
+		// test deck is equal to the number of rooms plus the number of people plus the number of weapons
+		assertEquals(board.getDeck().size(), 21);
 		// test number of rooms, weapons, and people in deck
+		int countRooms = 0;
+		int countWeapons = 0;
+		int countPeople = 0;
+		for (Card c : board.getDeck()) {
+			CardType type = c.getCardType();
+			switch (type) {
+			case ROOM:
+				countRooms++;
+				break;
+			case WEAPON:
+				countWeapons++;
+			case PERSON:
+				countPeople++;
+			}
+		}
+		assertEquals(countRooms, 9);
+		assertEquals(countWeapons, 6);
+		assertEquals(countPeople, 6);
 	}
 	
 	// The solution to the game is dealt
