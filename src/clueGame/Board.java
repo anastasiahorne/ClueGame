@@ -105,6 +105,16 @@ public class Board {
 		}
 		else if (type.equals("Player")) {
 			// Create new player and add attributes
+			String name = parts[1];
+			String color = parts[2];
+			int r = Integer.parseInt(parts[3]);
+			int c = Integer.parseInt(parts[4]);
+			if (players.size() == 0) {
+				HumanPlayer player = new HumanPlayer(name, color, r, c);
+			}
+			else {
+				ComputerPlayer player = new ComputerPlayer(name, color, r, c);
+			}
 			// Add the Player to the set of Players
 		}
 		else {
