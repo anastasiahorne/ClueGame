@@ -72,13 +72,15 @@ class GameSetupTests {
 				break;
 			case WEAPON:
 				countWeapons++;
+				break;
 			case PERSON:
 				countPeople++;
+				break;
 			}
 		}
-		assertEquals(countRooms, 9);
-		assertEquals(countWeapons, 6);
-		assertEquals(countPeople, 6);
+		assertEquals(9, countRooms);
+		assertEquals(6, countWeapons);
+		assertEquals(6, countPeople);
 	}
 	
 	// The solution to the game is dealt
@@ -113,10 +115,11 @@ class GameSetupTests {
 		assertEquals(countPeople,5);
 	}
 	
-	// The other cards are dealt to the players.
+	// Test that every card in the deck was given to the players roughly equally
+	// Every card was given out once because they are stored in a set which does not allow for duplicates
 	@Test
 	void testCardsDealt() {
-		// Test that every card in the deck was given to the players roughly equally
+		
 	}
 	
 	
