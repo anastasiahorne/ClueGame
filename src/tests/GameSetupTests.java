@@ -85,15 +85,32 @@ class GameSetupTests {
 	@Test
 	void testSolution() {
 		Solution testSol=board.getSolution();
-		// Test that solution variables are not empty
 		Card room1=testSol.getRoom();
 		Card person1=testSol.getPerson();
 		Card weapon1=testSol.getWeapon();
-		
-		
+		int countRooms = 0;
+		int countWeapons = 0;
+		int countPeople = 0;
 		// Test the types/classes in Solution to make sure you have one room, one weapon, and one person
+		assertEquals(room1.getCardType(),CardType.ROOM);
+		assertEquals(person1.getCardType(),CardType.PERSON);
+		assertEquals(weapon1.getCardType(),CardType.WEAPON);
 		// Test number of rooms, weapons, and people left in the deck
-		
+		for (Card c: board.getDeck()){
+			CardType type = c.getCardType();
+			switch (type) {
+			case ROOM:
+				countRooms++;
+				break;
+			case WEAPON:
+				countWeapons++;
+			case PERSON:
+				countPeople++;
+			}
+		}
+		assertEquals(countRooms,8);
+		assertEquals(countWeapons,5);
+		assertEquals(countPeople,5);
 	}
 	
 	// The other cards are dealt to the players.
