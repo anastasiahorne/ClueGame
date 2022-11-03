@@ -119,7 +119,12 @@ class GameSetupTests {
 	// Every card was given out once because they are stored in a set which does not allow for duplicates
 	@Test
 	void testCardsDealt() {
-		
+		int deckSize = board.getDeck().size();
+		int numPlayers = board.getPlayers().size();
+		int cardsPerPerson = deckSize / numPlayers;
+		for (Player p: board.getPlayers()) {
+			assertEquals(cardsPerPerson, , 1);
+		}
 	}
 	
 	
