@@ -21,6 +21,7 @@ public class Board {
 	private Set<String> weapons;
 	private Set<BoardCell> visited;
 	private Set<BoardCell> targets;
+	private Set<Card> deck;
 	
 	/*
      * variable and methods used for singleton pattern
@@ -324,5 +325,9 @@ public class Board {
 
 	public Set<String> getWeapons() {
 		return weapons;
+	}
+
+	public Set<Card> getDeck() {
+		return deck;
 	}
 }
