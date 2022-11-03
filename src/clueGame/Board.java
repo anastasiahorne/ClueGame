@@ -144,7 +144,7 @@ public class Board {
 			deck.add(weaponCard);
 		}
 	}
-	
+	//set the solution using the created deck
 	public void setSolution() {
 		
 	}
