@@ -47,7 +47,23 @@ class GameSetupTests {
 	}
 	
 	// Deck of all cards is created (composed of rooms, weapons, and people)
+	@Test
+	void testDeck() {
+		// test number of rooms, weapons, and people in deck
+	}
+	
 	// The solution to the game is dealt
+	@Test
+	void testSolution() {
+		// Test that solution variables are not empty
+		// Test number of rooms, weapons, and people left in the deck
+	}
+	
 	// The other cards are dealt to the players.
-
+	@Test
+	void testCardsDealt() {
+		// Test that every card in the deck was given to the players roughly equally
+	}
+	
+	
 }
