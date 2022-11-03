@@ -72,13 +72,15 @@ class GameSetupTests {
 				break;
 			case WEAPON:
 				countWeapons++;
+				break;
 			case PERSON:
 				countPeople++;
+				break;
 			}
 		}
-		assertEquals(countRooms, 9);
-		assertEquals(countWeapons, 6);
-		assertEquals(countPeople, 6);
+		assertEquals(9, countRooms);
+		assertEquals(6, countWeapons);
+		assertEquals(6, countPeople);
 	}
 	
 	// The solution to the game is dealt
