@@ -9,6 +9,7 @@ import org.junit.jupiter.api.Test;
 import clueGame.Board;
 import clueGame.Card;
 import clueGame.CardType;
+import clueGame.HumanPlayer;
 import clueGame.Player;
 import clueGame.Solution;
 
@@ -43,8 +44,7 @@ class GameSetupTests {
 		int countHuman = 0;
 		int countComputer = 0;
 		for (Player p: board.getPlayers()) {
-			Class c = p.getClass();
-			if (c.getName().equals("HumanPlayer")) {
+			if (p instanceof HumanPlayer) {
 				countHuman++;
 			}
 			else {
