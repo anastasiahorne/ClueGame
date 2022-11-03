@@ -8,6 +8,7 @@ import org.junit.jupiter.api.Test;
 
 import clueGame.Board;
 import clueGame.Player;
+import clueGame.Solution;
 
 class GameSetupTests {
 	private static Board board;
@@ -61,7 +62,10 @@ class GameSetupTests {
 	// The solution to the game is dealt
 	@Test
 	void testSolution() {
+		Solution testSol=board.getSolution();
 		// Test that solution variables are not empty
+		
+		
 		// Test the types/classes in Solution to make sure you have one room, one weapon, and one person
 		// Test number of rooms, weapons, and people left in the deck
 		
