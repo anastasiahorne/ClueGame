@@ -145,6 +145,11 @@ public class Board {
 		}
 	}
 	
+	public void setSolution() {
+		
+	}
+	
+	
 	//load our csv file, so we know where our rooms are, where our center etc.	
 	public void loadLayoutConfig() {
 		try {
