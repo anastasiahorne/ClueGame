@@ -64,6 +64,7 @@ class GameSetupTests {
 		// Test that solution variables are not empty
 		// Test the types/classes in Solution to make sure you have one room, one weapon, and one person
 		// Test number of rooms, weapons, and people left in the deck
+		
 	}
 	
 	// The other cards are dealt to the players.
