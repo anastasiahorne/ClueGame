@@ -73,11 +73,11 @@ public class Board {
 			String line=in.nextLine();
 			while (in.hasNextLine()) {
 				if (!(line.charAt(0) == '/')) {
-					getRoomInformation(line);
+					setInformation(line);
 				}
 				line=in.nextLine();
 			}
-			getRoomInformation(line);
+			setInformation(line);
 			in.close();
 		} catch (FileNotFoundException e) {
 			System.out.println("Could not find " + setupConfigFile);
@@ -87,7 +87,7 @@ public class Board {
 	/*
 	 * From line, extract information about room or space and put it into roomMap
 	 */
-	private void getRoomInformation(String line) {
+	private void setInformation(String line) {
 		char character;
 		String roomName;
 		String type;
@@ -111,14 +111,16 @@ public class Board {
 			int c = Integer.parseInt(parts[4]);
 			if (players.size() == 0) {
 				HumanPlayer player = new HumanPlayer(name, color, r, c);
+				players.add(player);
 			}
 			else {
 				ComputerPlayer player = new ComputerPlayer(name, color, r, c);
+				players.add(player);
 			}
-			// Add the Player to the set of Players
 		}
 		else {
 			// Add the weapon to the weapons set
+			weapons.add(parts[1]);
 		}
 	}
 	
