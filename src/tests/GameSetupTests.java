@@ -123,7 +123,7 @@ class GameSetupTests {
 		int numPlayers = board.getPlayers().size();
 		int cardsPerPerson = deckSize / numPlayers;
 		for (Player p: board.getPlayers()) {
-			assertEquals(cardsPerPerson, , 1);
+			assertEquals(cardsPerPerson, p.getHand().size(), 1);
 		}
 	}
 	

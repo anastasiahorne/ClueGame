@@ -16,5 +16,9 @@ abstract public class Player {
 		hand = new ArrayList<Card>();
 	}
 	
+	public ArrayList<Card> getHand() {
+		return hand;
+	}
+
 	abstract void updateHand(Card card);
 }
