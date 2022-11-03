@@ -21,11 +21,11 @@ public class Board {
 	private Set<String> weapons;
 	private Set<BoardCell> visited;
 	private Set<BoardCell> targets;
-
 	private Solution solution;
-
-	private Set<Card> deck;
-
+	private ArrayList<Card> deck;
+	private ArrayList<Card> playerCards;
+	private ArrayList<Card> weaponCards;
+	private ArrayList<Card> roomCards;
 	
 	/*
      * variable and methods used for singleton pattern
@@ -73,7 +73,7 @@ public class Board {
 		roomMap = new HashMap<Character, Room>();
 		players = new HashSet<Player>();
 		weapons = new HashSet<String>();
-		deck = new HashSet<Card>();
+		deck = new ArrayList<Card>();
 		try {
 			FileReader reader = new FileReader(setupConfigFile);
 			Scanner in=new Scanner(reader);
@@ -113,6 +113,7 @@ public class Board {
 			if (type.equals("Room")) {
 				Card roomCard = new Card(roomName, CardType.ROOM);
 				deck.add(roomCard);
+				roomCards.add(roomCard);
 			}
 		}
 		else if (type.equals("Player")) {
@@ -135,6 +136,7 @@ public class Board {
 			// Create a new card and add it to the deck
 			Card personCard = new Card(name, CardType.PERSON);
 			deck.add(personCard);
+			playerCards.add(personCard);
 		}
 		else {
 			// Add the weapon to the weapons set
@@ -142,6 +144,7 @@ public class Board {
 			// Create a new card and add it to the deck
 			Card weaponCard = new Card(parts[1], CardType.WEAPON);
 			deck.add(weaponCard);
+			weaponCards.add(weaponCard);
 		}
 	}
 	//set the solution using the created deck
@@ -295,6 +298,12 @@ public class Board {
 				}
 				visited.remove(adjCell);
 			}
+		}
+	}
+	
+	public void deal() {
+		for (Card card: deck) {
+			
 		}
 	}
 	
