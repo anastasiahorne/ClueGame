@@ -65,9 +65,11 @@ public class Board {
  
 	//load our txt file so we know what character represents what room, and our room names
 	public void loadSetupConfig() {
+		// initialize containers
 		roomMap = new HashMap<Character, Room>();
 		players = new HashSet<Player>();
 		weapons = new HashSet<String>();
+		deck = new HashSet<Card>();
 		try {
 			FileReader reader = new FileReader(setupConfigFile);
 			Scanner in=new Scanner(reader);
@@ -103,6 +105,11 @@ public class Board {
 			character = parts[2].charAt(0);
 			Room room = new Room(roomName, character);
 			roomMap.put(character, room);
+			// Create a new room card and add it to the deck
+			if (type.equals("Room")) {
+				Card roomCard = new Card(roomName, CardType.ROOM);
+				deck.add(roomCard);
+			}
 		}
 		else if (type.equals("Player")) {
 			// Create new player and add attributes
@@ -110,18 +117,27 @@ public class Board {
 			String color = parts[2];
 			int r = Integer.parseInt(parts[3]);
 			int c = Integer.parseInt(parts[4]);
+			// Make the first player the human player
 			if (players.size() == 0) {
+				// First person is human
 				HumanPlayer player = new HumanPlayer(name, color, r, c);
 				players.add(player);
 			}
 			else {
+				// All other people are computers
 				ComputerPlayer player = new ComputerPlayer(name, color, r, c);
 				players.add(player);
 			}
+			// Create a new card and add it to the deck
+			Card personCard = new Card(name, CardType.PERSON);
+			deck.add(personCard);
 		}
 		else {
 			// Add the weapon to the weapons set
 			weapons.add(parts[1]);
+			// Create a new card and add it to the deck
+			Card weaponCard = new Card(parts[1], CardType.WEAPON);
+			deck.add(weaponCard);
 		}
 	}
 	
