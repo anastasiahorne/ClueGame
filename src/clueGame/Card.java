@@ -2,7 +2,9 @@ package clueGame;
 
 public class Card {
 	private String cardName;
+
 	private CardType cardType;
+
 	
 	// Constructor
 	public Card(String name, CardType type) {

@@ -86,6 +86,9 @@ class GameSetupTests {
 	void testSolution() {
 		Solution testSol=board.getSolution();
 		// Test that solution variables are not empty
+		Card room1=testSol.getRoom();
+		Card person1=testSol.getPerson();
+		Card weapon1=testSol.getWeapon();
 		
 		
 		// Test the types/classes in Solution to make sure you have one room, one weapon, and one person
