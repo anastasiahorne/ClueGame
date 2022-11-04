@@ -152,18 +152,7 @@ public class Board {
 		}
 	}
 	//set the solution using the created deck
-	public void setSolution() {
-		Random rand=new Random();
-		Card room = roomCards.get(rand.nextInt(roomCards.size()));
-		Card person = playerCards.get(rand.nextInt(playerCards.size()));
-		Card weapon = weaponCards.get(rand.nextInt(weaponCards.size()));
-		solution=new Solution(room,person,weapon);
-		// Remove solution cards from the deck
-		deck.remove(room);
-		deck.remove(person);
-		deck.remove(weapon);
-		
-	}
+
 	
 	
 	//load our csv file, so we know where our rooms are, where our center etc.	

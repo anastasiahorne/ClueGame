@@ -83,39 +83,6 @@ class GameSetupTests {
 		assertEquals(6, countPeople);
 	}
 	
-	// The solution to the game is dealt
-	@Test
-	void testSolution() {
-		board.setSolution();
-		Solution testSol=board.getSolution();
-		Card room1=testSol.getRoom();
-		Card person1=testSol.getPerson();
-		Card weapon1=testSol.getWeapon();
-		int countRooms = 0;
-		int countWeapons = 0;
-		int countPeople = 0;
-		// Test the types/classes in Solution to make sure you have one room, one weapon, and one person
-		assertEquals(room1.getCardType(),CardType.ROOM);
-		assertEquals(person1.getCardType(),CardType.PERSON);
-		assertEquals(weapon1.getCardType(),CardType.WEAPON);
-		// Test number of rooms, weapons, and people left in the deck
-		for (Card c: board.getDeck()){
-			CardType type = c.getCardType();
-			switch (type) {
-			case ROOM:
-				countRooms++;
-				break;
-			case WEAPON:
-				countWeapons++;
-			case PERSON:
-				countPeople++;
-			}
-		}
-		assertEquals(countRooms,8);
-		assertEquals(countWeapons,5);
-		assertEquals(countPeople,5);
-	}
-	
 	// Test that every card in the deck was given to the players roughly equally
 	// Every card was given out once because they are stored in a set which does not allow for duplicates
 	@Test
@@ -127,6 +94,16 @@ class GameSetupTests {
 		for (Player p: board.getPlayers()) {
 			assertEquals(cardsPerPerson, p.getHand().size(), 1);
 		}
+		
+		
+		Solution testSol=board.getSolution();
+		Card room1=testSol.getRoom();
+		Card person1=testSol.getPerson();
+		Card weapon1=testSol.getWeapon();
+		// Test the types/classes in Solution to make sure you have one room, one weapon, and one person
+		assertEquals(room1.getCardType(),CardType.ROOM);
+		assertEquals(person1.getCardType(),CardType.PERSON);
+		assertEquals(weapon1.getCardType(),CardType.WEAPON);
 	}
 	
 	
