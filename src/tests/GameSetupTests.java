@@ -1,6 +1,9 @@
 package tests;
 
 import static org.junit.jupiter.api.Assertions.*;
+
+import java.util.ArrayList;
+
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import clueGame.Board;
@@ -88,6 +91,9 @@ class GameSetupTests {
 		board.deal();
 		int numPlayers = board.getPlayers().size();
 		int cardsPerPerson = deckSize / numPlayers;
+		/*
+		 * int numWeapons=0; int numPerson=0; int numRoom=0;
+		 */
 		for (Player p: board.getPlayers()) {
 			assertEquals(cardsPerPerson, p.getHand().size(), 1);
 		}
@@ -104,6 +110,18 @@ class GameSetupTests {
 		
 		//once players and solutions have their cards, our deck should be empty
 		assertEquals(0, board.getDeck().size());
+		
+		//no player should have the same card
+		
+		//player should have at least one of each type card
+		/*
+		 * Player p= board.getPlayers().get(0); for (Card c: p.getHand()) { CardType
+		 * type = c.getCardType(); switch (type) { case ROOM: numRoom++; break; case
+		 * WEAPON: numWeapons++; break; case PERSON: numPerson++; break; } }
+		 * //assertEquals(numRoom,1); assertEquals(numWeapons,1);
+		 * assertEquals(numPerson,1);
+		 */
+	
 	}
 	
 	
