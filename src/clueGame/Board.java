@@ -18,14 +18,15 @@ public class Board {
 	private String layoutConfigFile;
 	private String setupConfigFile;
 	Map<Character, Room> roomMap;
-	private Set<Player> players;
-	private Set<String> weapons;
+	private ArrayList<Player> players;
+	private HashSet<String> weapons;
 	private Set<BoardCell> visited;
 	private Set<BoardCell> targets;
-
 	private Solution solution;
-
 	private ArrayList<Card> deck;
+	private ArrayList<Card> playerCards;
+	private ArrayList<Card> weaponCards;
+	private ArrayList<Card> roomCards;
 
 	
 	/*
@@ -75,6 +76,12 @@ public class Board {
 		players = new HashSet<Player>();
 		weapons = new HashSet<String>();
 		deck = new ArrayList<Card>();
+		players = new ArrayList<Player>();
+		weapons = new ArrayList<String>();
+		deck = new ArrayList<Card>();
+		roomCards = new ArrayList<Card>();
+		playerCards = new ArrayList<Card>();
+		weaponCards = new ArrayList<Card>();
 		try {
 			FileReader reader = new FileReader(setupConfigFile);
 			Scanner in=new Scanner(reader);
@@ -114,6 +121,7 @@ public class Board {
 			if (type.equals("Room")) {
 				Card roomCard = new Card(roomName, CardType.ROOM);
 				deck.add(roomCard);
+				roomCards.add(roomCard);
 			}
 		}
 		else if (type.equals("Player")) {
@@ -136,6 +144,7 @@ public class Board {
 			// Create a new card and add it to the deck
 			Card personCard = new Card(name, CardType.PERSON);
 			deck.add(personCard);
+			playerCards.add(personCard);
 		}
 		else {
 			// Add the weapon to the weapons set
@@ -143,6 +152,7 @@ public class Board {
 			// Create a new card and add it to the deck
 			Card weaponCard = new Card(parts[1], CardType.WEAPON);
 			deck.add(weaponCard);
+			weaponCards.add(weaponCard);
 		}
 	}
 	//set the solution using the created deck
@@ -326,6 +336,32 @@ public class Board {
 		}
 	}
 	
+	public void deal() {
+		Random rand = new Random();
+		// Get a random room, person, and card
+		Card room = roomCards.get(rand.nextInt(roomCards.size()));
+		Card person = playerCards.get(rand.nextInt(playerCards.size()));
+		Card weapon = weaponCards.get(rand.nextInt(weaponCards.size()));
+		
+		// Remove cards from the deck
+		deck.remove(room);
+		deck.remove(person);
+		deck.remove(weapon);
+		
+		// Deal a random card to players
+		int playerNum = 0;
+		while (!deck.isEmpty()) {
+			// Pick a random card from the deck
+			Card card = deck.get(rand.nextInt(roomCards.size()));
+			// Update the player's hand
+			players.get(playerNum).updateHand(card);
+			// Remove the card from the deck
+			deck.remove(card);
+			// Increment player index
+			playerNum = (playerNum + 1) % players.size();
+		}
+	}
+	
 	// Return the number of rows in the game board
 	public int getNumRows() {
 		return numRows;
@@ -372,11 +408,11 @@ public class Board {
 		return getCell(i, j).getAdjList();
 	}
 
-	public Set<Player> getPlayers() {
+	public ArrayList<Player> getPlayers() {
 		return players;
 	}
 
-	public Set<String> getWeapons() {
+	public ArrayList<String> getWeapons() {
 		return weapons;
 	}
 	
