@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
+import java.util.Random;
 import java.util.Scanner;
 import java.util.Set;
 
@@ -305,6 +306,8 @@ public class Board {
 		for (Card card: deck) {
 			
 		}
+		Random rand = new Random();
+		Card room = deck.get(rand.nextInt(roomCards.size()));
 	}
 	
 	// Return the number of rows in the game board
@@ -362,7 +365,7 @@ public class Board {
 	}
 	
 
-	public Set<Card> getDeck() {
+	public ArrayList<Card> getDeck() {
 		return deck;
 
 	}
