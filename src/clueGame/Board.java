@@ -192,7 +192,7 @@ public class Board {
 				}
 			}
 		} catch (FileNotFoundException e) {
-			System.out.println("Could not find " + setupConfigFile);
+			e.getMessage();
 		}
 	}
 
