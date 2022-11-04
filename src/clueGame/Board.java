@@ -18,8 +18,8 @@ public class Board {
 	private String layoutConfigFile;
 	private String setupConfigFile;
 	Map<Character, Room> roomMap;
-	private Set<Player> players;
-	private Set<String> weapons;
+	private ArrayList<Player> players;
+	private ArrayList<String> weapons;
 	private Set<BoardCell> visited;
 	private Set<BoardCell> targets;
 	private Solution solution;
@@ -72,9 +72,12 @@ public class Board {
 	public void loadSetupConfig() {
 		// initialize containers
 		roomMap = new HashMap<Character, Room>();
-		players = new HashSet<Player>();
-		weapons = new HashSet<String>();
+		players = new ArrayList<Player>();
+		weapons = new ArrayList<String>();
 		deck = new ArrayList<Card>();
+		roomCards = new ArrayList<Card>();
+		playerCards = new ArrayList<Card>();
+		weaponCards = new ArrayList<Card>();
 		try {
 			FileReader reader = new FileReader(setupConfigFile);
 			Scanner in=new Scanner(reader);
@@ -303,11 +306,29 @@ public class Board {
 	}
 	
 	public void deal() {
-		for (Card card: deck) {
-			
-		}
 		Random rand = new Random();
-		Card room = deck.get(rand.nextInt(roomCards.size()));
+		// Get a random room, person, and card
+		Card room = roomCards.get(rand.nextInt(roomCards.size()));
+		Card person = playerCards.get(rand.nextInt(playerCards.size()));
+		Card weapon = weaponCards.get(rand.nextInt(weaponCards.size()));
+		
+		// Remove cards from the deck
+		deck.remove(room);
+		deck.remove(person);
+		deck.remove(weapon);
+		
+		// Deal a random card to players
+		int playerNum = 0;
+		while (!deck.isEmpty()) {
+			// Pick a random card from the deck
+			Card card = deck.get(rand.nextInt(roomCards.size()));
+			// Update the player's hand
+			players.get(playerNum).updateHand(card);
+			// Remove the card from the deck
+			deck.remove(card);
+			// Increment player index
+			playerNum = (playerNum + 1) % players.size();
+		}
 	}
 	
 	// Return the number of rows in the game board
@@ -356,11 +377,11 @@ public class Board {
 		return getCell(i, j).getAdjList();
 	}
 
-	public Set<Player> getPlayers() {
+	public ArrayList<Player> getPlayers() {
 		return players;
 	}
 
-	public Set<String> getWeapons() {
+	public ArrayList<String> getWeapons() {
 		return weapons;
 	}
 	
