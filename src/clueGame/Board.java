@@ -321,7 +321,7 @@ public class Board {
 		int playerNum = 0;
 		while (!deck.isEmpty()) {
 			// Pick a random card from the deck
-			Card card = deck.get(rand.nextInt(roomCards.size()));
+			Card card = deck.get(rand.nextInt(deck.size()));
 			// Update the player's hand
 			players.get(playerNum).updateHand(card);
 			// Remove the card from the deck
