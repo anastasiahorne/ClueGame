@@ -392,7 +392,6 @@ public class Board {
 	}
 
 	public Solution getSolution() {
-		// TODO Auto-generated method stub
 		return solution;
 	}
 }
