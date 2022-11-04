@@ -95,7 +95,7 @@ class GameSetupTests {
 			assertEquals(cardsPerPerson, p.getHand().size(), 1);
 		}
 		
-		
+		//solution tests, make sure we have the right solution
 		Solution testSol=board.getSolution();
 		Card room1=testSol.getRoom();
 		Card person1=testSol.getPerson();
@@ -104,6 +104,8 @@ class GameSetupTests {
 		assertEquals(room1.getCardType(),CardType.ROOM);
 		assertEquals(person1.getCardType(),CardType.PERSON);
 		assertEquals(weapon1.getCardType(),CardType.WEAPON);
+		
+		assertEquals(0, board.getDeck().size());
 	}
 	
 	
