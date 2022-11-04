@@ -19,7 +19,7 @@ public class Board {
 	private String setupConfigFile;
 	Map<Character, Room> roomMap;
 	private ArrayList<Player> players;
-	private ArrayList<String> weapons;
+	private HashSet<String> weapons;
 	private Set<BoardCell> visited;
 	private Set<BoardCell> targets;
 	private Solution solution;
@@ -27,6 +27,7 @@ public class Board {
 	private ArrayList<Card> playerCards;
 	private ArrayList<Card> weaponCards;
 	private ArrayList<Card> roomCards;
+
 	
 	/*
      * variable and methods used for singleton pattern
@@ -72,6 +73,9 @@ public class Board {
 	public void loadSetupConfig() {
 		// initialize containers
 		roomMap = new HashMap<Character, Room>();
+		players = new HashSet<Player>();
+		weapons = new HashSet<String>();
+		deck = new ArrayList<Card>();
 		players = new ArrayList<Player>();
 		weapons = new ArrayList<String>();
 		deck = new ArrayList<Card>();
@@ -153,6 +157,33 @@ public class Board {
 	}
 	//set the solution using the created deck
 	public void setSolution() {
+		Random rand=new Random();
+		int index= rand.nextInt(deck.size());
+		boolean hasRoom=false;
+		boolean hasWeapon=false;
+		boolean hasPerson=false;
+		while (!(hasRoom && hasWeapon && hasPerson)) {
+		Card card=deck.get(index);
+		CardType type = card.getCardType();
+		if (type == CardType.ROOM && !hasRoom) {
+			solution.setRoom(card);
+			hasRoom=true;
+			deck.remove(index);
+		}
+		else if (type== CardType.WEAPON && !hasWeapon) {
+			solution.setWeapon(card);
+			hasWeapon=true;
+			deck.remove(index);
+		}
+		else if (type== CardType.PERSON && !hasPerson) {
+			solution.setPerson(card);
+			hasPerson=true;
+			deck.remove(index);
+		}
+		else {
+			index=rand.nextInt(deck.size());
+		}
+		}
 		
 	}
 	
