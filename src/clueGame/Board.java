@@ -19,7 +19,7 @@ public class Board {
 	private String setupConfigFile;
 	Map<Character, Room> roomMap;
 	private ArrayList<Player> players;
-	private HashSet<String> weapons;
+	private ArrayList<String> weapons;
 	private Set<BoardCell> visited;
 	private Set<BoardCell> targets;
 	private Solution solution;
@@ -73,9 +73,6 @@ public class Board {
 	public void loadSetupConfig() {
 		// initialize containers
 		roomMap = new HashMap<Character, Room>();
-		players = new HashSet<Player>();
-		weapons = new HashSet<String>();
-		deck = new ArrayList<Card>();
 		players = new ArrayList<Player>();
 		weapons = new ArrayList<String>();
 		deck = new ArrayList<Card>();
