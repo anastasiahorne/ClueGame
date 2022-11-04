@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
+import java.util.Random;
 import java.util.Scanner;
 import java.util.Set;
 
@@ -24,7 +25,7 @@ public class Board {
 
 	private Solution solution;
 
-	private Set<Card> deck;
+	private ArrayList<Card> deck;
 
 	
 	/*
@@ -73,7 +74,7 @@ public class Board {
 		roomMap = new HashMap<Character, Room>();
 		players = new HashSet<Player>();
 		weapons = new HashSet<String>();
-		deck = new HashSet<Card>();
+		deck = new ArrayList<Card>();
 		try {
 			FileReader reader = new FileReader(setupConfigFile);
 			Scanner in=new Scanner(reader);
@@ -146,6 +147,33 @@ public class Board {
 	}
 	//set the solution using the created deck
 	public void setSolution() {
+		Random rand=new Random();
+		int index= rand.nextInt(deck.size());
+		boolean hasRoom=false;
+		boolean hasWeapon=false;
+		boolean hasPerson=false;
+		while (!(hasRoom && hasWeapon && hasPerson)) {
+		Card card=deck.get(index);
+		CardType type = card.getCardType();
+		if (type == CardType.ROOM && !hasRoom) {
+			solution.setRoom(card);
+			hasRoom=true;
+			deck.remove(index);
+		}
+		else if (type== CardType.WEAPON && !hasWeapon) {
+			solution.setWeapon(card);
+			hasWeapon=true;
+			deck.remove(index);
+		}
+		else if (type== CardType.PERSON && !hasPerson) {
+			solution.setPerson(card);
+			hasPerson=true;
+			deck.remove(index);
+		}
+		else {
+			index=rand.nextInt(deck.size());
+		}
+		}
 		
 	}
 	
@@ -353,7 +381,7 @@ public class Board {
 	}
 	
 
-	public Set<Card> getDeck() {
+	public ArrayList<Card> getDeck() {
 		return deck;
 
 	}

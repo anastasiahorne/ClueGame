@@ -86,6 +86,7 @@ class GameSetupTests {
 	// The solution to the game is dealt
 	@Test
 	void testSolution() {
+		board.setSolution();
 		Solution testSol=board.getSolution();
 		Card room1=testSol.getRoom();
 		Card person1=testSol.getPerson();
