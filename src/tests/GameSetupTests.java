@@ -105,6 +105,7 @@ class GameSetupTests {
 		assertEquals(person1.getCardType(),CardType.PERSON);
 		assertEquals(weapon1.getCardType(),CardType.WEAPON);
 		
+		//once players and solutions have their cards, our deck should be empty
 		assertEquals(0, board.getDeck().size());
 	}
 	
