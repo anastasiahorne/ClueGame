@@ -340,6 +340,9 @@ public class Board {
 		Card person = playerCards.get(rand.nextInt(playerCards.size()));
 		Card weapon = weaponCards.get(rand.nextInt(weaponCards.size()));
 		
+		// Set solution
+		solution = new Solution(room, person, weapon);
+		
 		// Remove cards from the deck
 		deck.remove(room);
 		deck.remove(person);
@@ -412,11 +415,9 @@ public class Board {
 	public ArrayList<String> getWeapons() {
 		return weapons;
 	}
-	
 
 	public ArrayList<Card> getDeck() {
 		return deck;
-
 	}
 
 	public Solution getSolution() {
