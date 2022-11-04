@@ -124,6 +124,7 @@ public class Board {
 			// Create new player and add attributes
 			String name = parts[1];
 			String color = parts[2];
+			//starting position
 			int r = Integer.parseInt(parts[3]);
 			int c = Integer.parseInt(parts[4]);
 			// Make the first player the human player
