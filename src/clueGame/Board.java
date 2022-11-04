@@ -50,7 +50,6 @@ public class Board {
     	// Initialize board variables
     	visited = new HashSet<BoardCell>();
     	targets = new HashSet<BoardCell>();
-    	
     	// Load configuration
     	try {
     		this.loadSetupConfig();
@@ -155,32 +154,14 @@ public class Board {
 	//set the solution using the created deck
 	public void setSolution() {
 		Random rand=new Random();
-		int index= rand.nextInt(deck.size());
-		boolean hasRoom=false;
-		boolean hasWeapon=false;
-		boolean hasPerson=false;
-		while (!(hasRoom && hasWeapon && hasPerson)) {
-		Card card=deck.get(index);
-		CardType type = card.getCardType();
-		if (type == CardType.ROOM && !hasRoom) {
-			solution.setRoom(card);
-			hasRoom=true;
-			deck.remove(index);
-		}
-		else if (type== CardType.WEAPON && !hasWeapon) {
-			solution.setWeapon(card);
-			hasWeapon=true;
-			deck.remove(index);
-		}
-		else if (type== CardType.PERSON && !hasPerson) {
-			solution.setPerson(card);
-			hasPerson=true;
-			deck.remove(index);
-		}
-		else {
-			index=rand.nextInt(deck.size());
-		}
-		}
+		Card room = roomCards.get(rand.nextInt(roomCards.size()));
+		Card person = playerCards.get(rand.nextInt(playerCards.size()));
+		Card weapon = weaponCards.get(rand.nextInt(weaponCards.size()));
+		solution=new Solution(room,person,weapon);
+		// Remove solution cards from the deck
+		deck.remove(room);
+		deck.remove(person);
+		deck.remove(weapon);
 		
 	}
 	
