@@ -23,8 +23,9 @@ public class Card {
 	}
 	
 	public boolean equals(Card target) {
-		String targetName=target.getCardName();
-		CardType targetType=target.getCardType();
+		String thisName=this.getCardName();
+		CardType thisType=this.getCardType();
+		if (thisName==target.getCardName() && thisType==target.getCardType());
 		return false;
 	}
 }

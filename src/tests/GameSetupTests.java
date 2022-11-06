@@ -110,6 +110,22 @@ class GameSetupTests {
 		
 		
 	}
+	//test to make sure the cards equals method is functioning properly
+	@Test
+	void testCardsEquals() {
+		//test of cards have same type but different names
+		Card A= new Card("ABC",CardType.WEAPON);
+		Card B= new Card("BCA", CardType.WEAPON);
+		assertFalse(A.equals(B));
+		//test cards that have same name but different type
+		Card C= new Card("ABC",CardType.WEAPON);
+		Card D= new Card("ABC", CardType.ROOM);
+		assertFalse(C.equals(D));
+		//test cards that have same name and type
+		Card E= new Card("ABC",CardType.WEAPON);
+		Card F= new Card("ABC", CardType.WEAPON);
+		assertTrue(E.equals(F));
+	}
 	
 	
 }
