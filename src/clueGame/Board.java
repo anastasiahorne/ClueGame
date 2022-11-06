@@ -337,6 +337,10 @@ public class Board {
 		return false;
 	}
 	
+	public Card handleSuggestion() {
+		return new Card("", CardType.PERSON);
+	}
+	
 	// Return the number of rows in the game board
 	public int getNumRows() {
 		return numRows;
