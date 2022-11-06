@@ -6,6 +6,7 @@ import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
 import clueGame.Board;
+import clueGame.HumanPlayer;
 import clueGame.Player;
 import clueGame.Solution;
 
@@ -26,13 +27,13 @@ class GameSolutionTest {
 
 	@Test
 	void testAccusationCheck() {
-		Solution solution = new Solution();
-		Player player = new Player("Name", "Orange", 0, 0);
+		// First player is the human player
+		HumanPlayer player = (HumanPlayer) board.getPlayers().get(0);
 		
 		// Test accusation is equal to the solution (player, weapon, and room are correct)
-		assertTrue(solution.getPerson(), );
-		assertTrue();
-		assertTrue();
+		assertEquals(board.getSolution().getPerson(), );
+		assertEquals(board.getSolution().getWeapon(), );
+		assertEquals(board.getSolution().getRoom(), );
 		// Test an accusation with the wrong person
 		
 		// Test an accusation with the wrong weapon
