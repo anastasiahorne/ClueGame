@@ -32,7 +32,7 @@ public class Player {
 		return seen;
 	}
 
-	public Card disproveSuggestion() {
+	public Card disproveSuggestion(Card person, Card weapon, Card room) {
 		return new Card("", CardType.PERSON);
 	}
 	
