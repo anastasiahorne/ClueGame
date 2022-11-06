@@ -22,5 +22,9 @@ public class Card {
 		return cardType;
 	}
 	
-	
+	public boolean equals(Card target) {
+		String targetName=target.getCardName();
+		CardType targetType=target.getCardType();
+		return false;
+	}
 }
