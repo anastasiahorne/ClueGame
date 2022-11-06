@@ -306,19 +306,7 @@ public class Board {
 	
 	public void deal() {
 		Random rand = new Random();
-		// Get a random room, person, and card
-		Card room = roomCards.get(rand.nextInt(roomCards.size()));
-		Card person = playerCards.get(rand.nextInt(playerCards.size()));
-		Card weapon = weaponCards.get(rand.nextInt(weaponCards.size()));
-		
-		// Set solution
-		solution = new Solution(room, person, weapon);
-		
-		// Remove cards from the deck
-		deck.remove(room);
-		deck.remove(person);
-		deck.remove(weapon);
-		
+		setSolution();
 		// Deal a random card to players
 		int playerNum = 0;
 		while (!deck.isEmpty()) {
@@ -331,6 +319,22 @@ public class Board {
 			// Increment player index
 			playerNum = (playerNum + 1) % players.size();
 		}
+	}
+
+	public void setSolution() {
+		Random rand = new Random();
+		// Get a random room, person, and card
+		Card room = roomCards.get(rand.nextInt(roomCards.size()));
+		Card person = playerCards.get(rand.nextInt(playerCards.size()));
+		Card weapon = weaponCards.get(rand.nextInt(weaponCards.size()));
+		
+		// Set solution
+		solution = new Solution(room, person, weapon);
+		
+		// Remove cards from the deck
+		deck.remove(room);
+		deck.remove(person);
+		deck.remove(weapon);
 	}
 	
 	public boolean checkAccusation(Card person, Card weapon, Card room) {
