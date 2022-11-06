@@ -5,4 +5,12 @@ public class ComputerPlayer extends Player {
 	public ComputerPlayer(String name, String color, int row, int column) {
 		super(name, color, row, column);
 	}
+	
+	public void createSuggestion(Room room) {
+		
+	}
+	
+	public void selectAMoveTarget() {
+		
+	}
 }
