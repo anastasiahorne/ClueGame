@@ -8,6 +8,7 @@ import org.junit.jupiter.api.Test;
 import clueGame.Board;
 import clueGame.BoardCell;
 import clueGame.Card;
+import clueGame.CardType;
 import clueGame.HumanPlayer;
 import clueGame.Player;
 import clueGame.Solution;
@@ -39,7 +40,8 @@ class GameSolutionTest {
 		Card roomSol = board.getSolution().getRoom();
 		assertTrue(board.checkAccusation(personSol,weaponSol,roomSol));
 		// Test an accusation with the wrong person
-		//assertFalse(board.checkAccusation.())
+		Card personWrong=new Card("WrongPerson",CardType.PERSON);
+		assertFalse(board.checkAccusation(personWrong,weaponSol,roomSol));
 		// Test an accusation with the wrong weapon
 		
 		// Test an accusation with the wrong room
