@@ -25,7 +25,9 @@ public class Card {
 	public boolean equals(Card target) {
 		String thisName=this.getCardName();
 		CardType thisType=this.getCardType();
-		if (thisName==target.getCardName() && thisType==target.getCardType());
+		if (thisName==target.getCardName() && thisType==target.getCardType()) {
+			return true;
+		}
 		return false;
 	}
 }
