@@ -6,6 +6,8 @@ import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
 import clueGame.Board;
+import clueGame.BoardCell;
+import clueGame.Card;
 import clueGame.HumanPlayer;
 import clueGame.Player;
 import clueGame.Solution;
@@ -20,9 +22,10 @@ class GameSolutionTest {
 		// Board is singleton, get the only instance
 		board = Board.getInstance();
 		// set the file names to use our config files
-		board.setConfigFiles("ClueLayout.csv", "ClueSetup.txt");		
+		board.setConfigFiles("ClueLayout.csv", "ClueSetup.txt");	
 		// Initialize will load config files 
 		board.initialize();
+		board.deal();
 	}
 
 	@Test
@@ -31,11 +34,12 @@ class GameSolutionTest {
 		HumanPlayer player = (HumanPlayer) board.getPlayers().get(0);
 		
 		// Test accusation is equal to the solution (player, weapon, and room are correct)
-		assertEquals(board.getSolution().getPerson(), );
-		assertEquals(board.getSolution().getWeapon(), );
-		assertEquals(board.getSolution().getRoom(), );
+		Card personSol = board.getSolution().getPerson();
+		Card weaponSol = board.getSolution().getWeapon();
+		Card roomSol = board.getSolution().getRoom();
+		assertTrue(board.checkAccusation(personSol,weaponSol,roomSol));
 		// Test an accusation with the wrong person
-		
+		//assertFalse(board.checkAccusation.())
 		// Test an accusation with the wrong weapon
 		
 		// Test an accusation with the wrong room
