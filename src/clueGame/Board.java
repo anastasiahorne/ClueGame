@@ -338,6 +338,12 @@ public class Board {
 	}
 	
 	public boolean checkAccusation(Card person, Card weapon, Card room) {
+		String personNameSol=solution.getPerson().getCardName();
+		CardType personTypeSol=solution.getPerson().getCardType();
+		String weaponNameSol=solution.getWeapon().getCardName();
+		CardType weaponTypeSol=solution.getWeapon().getCardType();
+		String RoomNameSol=solution.getRoom().getCardName();
+		CardType RoomTypeSol=solution.getRoom().getCardType();
 		return false;
 	}
 	
