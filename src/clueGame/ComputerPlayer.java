@@ -6,8 +6,11 @@ public class ComputerPlayer extends Player {
 		super(name, color, row, column);
 	}
 	
-	public void createSuggestion(Room room) {
-		
+	public Solution createSuggestion() {
+		Card card1 = new Card("", CardType.PERSON);
+		Card card2 = new Card("", CardType.WEAPON);
+		Card card3 = new Card("", CardType.ROOM);
+		return new Solution(card1, card2, card3);
 	}
 	
 	public void selectAMoveTarget() {
