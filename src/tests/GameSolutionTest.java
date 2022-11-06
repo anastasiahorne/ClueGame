@@ -12,7 +12,17 @@ class GameSolutionTest {
 	}
 
 	@Test
-	void test() {
+	void testAccusationCheck() {
+		fail("Not yet implemented");
+	}
+	
+	@Test
+	void testSuggestionDisproved() {
+		fail("Not yet implemented");
+	}
+	
+	@Test
+	void testSuggestionHandled() {
 		fail("Not yet implemented");
 	}
 

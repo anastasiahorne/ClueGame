@@ -333,6 +333,10 @@ public class Board {
 		}
 	}
 	
+	public boolean checkAccusation(Card person, Card weapon, Card room) {
+		return false;
+	}
+	
 	// Return the number of rows in the game board
 	public int getNumRows() {
 		return numRows;

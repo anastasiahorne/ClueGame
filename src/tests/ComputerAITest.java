@@ -12,7 +12,12 @@ class ComputerAITest {
 	}
 
 	@Test
-	void test() {
+	void testTargetsSelected() {
+		fail("Not yet implemented");
+	}
+	
+	@Test
+	void testSuggestionCreation() {
 		fail("Not yet implemented");
 	}
 
