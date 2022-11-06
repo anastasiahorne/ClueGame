@@ -43,9 +43,11 @@ class GameSolutionTest {
 		Card personWrong=new Card("WrongPerson",CardType.PERSON);
 		assertFalse(board.checkAccusation(personWrong,weaponSol,roomSol));
 		// Test an accusation with the wrong weapon
-		
+		Card weaponWrong=new Card("WrongWeapon", CardType.WEAPON);
+		assertFalse(board.checkAccusation(personWrong, weaponWrong, roomSol));
 		// Test an accusation with the wrong room
-		
+		Card roomWrong= new Card("WrongRoom",CardType.ROOM);
+		assertFalse(board.checkAccusation(personWrong, weaponWrong, roomWrong));
 	}
 	
 	@Test
