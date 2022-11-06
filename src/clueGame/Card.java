@@ -28,6 +28,7 @@ public class Card {
 		if (thisName==target.getCardName() && thisType==target.getCardType()) {
 			return true;
 		}
+		
 		return false;
 	}
 }
