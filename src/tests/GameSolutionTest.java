@@ -94,25 +94,25 @@ class GameSolutionTest {
 	@Test
 	void testSuggestionHandled() {
 		HumanPlayer test2 = (HumanPlayer) board.getPlayers().get(0);
-		Card test2Person = new Card ("test2",CardType.PERSON);
-		Card test2Weapon = new Card("test2",CardType.WEAPON);
-		Card test2Room = new Card("test2", CardType.ROOM);
+		Card testPerson = new Card ("test2",CardType.PERSON);
+		Card testWeapon = new Card("test2",CardType.WEAPON);
+		Card testRoom = new Card("test2", CardType.ROOM);
 		// If no player can disprove, test that null is returned
-		assertEquals(board.handleSuggestion(test2Person, test2Weapon, test2Room, test2), null);
+		assertEquals(null, board.handleSuggestion(testPerson, testWeapon, testRoom, test2));
 		
 		// Test that if only the suggesting player can disprove, null is returned
-		test2.updateHand(test2Person);
-		assertEquals(board.handleSuggestion(test2Person, test2Weapon, test2Room, test2), null);
+		test2.updateHand(testPerson);
+		assertEquals(null, board.handleSuggestion(testPerson, testWeapon, testRoom, test2));
 		
-		// Test that only the human can disprove returns a card that disproves the suggestion
+		// Test that if only the human can disprove returns a card that disproves the suggestion
 		ComputerPlayer test3 = (ComputerPlayer) board.getPlayers().get(3);
-		test2.updateHand(test2Weapon);
-		assertEquals(test2Weapon, board.handleSuggestion(test2Person, test2Weapon, test2Room, test3));
+		assertEquals(testPerson, board.handleSuggestion(testPerson, testWeapon, testRoom, test3));
 		
 		// Test that if more than one player can disprove, the correct player returns the answer
-		ComputerPlayer test4 = new ComputerPlayer("test4", "red", 5, 5);
-		test4.updateHand(test2Room);
-		assertEquals(board.handleSuggestion(test2Person, test2Weapon, test2Room, test4), test2Weapon);
+		ComputerPlayer test4 = (ComputerPlayer) board.getPlayers().get(2);
+		test3.updateHand(testRoom);
+		// test2 holds test2Person and test3 holds test2Room, since test3 is at index 3, testRoom should be returned
+		assertEquals(testRoom, board.handleSuggestion(testPerson, testWeapon, testRoom, test4));
 	}
 
 }
