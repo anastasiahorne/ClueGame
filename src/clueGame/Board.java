@@ -348,7 +348,15 @@ public class Board {
 	}
 	
 	public Card handleSuggestion(Card person, Card weapon, Card room, Player suggester) {
-		return new Card("", CardType.PERSON);
+		for (Player p: players) {
+			Card match=p.disproveSuggestion(person, weapon, room);
+			//return the first card that disputed the suggestion
+			if (match!=null) {
+				return match;
+			}
+			//need to add case that makes sure suggesting player returns null
+		}
+		return null;
 	}
 	
 	// Return the number of rows in the game board
