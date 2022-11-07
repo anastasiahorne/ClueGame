@@ -23,6 +23,11 @@ public class Player {
 	public void updateHand(Card card) {
 		hand.add(card);
 	}
+	
+	// Add card to hand
+	public void updateSeen(Card card) {
+		seen.add(card);
+	}
 
 	public ArrayList<Card> getHand() {
 		return hand;

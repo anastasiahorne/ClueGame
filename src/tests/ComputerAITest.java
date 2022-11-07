@@ -2,12 +2,15 @@ package tests;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+import java.util.Set;
+
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
 import clueGame.Board;
 import clueGame.BoardCell;
 import clueGame.Card;
+import clueGame.CardType;
 import clueGame.ComputerPlayer;
 import clueGame.Room;
 import clueGame.Solution;
@@ -31,12 +34,75 @@ class ComputerAITest {
 	void testTargetsSelected() {
 		// Get second player which will be a ComputerPlayer since the first player is the HumanPlayer
 		ComputerPlayer computer = (ComputerPlayer) board.getPlayers().get(1);
-		// Test if no rooms in list, select randomly
+		computer.setLocation(7, 8);
+		int row = computer.getRow();
+		int col = computer.getColumn();
+		BoardCell cell = board.getCell(row, col);
+		board.calcTargets(cell, 3);
+		Set<BoardCell> targets = board.getTargets();
+		BoardCell target = computer.selectAMoveTarget(targets);
 		
 		// Test if room in list that has not been seen it is selected
+		assertEquals(target, board.getCell(3, 9));
+		
+		// Test if no rooms in list, select randomly
+		computer.setLocation(16, 13);
+		row = computer.getRow();
+		col = computer.getColumn();
+		cell = board.getCell(row, col);
+		board.calcTargets(cell, 1);
+		targets = board.getTargets();
+		int countUp = 0;
+		int countDown = 0;
+		int countLeft = 0;
+		int countRight = 0;
+		for (int i = 0; i < 100; i++) {
+			target = computer.selectAMoveTarget(targets);
+			if (target.equals(board.getCell(row - 1, col))) {
+				countUp++;
+			}
+			else if (target.equals(board.getCell(row + 1, col))) {
+				countDown++;
+			}
+			else if (target.equals(board.getCell(row, col - 1))) {
+				countLeft++;
+			}
+			else if (target.equals(board.getCell(row, col + 1))) {
+				countRight++;
+			}
+		}
+		assertTrue(countUp > 10);
+		assertTrue(countDown > 10);
+		assertTrue(countLeft > 10);
+		assertTrue(countRight > 10);
 		
 		// Test if room in list that has been seen, select randomly
-		
+		computer.setLocation(14, 17);
+		Card c = new Card(board.getRoom(board.getCell(12, 21)).getName(), CardType.ROOM);
+		computer.updateSeen(c);
+		row = computer.getRow();
+		col = computer.getColumn();
+		cell = board.getCell(row, col);
+		board.calcTargets(cell, 1);
+		targets = board.getTargets();
+		int countRoom = 0;
+		countDown = 0;
+		countLeft = 0;
+		for (int i = 0; i < 100; i++) {
+			target = computer.selectAMoveTarget(targets);
+			if (target.equals(board.getCell(row + 1, col))) {
+				countDown++;
+			}
+			else if (target.equals(board.getCell(row, col - 1))) {
+				countLeft++;
+			}
+			else if (target.equals(board.getCell(12, 21))) {
+				countRoom++;
+			}
+		}
+		assertTrue(countDown > 10);
+		assertTrue(countLeft > 10);
+		assertTrue(countRoom > 10);
 	}
 	
 	@Test
