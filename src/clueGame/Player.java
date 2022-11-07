@@ -28,6 +28,16 @@ public class Player {
 	// Add card to hand
 	public void updateHand(Card card) {
 		hand.add(card);
+		switch (card.getCardType()) {
+			case ROOM:
+				seenRooms.add(card);
+				break;
+			case PERSON:
+				seenPeople.add(card);
+				break;
+			case WEAPON:
+				seenWeapons.add(card);
+		}
 	}
 
 	// Add card to hand
@@ -60,21 +70,21 @@ public class Player {
 	}
 
 	public Card disproveSuggestion(Card person, Card weapon, Card room) {
-		int countMatch=0;
-		Random rand=new Random();
-		ArrayList<Card> matches=new ArrayList<Card>();
-		for (Card c:this.hand) {
+		int countMatch = 0;
+		Random rand = new Random();
+		ArrayList<Card> matches = new ArrayList<Card>();
+		for (Card c: this.hand) {
 			if (c.equals(room) || c.equals(weapon) || c.equals(person)) {
 				countMatch++;
 				matches.add(c);
 			}
 		}
 		//if player has one matching card, return that card
-		if (countMatch==1) {
+		if (countMatch == 1) {
 			return matches.get(0);
 		}
 		//if multiple cards match, randomly return 1
-		else if (countMatch>1) {
+		else if (countMatch > 1) {
 			return matches.get(rand.nextInt(matches.size()));
 		}
 		//if player has no cards that match return null

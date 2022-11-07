@@ -28,46 +28,46 @@ public class Board {
 	private ArrayList<Card> weaponCards;
 	private ArrayList<Card> roomCards;
 
-	
+
 	/*
-     * variable and methods used for singleton pattern
-     */
-    private static Board theInstance = new Board();
-    // constructor is private to ensure only one can be created
-    private Board() {
-    	super() ;
-    }
-    
-    // this method returns the only Board
-    public static Board getInstance() {
-    	return theInstance;
-    }
-    
-    /*
-     * initialize the board (since we are using singleton pattern)
-     */
-    public void initialize() {
-    	// Initialize board variables
-    	visited = new HashSet<BoardCell>();
-    	targets = new HashSet<BoardCell>();
-    	// Load configuration
-    	try {
-    		this.loadSetupConfig();
-    		this.loadLayoutConfig();
-    	} 
-    	catch (BadConfigFormatException e) {
-    		System.out.println("Bad format in file(s)");
-    	}
-    	
-    	// Calculate adjacencies for each cell
-    	calculateAdjacencies();
-    }
-     
- 	public void setConfigFiles(String layoutConfigFile,String setupConfigFile) {
- 		this.layoutConfigFile = "data/" + layoutConfigFile;
- 		this.setupConfigFile = "data/" + setupConfigFile;
- 	}
- 
+	 * variable and methods used for singleton pattern
+	 */
+	private static Board theInstance = new Board();
+	// constructor is private to ensure only one can be created
+	private Board() {
+		super() ;
+	}
+
+	// this method returns the only Board
+	public static Board getInstance() {
+		return theInstance;
+	}
+
+	/*
+	 * initialize the board (since we are using singleton pattern)
+	 */
+	public void initialize() {
+		// Initialize board variables
+		visited = new HashSet<BoardCell>();
+		targets = new HashSet<BoardCell>();
+		// Load configuration
+		try {
+			this.loadSetupConfig();
+			this.loadLayoutConfig();
+		} 
+		catch (BadConfigFormatException e) {
+			System.out.println("Bad format in file(s)");
+		}
+
+		// Calculate adjacencies for each cell
+		calculateAdjacencies();
+	}
+
+	public void setConfigFiles(String layoutConfigFile,String setupConfigFile) {
+		this.layoutConfigFile = "data/" + layoutConfigFile;
+		this.setupConfigFile = "data/" + setupConfigFile;
+	}
+
 	//load our txt file so we know what character represents what room, and our room names
 	public void loadSetupConfig() {
 		// initialize containers
@@ -154,8 +154,8 @@ public class Board {
 	}
 	//set the solution using the created deck
 
-	
-	
+
+
 	//load our csv file, so we know where our rooms are, where our center etc.	
 	public void loadLayoutConfig() {
 		try {
@@ -273,7 +273,7 @@ public class Board {
 			(getRoom(cell).getCenterCell()).addAdjacency(getRoom(cell.getSecretPassage()).getCenterCell());
 		}
 	}
-	
+
 	// Clear sets and make a call to findAllTargets
 	public void calcTargets(BoardCell startCell, int pathLength) {
 		visited.clear();
@@ -282,7 +282,7 @@ public class Board {
 		findAllTargets(startCell, pathLength);
 		targets.remove(startCell);
 	}
-	
+
 	// Get all cells that are pathLength cells away from thisCell
 	public void findAllTargets(BoardCell thisCell, int numSteps) {
 		for (BoardCell adjCell: thisCell.getAdjList()) {
@@ -303,7 +303,7 @@ public class Board {
 			}
 		}
 	}
-	
+
 	public void deal() {
 		Random rand = new Random();
 		setSolution();
@@ -327,16 +327,16 @@ public class Board {
 		Card room = roomCards.get(rand.nextInt(roomCards.size()));
 		Card person = playerCards.get(rand.nextInt(playerCards.size()));
 		Card weapon = weaponCards.get(rand.nextInt(weaponCards.size()));
-		
+
 		// Set solution
 		solution = new Solution(room, person, weapon);
-		
+
 		// Remove cards from the deck
 		deck.remove(room);
 		deck.remove(person);
 		deck.remove(weapon);
 	}
-	
+
 	public boolean checkAccusation(Card person, Card weapon, Card room) {
 		Card personSol=solution.getPerson();
 		Card weaponSol=solution.getWeapon();
@@ -346,50 +346,61 @@ public class Board {
 		}
 		return false;
 	}
-	
+
 	public Card handleSuggestion(Card person, Card weapon, Card room, Player suggester) {
-		for (Player p: players) {
-			Card match=p.disproveSuggestion(person, weapon, room);
-			//return the first card that disputed the suggestion
-			if (match!=null) {
-				return match;
+		// Get the index of the player making the suggestion so we have the order
+		int playerIdx = 0;
+		for (Player player : getPlayers()) {
+			if (suggester.equals(player)) {
+				break;
 			}
-			//need to add case that makes sure suggesting player returns null
+			playerIdx++;
 		}
+		// Get the index of the next player
+		int nextIdx = (playerIdx + 1) % getPlayers().size();
+		// Check if players can disprove
+		while (nextIdx != playerIdx) {
+			Card disproval = getPlayers().get(nextIdx).disproveSuggestion(person, weapon, room);
+			if (disproval != null) {
+				return disproval;
+			}
+			nextIdx = (nextIdx + 1) % getPlayers().size();
+		}
+		// If no player can disprove, return null
 		return null;
 	}
-	
+
 	// Return the number of rows in the game board
 	public int getNumRows() {
 		return numRows;
 	}
-	
+
 	// Return the number of columns in the game board
 	public int getNumColumns() {
 		return numColumns;
 	}
-	
+
 	// Return the room given by the character that represents the room
 	public Room getRoom(char c) {
 		return roomMap.get(c);
 	}
-	
+
 	// Return the cell at position i, j
 	public BoardCell getCell(int row, int col) {
 		return grid[row][col];
 	}
-	
+
 	// Return the room at the given cell on the board
 	public Room getRoom(BoardCell cell) {
 		char symbol = cell.getInitial();
 		return getRoom(symbol);
 	}
-	
+
 	// Return the number of rooms on the board by counting the elements in the map
 	public int getNumRooms() {
 		return roomMap.size();
 	}
-	
+
 	// Getter for roomMap variable
 	public Map<Character, Room> getRoomMap() {
 		return roomMap;

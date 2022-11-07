@@ -102,6 +102,8 @@ class ComputerAITest {
 				countRoom++;
 			}
 		}
+		// FIXME: Room is chosen every time
+		assertEquals(10, countRoom);
 		assertTrue(countDown > 10);
 		assertTrue(countLeft > 10);
 		assertTrue(countRoom > 10);

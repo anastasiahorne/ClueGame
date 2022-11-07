@@ -93,7 +93,7 @@ class GameSolutionTest {
 	
 	@Test
 	void testSuggestionHandled() {
-		HumanPlayer test2 = new HumanPlayer("test2", "red", 5, 5);
+		HumanPlayer test2 = (HumanPlayer) board.getPlayers().get(0);
 		Card test2Person = new Card ("test2",CardType.PERSON);
 		Card test2Weapon = new Card("test2",CardType.WEAPON);
 		Card test2Room = new Card("test2", CardType.ROOM);
@@ -105,9 +105,9 @@ class GameSolutionTest {
 		assertEquals(board.handleSuggestion(test2Person, test2Weapon, test2Room, test2), null);
 		
 		// Test that only the human can disprove returns a card that disproves the suggestion
-		ComputerPlayer test3 = new ComputerPlayer("test3", "red", 5, 5);
-		test3.updateHand(test2Weapon);
-		assertEquals(board.handleSuggestion(test2Person, test2Weapon, test2Room, test3), test2Weapon);
+		ComputerPlayer test3 = (ComputerPlayer) board.getPlayers().get(3);
+		test2.updateHand(test2Weapon);
+		assertEquals(test2Weapon, board.handleSuggestion(test2Person, test2Weapon, test2Room, test3));
 		
 		// Test that if more than one player can disprove, the correct player returns the answer
 		ComputerPlayer test4 = new ComputerPlayer("test4", "red", 5, 5);
