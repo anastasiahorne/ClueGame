@@ -58,6 +58,9 @@ public class Player {
 	}
 
 	public Card disproveSuggestion(Card person, Card weapon, Card room) {
+		//if player has one matching card, return that card
+		//if multiple cards match, randomly return 1
+		//if player has no cards that match return null
 		return new Card("", CardType.PERSON);
 	}
 
