@@ -2,6 +2,7 @@ package tests;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+import java.util.ArrayList;
 import java.util.Random;
 import java.util.Set;
 
@@ -121,15 +122,27 @@ class ComputerAITest {
 		
 		// Test if multiple weapons or people not seen one is chosen randomly
 		Random rand = new Random();
-		for (int i = 0; i < 100; i++) {
-			suggestion = computer.createSuggestion();
-			int index = rand.nextInt(board.getWeaponCards().size());
-			Card c = board.getWeaponCards().get(index);
-			while (computer.getSeenWeapons().contains(c)) {
-				index = rand.nextInt(board.getWeaponCards().size());
-				c = board.getWeaponCards().get(index);
+		ArrayList<Card> unseenWeapons = new ArrayList<Card>();
+		for (Card card : board.getWeaponCards()) {
+			if (!computer.getSeenWeapons().contains(card)) {
+				unseenWeapons.add(card);
 			}
 		}
+		int oddCards = 0;
+		int evenCards = 0;
+		for (int i = 0; i < 100; i++) {
+			suggestion = computer.createSuggestion();
+			int index = rand.nextInt(unseenWeapons.size());
+			Card c = unseenWeapons.get(index);
+			if (index % 2 == 0) {
+				evenCards++;
+			}
+			else {
+				oddCards++;
+			}
+		}
+		assertTrue(oddCards > 10);
+		assertTrue(evenCards > 10);
 		
 		// Test if only one weapon or person not seen it is selected
 		for (int i = 0; i < board.getWeaponCards().size() - 1; i++) {
