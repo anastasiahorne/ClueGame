@@ -424,4 +424,8 @@ public class Board {
 	public ArrayList<Card> getWeaponCards() {
 		return weaponCards;
 	}
+
+	public ArrayList<Card> getPlayerCards() {
+		return playerCards;
+	}
 }

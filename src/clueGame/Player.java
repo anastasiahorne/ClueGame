@@ -6,11 +6,12 @@ import java.util.Random;
 public class Player {
 	private String name;
 	private String color;
-	private int row, column;
-	private ArrayList<Card> hand;
-	private ArrayList<Card> seenPeople;
-	private ArrayList<Card> seenWeapons;
-	private ArrayList<Card> seenRooms;
+	protected int row;
+	protected int column;
+	protected ArrayList<Card> hand;
+	protected ArrayList<Card> seenPeople;
+	protected ArrayList<Card> seenWeapons;
+	protected ArrayList<Card> seenRooms;
 
 	// Constructor
 	public Player(String name, String color, int row, int column) {
