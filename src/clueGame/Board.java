@@ -347,7 +347,7 @@ public class Board {
 		return false;
 	}
 	
-	public Card handleSuggestion() {
+	public Card handleSuggestion(Card person, Card weapon, Card room, Player suggester) {
 		return new Card("", CardType.PERSON);
 	}
 	
