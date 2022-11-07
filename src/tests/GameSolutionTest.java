@@ -57,23 +57,22 @@ class GameSolutionTest {
 	void testSuggestionDisproved() {
 		HumanPlayer test1 = new HumanPlayer("test1", "red", 5, 5);
 		Card test1Person = new Card ("test1",CardType.PERSON);
-		Card test1Weapon = new Card("Axe",CardType.WEAPON);
-		Card test1Room = new Card("library", CardType.ROOM);
+		Card test1Weapon = new Card("weap",CardType.WEAPON);
+		Card test1Room = new Card("home", CardType.ROOM);
 		test1.updateHand(test1Room);
 		test1.updateHand(test1Weapon);
 		test1.updateHand(test1Person);
-		Card Person = new Card ("test1",CardType.PERSON);
+		Card Person = new Card ("rando",CardType.PERSON);
 		Card Weapon = new Card("Axe",CardType.WEAPON);
 		Card Room = new Card("library", CardType.ROOM);
-		Card emptyCard = null;
 		// Test if a player only has one matching card it should be returned
-		assertEquals(test1Person, test1.disproveSuggestion(Person, test1Weapon, test1Room));
+		assertEquals(test1Person, test1.disproveSuggestion(test1Person, Weapon, Room));
 		
 		// Test if player has >1 matching cards, chosen card is chosen randomly
 		int personCount = 0;
 		int weaponCount = 0;
 		int roomCount = 0;
-		for (int i = 0;i < 20; ++i) {
+		for (int i = 0;i < 30; ++i) {
 			if (test1Person.equals(test1.disproveSuggestion(test1Person, test1Weapon, test1Room))) {
 				personCount++;
 			}
@@ -89,7 +88,7 @@ class GameSolutionTest {
 		assertTrue(roomCount > 0);
 		
 		// Test if player has no matching cards, null is returned
-		assertEquals(emptyCard, test1.disproveSuggestion(Person, Weapon, Room));
+		assertEquals(null, test1.disproveSuggestion(Person, Weapon, Room));
 	}
 	
 	@Test

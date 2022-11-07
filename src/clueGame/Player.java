@@ -62,7 +62,7 @@ public class Player {
 		int countMatch=0;
 		Random rand=new Random();
 		ArrayList<Card> matches=new ArrayList<Card>();
-		for (Card c:hand) {
+		for (Card c:this.hand) {
 			if (c.equals(room) || c.equals(weapon) || c.equals(person)) {
 				countMatch++;
 				matches.add(c);
@@ -76,7 +76,6 @@ public class Player {
 		else if (countMatch>1) {
 			return matches.get(rand.nextInt(matches.size()));
 		}
-		
 		//if player has no cards that match return null
 		else {
 			return null;
