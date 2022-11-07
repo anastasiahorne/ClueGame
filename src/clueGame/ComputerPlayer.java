@@ -9,10 +9,12 @@ public class ComputerPlayer extends Player {
 	private Board board = Board.getInstance();
 	private Random rand = new Random();
 
+	// Constructor
 	public ComputerPlayer(String name, String color, int row, int column) {
 		super(name, color, row, column);
 	}
 	
+	// Create a suggestion based on seen cards in the current room
 	public Solution createSuggestion() {
 		// Room should be the current room
 		Card room = new Card(board.getRoom(board.getCell(row, column)).getName(), CardType.ROOM);
@@ -38,10 +40,24 @@ public class ComputerPlayer extends Player {
 		index = rand.nextInt(unseenPeople.size());
 		Card person = unseenPeople.get(index);
 		
-		return new Solution(person, weapon, room);
+		return new Solution(room, person, weapon);
 	}
 	
 	public BoardCell selectAMoveTarget(Set<BoardCell> targets) {
-		return null;
+		for (BoardCell target: targets) {
+			if (target.isRoomCenter()) {
+				Card room = new Card(board.getRoom(target).getName(), CardType.ROOM);
+				// If neither hand nor seenRooms contains the current room, pick that target
+				if (!getSeenRooms().contains(room) && !getHand().contains(room)) {
+					return target;
+				}
+			}
+		}
+		// If none of the targets are an unseen room, choose randomly
+		ArrayList<BoardCell> targetList = new ArrayList<BoardCell>();
+		for (BoardCell target : targets) {
+			targetList.add(target);
+		}
+		return targetList.get(rand.nextInt(targetList.size()));
 	}
 }
