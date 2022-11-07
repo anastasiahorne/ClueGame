@@ -412,4 +412,8 @@ public class Board {
 	public Solution getSolution() {
 		return solution;
 	}
+
+	public ArrayList<Card> getWeaponCards() {
+		return weaponCards;
+	}
 }

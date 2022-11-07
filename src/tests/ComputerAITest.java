@@ -2,6 +2,7 @@ package tests;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+import java.util.Random;
 import java.util.Set;
 
 import org.junit.jupiter.api.BeforeAll;
@@ -79,7 +80,7 @@ class ComputerAITest {
 		// Test if room in list that has been seen, select randomly
 		computer.setLocation(14, 17);
 		Card c = new Card(board.getRoom(board.getCell(12, 21)).getName(), CardType.ROOM);
-		computer.updateSeen(c);
+		computer.updateSeenRooms(c);
 		row = computer.getRow();
 		col = computer.getColumn();
 		cell = board.getCell(row, col);
@@ -108,9 +109,7 @@ class ComputerAITest {
 	@Test
 	void testSuggestionCreation() {
 		// Get second player which will be a ComputerPlayer since the first player is the HumanPlayer
-		ComputerPlayer computer = (ComputerPlayer) board.getPlayers().get(1);
-		// Set the player's location to be in a room
-		computer.setLocation(12, 21);
+		ComputerPlayer computer = new ComputerPlayer("test", "test", 12, 21);
 		// Create a suggestion
 		Solution suggestion = computer.createSuggestion();
 		// Test that the room matches the current location
@@ -119,10 +118,24 @@ class ComputerAITest {
 		BoardCell cell = board.getCell(row, col);
 		Room room = board.getRoom(cell);
 		assertEquals(room.getName(), suggestion.getRoom().getCardName());
-		// Test if only one weapon or person not seen it is selected
 		
 		// Test if multiple weapons or people not seen one is chosen randomly
+		Random rand = new Random();
+		for (int i = 0; i < 100; i++) {
+			suggestion = computer.createSuggestion();
+			int index = rand.nextInt(board.getWeaponCards().size());
+			Card c = board.getWeaponCards().get(index);
+			while (computer.getSeenWeapons().contains(c)) {
+				index = rand.nextInt(board.getWeaponCards().size());
+				c = board.getWeaponCards().get(index);
+			}
+		}
 		
+		// Test if only one weapon or person not seen it is selected
+		for (int i = 0; i < board.getWeaponCards().size() - 1; i++) {
+			computer.updateSeenWeapons(board.getWeaponCards().get(i));
+		}
+		assertEquals(board.getWeaponCards().get(board.getWeaponCards().size() - 1), suggestion.getWeapon());
 	}
 
 }
