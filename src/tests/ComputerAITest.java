@@ -147,11 +147,11 @@ class ComputerAITest {
 		assertTrue(evenCards > 10);
 		
 		// Test if only one weapon or person not seen it is selected
-		for (int i = 0; i < board.getWeaponCards().size() - 1; i++) {
+		for (int i = 0; i < board.getWeaponCards().size() -1; i++) {
 			computer.updateSeenWeapons(board.getWeaponCards().get(i));
 		}
 		
-		// FIXME: wrong card returned
+		// FIXME: wrong card returned, has something to do with randomness of return, card it returns is random
 		assertEquals(board.getWeaponCards().get(board.getWeaponCards().size() - 1), suggestion.getWeapon());
 	}
 
