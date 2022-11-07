@@ -76,6 +76,7 @@ public class Player {
 		else if (countMatch>1) {
 			return matches.get(rand.nextInt(matches.size()));
 		}
+		
 		//if player has no cards that match return null
 		else {
 			return null;
