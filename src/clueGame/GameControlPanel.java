@@ -22,19 +22,20 @@ public class GameControlPanel extends JPanel {
 		JPanel guessPanel=new JPanel();
 		guessPanel.setLayout(new GridLayout(0,2));
 		
-		JPanel panel = createGuessPanel("Guess");
+		JPanel panel = createGuessPanel("Guess", "I have no guess!");
 		guessPanel.add(panel);
-		panel = createGuessPanel("Guess Result");
+		panel = createGuessPanel("Guess Result", "So you have nothing?");
 		guessPanel.add(panel);
 		add(guessPanel);
 	}
 	
-	private JPanel createGuessPanel(String title) {
+	private JPanel createGuessPanel(String title, String message) {
 		JPanel panel = new JPanel();
 		// Use a grid layout, 1 row, 2 elements (label, text)
 		panel.setLayout(new GridLayout(1,0));
 		guess = new JTextField(20);
 		guess.setEditable(false);
+		setGuess(message);
 		panel.add(guess);
 		panel.setBorder(new TitledBorder (new EtchedBorder(), title));
 		return panel;
