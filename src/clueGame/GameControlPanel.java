@@ -65,8 +65,7 @@ public class GameControlPanel extends JPanel {
 		
 	}
 
-	private void setGuess(String string) {
-		// TODO Auto-generated method stub
-		
+	private void setGuess(String message) {
+		guess.setText(message);
 	}
 }
