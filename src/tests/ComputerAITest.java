@@ -73,6 +73,7 @@ class ComputerAITest {
 				countRight++;
 			}
 		}
+		// Ensure randomness
 		assertTrue(countUp > 10);
 		assertTrue(countDown > 10);
 		assertTrue(countLeft > 10);
@@ -102,6 +103,7 @@ class ComputerAITest {
 				countRoom++;
 			}
 		}
+		// Ensure randomness
 		assertTrue(countDown > 10);
 		assertTrue(countLeft > 10);
 		assertTrue(countRoom > 10);

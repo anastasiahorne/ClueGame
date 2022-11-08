@@ -22,6 +22,7 @@ public class Card {
 		return cardType;
 	}
 	
+	// Test for equivalency
 	public boolean equals(Card target) {
 		String thisName = this.getCardName();
 		CardType thisType = this.getCardType();

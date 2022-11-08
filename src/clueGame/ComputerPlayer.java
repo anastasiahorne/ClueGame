@@ -43,6 +43,7 @@ public class ComputerPlayer extends Player {
 		return new Solution(room, person, weapon);
 	}
 	
+	// Selects which BoardCell the player should move to
 	public BoardCell selectAMoveTarget(Set<BoardCell> targets) {
 		for (BoardCell target: targets) {
 			if (target.isRoomCenter()) {

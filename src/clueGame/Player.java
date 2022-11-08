@@ -53,22 +53,27 @@ public class Player {
 		seenRooms.add(card);
 	}
 
+	// Getter for Arraylist<Card> hand
 	public ArrayList<Card> getHand() {
 		return hand;
 	}
 
+	// Getter for seenPeople
 	public ArrayList<Card> getSeenPeople() {
 		return seenPeople;
 	}
 	
+	// Getter for seenWeapons
 	public ArrayList<Card> getSeenWeapons() {
 		return seenWeapons;
 	}
 	
+	// Getter for seenRooms
 	public ArrayList<Card> getSeenRooms() {
 		return seenRooms;
 	}
 
+	// Check if one of the cards passed in is in the player's hand
 	public Card disproveSuggestion(Card person, Card weapon, Card room) {
 		int countMatch = 0;
 		Random rand = new Random();
@@ -93,15 +98,18 @@ public class Player {
 		}
 	}
 
+	// Set the location of the player using the row and column integers
 	public void setLocation(int r, int c) {
 		row = r;
 		column = c;
 	}
 
+	// Getter for int row
 	public int getRow() {
 		return row;
 	}
 
+	// Getter for int column
 	public int getColumn() {
 		return column;
 	}

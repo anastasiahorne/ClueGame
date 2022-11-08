@@ -32,10 +32,12 @@ public class BoardCell {
 		isSecretPassage = false;
 	}
 	
+	// Getter for isSecretPassage
 	public boolean isSecretPassage() {
 		return isSecretPassage;
 	}
 
+	// Setter for isSecretPassage
 	public void setSecretPassage(boolean isSecretPassage) {
 		this.isSecretPassage = isSecretPassage;
 	}
