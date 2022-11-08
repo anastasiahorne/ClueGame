@@ -3,7 +3,7 @@ package clueGame;
 import java.util.ArrayList;
 import java.util.Random;
 import java.util.Set;
-import clueGame.Board;
+
 
 public class ComputerPlayer extends Player {
 	private Board board = Board.getInstance();
