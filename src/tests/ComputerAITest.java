@@ -150,7 +150,7 @@ class ComputerAITest {
 		for (int i = 0; i < board.getWeaponCards().size() -1; i++) {
 			computer.updateSeenWeapons(board.getWeaponCards().get(i));
 		}
-		
+		suggestion=computer.createSuggestion();
 		// FIXME: wrong card returned, has something to do with randomness of return, card it returns is random
 		assertEquals(board.getWeaponCards().get(board.getWeaponCards().size() - 1), suggestion.getWeapon());
 	}
