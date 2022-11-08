@@ -43,10 +43,10 @@ class ComputerAITest {
 		board.calcTargets(cell, 3);
 		Set<BoardCell> targets = board.getTargets();
 		BoardCell target = computer.selectAMoveTarget(targets);
-		
+
 		// Test if room in list that has not been seen it is selected
 		assertEquals(target, board.getCell(3, 9));
-		
+
 		// Test if no rooms in list, select randomly
 		computer.setLocation(16, 13);
 		row = computer.getRow();
@@ -77,7 +77,7 @@ class ComputerAITest {
 		assertTrue(countDown > 10);
 		assertTrue(countLeft > 10);
 		assertTrue(countRight > 10);
-		
+
 		// Test if room in list that has been seen, select randomly
 		computer.setLocation(14, 17);
 		Card c = new Card(board.getRoom(board.getCell(12, 21)).getName(), CardType.ROOM);
@@ -102,13 +102,11 @@ class ComputerAITest {
 				countRoom++;
 			}
 		}
-		// FIXME: Room is chosen every time
-		assertEquals(10, countRoom);
 		assertTrue(countDown > 10);
 		assertTrue(countLeft > 10);
 		assertTrue(countRoom > 10);
 	}
-	
+
 	@Test
 	void testSuggestionCreation() {
 		// Get second player which will be a ComputerPlayer since the first player is the HumanPlayer
@@ -121,7 +119,7 @@ class ComputerAITest {
 		BoardCell cell = board.getCell(row, col);
 		Room room = board.getRoom(cell);
 		assertEquals(room.getName(), suggestion.getRoom().getCardName());
-		
+
 		// Test if multiple weapons or people not seen one is chosen randomly
 		Random rand = new Random();
 		ArrayList<Card> unseenWeapons = new ArrayList<Card>();
@@ -145,7 +143,30 @@ class ComputerAITest {
 		}
 		assertTrue(oddCards > 10);
 		assertTrue(evenCards > 10);
-		
+
+		// Test if multiple weapons or people not seen one is chosen randomly
+		ArrayList<Card> unseenPeople = new ArrayList<Card>();
+		for (Card card : board.getPlayerCards()) {
+			if (!computer.getSeenPeople().contains(card)) {
+				unseenPeople.add(card);
+			}
+		}
+		oddCards = 0;
+		evenCards = 0;
+		for (int i = 0; i < 100; i++) {
+			suggestion = computer.createSuggestion();
+			int index = rand.nextInt(unseenPeople.size());
+			Card c = unseenPeople.get(index);
+			if (index % 2 == 0) {
+				evenCards++;
+			}
+			else {
+				oddCards++;
+			}
+		}
+		assertTrue(oddCards > 10);
+		assertTrue(evenCards > 10);
+
 		// Test if only one weapon or person not seen it is selected
 		for (int i = 0; i < board.getWeaponCards().size() -1; i++) {
 			computer.updateSeenWeapons(board.getWeaponCards().get(i));

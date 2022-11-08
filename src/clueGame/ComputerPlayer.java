@@ -46,9 +46,20 @@ public class ComputerPlayer extends Player {
 	public BoardCell selectAMoveTarget(Set<BoardCell> targets) {
 		for (BoardCell target: targets) {
 			if (target.isRoomCenter()) {
-				Card room = new Card(board.getRoom(target).getName(), CardType.ROOM);
+				String roomName = board.getRoom(target).getName();
+				boolean seen = false;
+				for (Card room : getSeenRooms()) {
+					if (roomName.equals(room.getCardName())) {
+						seen = true;
+					}
+				}
+				for (Card room : getHand()) {
+					if (roomName.equals(room.getCardName())) {
+						seen = true;
+					}
+				}
 				// If neither hand nor seenRooms contains the current room, pick that target
-				if (!getSeenRooms().contains(room) && !getHand().contains(room)) {
+				if (seen == false) {
 					return target;
 				}
 			}

@@ -439,4 +439,8 @@ public class Board {
 	public ArrayList<Card> getPlayerCards() {
 		return playerCards;
 	}
+
+	public ArrayList<Card> getRoomCards() {
+		return roomCards;
+	}
 }
