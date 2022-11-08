@@ -19,10 +19,14 @@ public class GameControlPanel extends JPanel {
 	 */
 	public GameControlPanel()  {
 		setLayout(new GridLayout(2,0));
+		JPanel guessPanel=new JPanel();
+		guessPanel.setLayout(new GridLayout(0,2));
+		
 		JPanel panel = createGuessPanel("Guess");
-		add(panel);
+		guessPanel.add(panel);
 		panel = createGuessPanel("Guess Result");
-		add(panel);
+		guessPanel.add(panel);
+		add(guessPanel);
 	}
 	
 	private JPanel createGuessPanel(String title) {
