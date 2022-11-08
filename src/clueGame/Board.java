@@ -416,30 +416,37 @@ public class Board {
 		return getCell(i, j).getAdjList();
 	}
 
+	// Getter for the array of players
 	public ArrayList<Player> getPlayers() {
 		return players;
 	}
 
+	// Getter for the array of weapons
 	public ArrayList<String> getWeapons() {
 		return weapons;
 	}
 
+	// Getter for the deck of Cards
 	public ArrayList<Card> getDeck() {
 		return deck;
 	}
 
+	// Getter for the solution
 	public Solution getSolution() {
 		return solution;
 	}
 
+	// Getter for the array of weaponCards
 	public ArrayList<Card> getWeaponCards() {
 		return weaponCards;
 	}
 
+	// Getter for the array of playerCards
 	public ArrayList<Card> getPlayerCards() {
 		return playerCards;
 	}
 
+	// Getter for the array of roomCards
 	public ArrayList<Card> getRoomCards() {
 		return roomCards;
 	}
