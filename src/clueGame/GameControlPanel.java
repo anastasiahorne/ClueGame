@@ -33,9 +33,8 @@ public class GameControlPanel extends JPanel {
 		JPanel panel = new JPanel();
 		// Use a grid layout, 1 row, 2 elements (label, text)
 		panel.setLayout(new GridLayout(1,0));
-		JLabel nameLabel = new JLabel("Name");
 		guess = new JTextField(20);
-		panel.add(nameLabel);
+		guess.setEditable(false);
 		panel.add(guess);
 		panel.setBorder(new TitledBorder (new EtchedBorder(), title));
 		return panel;
