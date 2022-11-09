@@ -113,4 +113,8 @@ public class Player {
 	public int getColumn() {
 		return column;
 	}
+
+	public String getName() {
+		return name;
+	}
 }

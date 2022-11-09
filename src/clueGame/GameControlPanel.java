@@ -28,47 +28,71 @@ public class GameControlPanel extends JPanel {
 		JPanel bottomPanel = createBottomPanel();
 		add(topPanel);
 		add(bottomPanel);
-		/*
-		JPanel guessPanel = new JPanel();
-		guessPanel.setLayout(new GridLayout(0,2));
-		
-		JPanel panel = createGuessPanel("Guess", "I have no guess!");
-		guessPanel.add(panel);
-		panel = createGuessPanel("Guess Result", "So you have nothing?");
-		guessPanel.add(panel);
-		add(guessPanel);
-		*/
 	}
 
 	private JPanel createTopPanel() {
 		JPanel topPanel = new JPanel();
-		JPanel panel = new JPanel();
-		topPanel.add(panel);
+		topPanel.setLayout(new GridLayout(1, 4));
 		
-		panel = createGuessPanel("Guess Result", "So you have nothing?");
-		topPanel.add(panel);
+		JPanel turnPanel = new JPanel();
+		JLabel turnLabel = new JLabel("Whose turn?");
+		turnPanel.add(turnLabel);
+		
+		turn = new JTextField();
+		turn.setEditable(false);
+		turnPanel.add(turn);
+		topPanel.add(turnPanel);
+		
+		JPanel rollPanel = new JPanel();
+		JLabel rollLabel = new JLabel("Roll: ");
+		rollPanel.add(rollLabel);
+		
+		roll = new JTextField();
+		roll.setEditable(false);
+		rollPanel.add(roll);
+		topPanel.add(rollPanel);
+		
+		accusation = new JButton("Make Accusation");
+		topPanel.add(accusation);
+		next = new JButton("NEXT!");
+		topPanel.add(next);
+		
 		return topPanel;
 	}
 	
 	private JPanel createBottomPanel() {
 		JPanel bottomPanel = new JPanel();
-		JPanel panel = createGuessPanel("Guess", "I have no guess!");
+		bottomPanel.setLayout(new GridLayout(0, 2));
+		
+		JPanel panel = new JPanel();
+		panel.setBorder(new TitledBorder(new EtchedBorder(), "Guess"));
+		guess = new JTextField();
+		guess.setEditable(false);
+		panel.add(guess);
 		bottomPanel.add(panel);
-		panel = createGuessPanel("Guess Result", "So you have nothing?");
+		
+		panel = new JPanel();
+		panel.setBorder(new TitledBorder(new EtchedBorder(), "Guess"));
+		result = new JTextField();
+		result.setEditable(false);
+		panel.add(result);
+		
 		bottomPanel.add(panel);
 		return bottomPanel;
 	}
+	
+	private void setTurn(Player player, int r) {
+		String name = player.getName();
+		turn.setText(name);
+		roll.setText(String.valueOf(r));
+	}
 
-	private JPanel createGuessPanel(String title, String message) {
-		JPanel panel = new JPanel();
-		// Use a grid layout, 1 row, 2 elements (label, text)
-		panel.setLayout(new GridLayout(1,0));
-		guess = new JTextField(20);
-		guess.setEditable(false);
-		setGuess(message);
-		panel.add(guess);
-		panel.setBorder(new TitledBorder (new EtchedBorder(), title));
-		return panel;
+	private void setGuess(String message) {
+		guess.setText(message);
+	}
+	
+	private void setResult(String message) {
+		result.setText(message);
 	}
 	
 	/**
@@ -78,7 +102,7 @@ public class GameControlPanel extends JPanel {
 	 */
 	public static void main(String[] args) {
 		GameControlPanel panel = new GameControlPanel();  // create the panel
-		panel.setLayout(new GridLayout(2,0));
+		//panel.setLayout(new GridLayout(2,0));
 		JFrame frame = new JFrame();  // create the frame 
 		frame.setContentPane(panel); // put the panel in the frame
 		frame.setSize(750, 180);  // size the frame
@@ -87,16 +111,7 @@ public class GameControlPanel extends JPanel {
 		
 		// test filling in the data
 		panel.setTurn(new ComputerPlayer( "Col. Mustard", "orange", 0, 0), 5);
-		panel.setGuess( "I have no guess!");
-		panel.setGuess( "So you have nothing?");
-	}
-
-	private void setTurn(Player player, int roll) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	private void setGuess(String message) {
-		guess.setText(message);
+		panel.setGuess("I have no guess!");
+		panel.setResult("So you have nothing?");
 	}
 }
