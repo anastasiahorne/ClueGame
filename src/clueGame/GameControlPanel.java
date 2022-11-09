@@ -13,13 +13,23 @@ import javax.swing.border.TitledBorder;
 
 public class GameControlPanel extends JPanel {
 	private JTextField guess;
+	private JTextField result;
+	private JTextField turn;
+	private JTextField roll;
+	private JButton accusation;
+	private JButton next;
 	
 	/**
 	 * Constructor for the panel, it does 90% of the work
 	 */
-	public GameControlPanel()  {
+	public GameControlPanel() {
 		setLayout(new GridLayout(2,0));
-		JPanel guessPanel=new JPanel();
+		JPanel topPanel = createTopPanel();
+		JPanel bottomPanel = createBottomPanel();
+		add(topPanel);
+		add(bottomPanel);
+		/*
+		JPanel guessPanel = new JPanel();
 		guessPanel.setLayout(new GridLayout(0,2));
 		
 		JPanel panel = createGuessPanel("Guess", "I have no guess!");
@@ -27,8 +37,28 @@ public class GameControlPanel extends JPanel {
 		panel = createGuessPanel("Guess Result", "So you have nothing?");
 		guessPanel.add(panel);
 		add(guessPanel);
+		*/
+	}
+
+	private JPanel createTopPanel() {
+		JPanel topPanel = new JPanel();
+		JPanel panel = new JPanel();
+		topPanel.add(panel);
+		
+		panel = createGuessPanel("Guess Result", "So you have nothing?");
+		topPanel.add(panel);
+		return topPanel;
 	}
 	
+	private JPanel createBottomPanel() {
+		JPanel bottomPanel = new JPanel();
+		JPanel panel = createGuessPanel("Guess", "I have no guess!");
+		bottomPanel.add(panel);
+		panel = createGuessPanel("Guess Result", "So you have nothing?");
+		bottomPanel.add(panel);
+		return bottomPanel;
+	}
+
 	private JPanel createGuessPanel(String title, String message) {
 		JPanel panel = new JPanel();
 		// Use a grid layout, 1 row, 2 elements (label, text)
