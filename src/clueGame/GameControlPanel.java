@@ -95,6 +95,10 @@ public class GameControlPanel extends JPanel {
 		result.setText(message);
 	}
 	
+	private void getColor(Player player) {
+		
+	}
+	
 	/**
 	 * Main to test the panel
 	 * 
