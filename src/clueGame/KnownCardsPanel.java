@@ -29,4 +29,16 @@ public class KnownCardsPanel extends JPanel {
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); // allow it to close
 		frame.setVisible(true); // make it visible
 	}
+	
+	private JPanel createPeoplePanel() {
+		return null;
+	}
+	
+	private JPanel createRoomPanel() {
+		return null;
+	}
+	
+	private JPanel createWeaponPanel() {
+		return null;
+	}
 }

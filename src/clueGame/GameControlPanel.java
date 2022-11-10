@@ -84,19 +84,6 @@ public class GameControlPanel extends JPanel {
 		return bottomPanel;
 	}
 	
-	//create our panel that shows the seen cards
-	private JPanel createCardPanel() {
-		JPanel rightPanel=new JPanel();
-		rightPanel.setLayout(new GridLayout(3,0));
-		
-		//create panel for seen people, should update if more are seen
-		
-		//create panel for seen rooms, should update if more are seen
-		
-		//create panel for seen weapons, should update if more are seen 
-		return rightPanel;
-	}
-	
 	// Setter for turn
 	private void setTurn(Player player, int r) {
 		String name = player.getName();
