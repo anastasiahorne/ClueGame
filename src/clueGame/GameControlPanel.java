@@ -23,11 +23,13 @@ public class GameControlPanel extends JPanel {
 	 * Constructor for the panel, it does 90% of the work
 	 */
 	public GameControlPanel() {
-		setLayout(new GridLayout(2,0));
+		setLayout(new GridLayout(2,2));
 		JPanel topPanel = createTopPanel();
 		JPanel bottomPanel = createBottomPanel();
+		//JPanel rightPanel= createCardPanel();
 		add(topPanel);
 		add(bottomPanel);
+		//add(rightPanel);
 	}
 
 	private JPanel createTopPanel() {
@@ -35,7 +37,7 @@ public class GameControlPanel extends JPanel {
 		topPanel.setLayout(new GridLayout(1, 4));
 		//set whose turn it is
 		JPanel turnPanel = new JPanel();
-		turnPanel.setLayout(new GridLayout(2,1));
+		turnPanel.setLayout(new GridLayout(2,0));
 		JLabel turnLabel = new JLabel("Whose turn?");
 		turnPanel.add(turnLabel);
 	
@@ -82,6 +84,19 @@ public class GameControlPanel extends JPanel {
 		
 		bottomPanel.add(panel);
 		return bottomPanel;
+	}
+	
+	//create our panel that shows the seen cards
+	private JPanel createCardPanel() {
+		JPanel rightPanel=new JPanel();
+		rightPanel.setLayout(new GridLayout(3,0));
+		
+		//create panel for seen people, should update if more are seen
+		
+		//create panel for seen rooms, should update if more are seen
+		
+		//create panel for seen weapons, should update if more are seen 
+		return rightPanel;
 	}
 	
 	// Setter for turn
