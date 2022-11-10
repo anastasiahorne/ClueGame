@@ -420,6 +420,15 @@ public class Board {
 	public ArrayList<Player> getPlayers() {
 		return players;
 	}
+	//Getter for the human player
+	public HumanPlayer getHumanPlayer() {
+		for (Player p: players) {
+			if (p instanceof HumanPlayer) {
+				return (HumanPlayer) p;
+			}
+		}
+		return null;
+	}
 
 	// Getter for the array of weapons
 	public ArrayList<String> getWeapons() {
