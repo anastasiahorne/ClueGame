@@ -39,7 +39,14 @@ public class KnownCardsPanel extends JPanel {
 		
 		// mark all cards as seen for testing
 		for (Card c : testBoard.getPlayerCards()) {
-			
+			switch (c.getCardType()) {
+			case PERSON:
+				break;
+			case WEAPON:
+				break;
+			case ROOM:
+				break;
+			}
 		}
 		
 		KnownCardsPanel panel = new KnownCardsPanel();  // create the panel
@@ -48,5 +55,8 @@ public class KnownCardsPanel extends JPanel {
 		frame.setSize(180, 650);  // size the frame
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); // allow it to close
 		frame.setVisible(true); // make it visible
+		
+		// Set values
+		
 	}
 }
