@@ -5,6 +5,8 @@ import java.awt.GridLayout;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
+import javax.swing.border.EtchedBorder;
+import javax.swing.border.TitledBorder;
 
 public class KnownCardsPanel extends JPanel {
 
@@ -20,15 +22,24 @@ public class KnownCardsPanel extends JPanel {
 	}
 
 	private JPanel createPeoplePanel() {
-		return null;
+		JPanel peoplePanel = new JPanel();
+		peoplePanel.setLayout(new GridLayout(0, 1));
+		peoplePanel.setBorder(new TitledBorder(new EtchedBorder(), "People"));
+		return peoplePanel;
 	}
 
 	private JPanel createRoomPanel() {
-		return null;
+		JPanel roomPanel = new JPanel();
+		roomPanel.setLayout(new GridLayout(0, 1));
+		roomPanel.setBorder(new TitledBorder(new EtchedBorder(), "Rooms"));
+		return roomPanel;
 	}
 
 	private JPanel createWeaponPanel() {
-		return null;
+		JPanel weaponPanel = new JPanel();
+		weaponPanel.setLayout(new GridLayout(0, 1));
+		weaponPanel.setBorder(new TitledBorder(new EtchedBorder(), "Weapons"));
+		return weaponPanel;
 	}
 
 	private void updatePanel(JPanel name, CardType type) {
@@ -77,7 +88,12 @@ public class KnownCardsPanel extends JPanel {
 		}
 		return new Color(r, g, b);
 	}
-
+	
+	/**
+	 * Main to test the panel
+	 * 
+	 * @param args
+	 */
 	public static void main(String[] args) {
 		Board testBoard = Board.getInstance();
 
