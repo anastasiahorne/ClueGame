@@ -65,7 +65,7 @@ public class GameControlPanel extends JPanel {
 	private JPanel createBottomPanel() {
 		JPanel bottomPanel = new JPanel();
 		bottomPanel.setLayout(new GridLayout(0, 2));
-		
+		//
 		JPanel panel = new JPanel();
 		panel.setBorder(new TitledBorder(new EtchedBorder(), "Guess"));
 		guess = new JTextField();
@@ -74,7 +74,7 @@ public class GameControlPanel extends JPanel {
 		bottomPanel.add(panel);
 		
 		panel = new JPanel();
-		panel.setBorder(new TitledBorder(new EtchedBorder(), "Guess"));
+		panel.setBorder(new TitledBorder(new EtchedBorder(), "Guess Result"));
 		result = new JTextField();
 		result.setEditable(false);
 		panel.add(result);
