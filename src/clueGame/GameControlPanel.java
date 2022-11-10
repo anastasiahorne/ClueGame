@@ -34,17 +34,18 @@ public class GameControlPanel extends JPanel {
 	private JPanel createTopPanel() {
 		JPanel topPanel = new JPanel();
 		topPanel.setLayout(new GridLayout(1, 4));
-		
+		//set whose turn it is
 		JPanel turnPanel = new JPanel();
 		turnPanel.setLayout(new GridLayout(2,1));
 		JLabel turnLabel = new JLabel("Whose turn?");
 		turnPanel.add(turnLabel);
-		
+	
 		turn = new JTextField();
 		turn.setEditable(false);
 		turnPanel.add(turn);
 		topPanel.add(turnPanel);
 		
+		//set the roll number
 		JPanel rollPanel = new JPanel();
 		JLabel rollLabel = new JLabel("Roll: ");
 		rollPanel.add(rollLabel);
@@ -54,6 +55,7 @@ public class GameControlPanel extends JPanel {
 		rollPanel.add(roll);
 		topPanel.add(rollPanel);
 		
+		//set the make accusation panel
 		accusation = new JButton("Make Accusation");
 		topPanel.add(accusation);
 		next = new JButton("NEXT!");
@@ -65,14 +67,14 @@ public class GameControlPanel extends JPanel {
 	private JPanel createBottomPanel() {
 		JPanel bottomPanel = new JPanel();
 		bottomPanel.setLayout(new GridLayout(0, 2));
-		//
+		//set our guess panel, and get our guess from another method
 		JPanel panel = new JPanel();
 		panel.setBorder(new TitledBorder(new EtchedBorder(), "Guess"));
 		guess = new JTextField();
 		guess.setEditable(false);
 		panel.add(guess);
 		bottomPanel.add(panel);
-		
+		//set our guess result panel
 		panel = new JPanel();
 		panel.setBorder(new TitledBorder(new EtchedBorder(), "Guess Result"));
 		result = new JTextField();
