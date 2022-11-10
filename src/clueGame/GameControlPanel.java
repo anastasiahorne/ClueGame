@@ -23,13 +23,11 @@ public class GameControlPanel extends JPanel {
 	 * Constructor for the panel, it does 90% of the work
 	 */
 	public GameControlPanel() {
-		setLayout(new GridLayout(2,2));
+		setLayout(new GridLayout(2,0));
 		JPanel topPanel = createTopPanel();
 		JPanel bottomPanel = createBottomPanel();
-		//JPanel rightPanel= createCardPanel();
 		add(topPanel);
 		add(bottomPanel);
-		//add(rightPanel);
 	}
 
 	private JPanel createTopPanel() {
