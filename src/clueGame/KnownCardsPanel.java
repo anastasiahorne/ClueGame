@@ -30,6 +30,9 @@ public class KnownCardsPanel extends JPanel {
 		return null;
 	}
 	
+	private void updatePanel(JPanel name, CardType type) {
+		
+	}
 	public static void main(String[] args) {
 		Board testBoard = Board.getInstance();
 		
