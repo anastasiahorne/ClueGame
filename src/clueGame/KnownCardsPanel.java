@@ -21,4 +21,16 @@ public class KnownCardsPanel extends JPanel {
 			
 		}
 	}
+	
+	private JPanel createPeoplePanel() {
+		return null;
+	}
+	
+	private JPanel createRoomPanel() {
+		return null;
+	}
+	
+	private JPanel createWeaponPanel() {
+		return null;
+	}
 }
