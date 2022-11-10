@@ -82,6 +82,7 @@ public class GameControlPanel extends JPanel {
 		return bottomPanel;
 	}
 	
+	// Setter for turn
 	private void setTurn(Player player, int r) {
 		String name = player.getName();
 		turn.setText(name);
@@ -89,20 +90,22 @@ public class GameControlPanel extends JPanel {
 		roll.setText(String.valueOf(r));
 	}
 
+	// Setter for guess
 	private void setGuess(String message) {
 		guess.setText(message);
 	}
 	
+	// Setter for result
 	private void setResult(String message) {
 		result.setText(message);
 	}
 	
+	// Get the color of the player
 	private Color getColor(Player player) {
 		String colorString = player.getColor();
 		int r = 192;
 		int b = 192;
 		int g = 192;
-		Color color;
 		switch (colorString) {
 		case "Red":
 			r = 255;
