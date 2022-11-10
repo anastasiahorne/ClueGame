@@ -1,6 +1,7 @@
 package clueGame;
 
 import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.GridLayout;
 
 import javax.swing.JButton;
@@ -84,6 +85,7 @@ public class GameControlPanel extends JPanel {
 	private void setTurn(Player player, int r) {
 		String name = player.getName();
 		turn.setText(name);
+		turn.setBackground(getColor(player));
 		roll.setText(String.valueOf(r));
 	}
 
@@ -95,8 +97,47 @@ public class GameControlPanel extends JPanel {
 		result.setText(message);
 	}
 	
-	private void getColor(Player player) {
-		
+	private Color getColor(Player player) {
+		String colorString = player.getColor();
+		int r = 192;
+		int b = 192;
+		int g = 192;
+		Color color;
+		switch (colorString) {
+		case "Red":
+			r = 255;
+			g = 51;
+			b = 51;
+			break;
+		case "Blue":
+			r = 102;
+			g = 178;
+			b = 255;
+			break;
+		case "White":
+			r = 255;
+			g = 255;
+			b = 255;
+			break;
+		case "Yellow":
+			r = 255;
+			g = 255;
+			b = 153;
+			break;
+		case "Purple":
+			r = 153;
+			g = 153;
+			b = 255;
+			break;
+		case "Green":
+			r = 153;
+			g = 255;
+			b = 153;
+			break;
+		default:
+			break;
+		}
+		return new Color(r, g, b);
 	}
 	
 	/**
@@ -114,7 +155,7 @@ public class GameControlPanel extends JPanel {
 		frame.setVisible(true); // make it visible
 		
 		// test filling in the data
-		panel.setTurn(new ComputerPlayer( "Col. Mustard", "orange", 0, 0), 5);
+		panel.setTurn(new ComputerPlayer( "Blaster", "Blue", 0, 0), 5);
 		panel.setGuess("I have no guess!");
 		panel.setResult("So you have nothing?");
 	}
