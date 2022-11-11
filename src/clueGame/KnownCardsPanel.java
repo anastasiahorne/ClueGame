@@ -194,17 +194,13 @@ public class KnownCardsPanel extends JPanel {
 
 		// mark all cards as seen for testing
 		for (Card c : testBoard.getPlayerCards()) {
-			switch (c.getCardType()) {
-			case PERSON:
 				human.updateSeenPeople(c);
-				break;
-			case WEAPON:
-				human.updateSeenWeapons(c);
-				break;
-			case ROOM:
-				human.updateSeenRooms(c);
-				break;
 			}
+		for (Card c : testBoard.getWeaponCards()) {
+			human.updateSeenWeapons(c);
+		}
+		for (Card c : testBoard.getRoomCards()) {
+			human.updateSeenRooms(c);
 		}
 
 		KnownCardsPanel panel = new KnownCardsPanel(human);  // create the panel
