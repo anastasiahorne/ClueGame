@@ -181,6 +181,8 @@ public class KnownCardsPanel extends JPanel {
 	 * 
 	 * @param args
 	 */
+	
+	//have repeating values
 	public static void main(String[] args) {
 		Board testBoard = Board.getInstance();
 
