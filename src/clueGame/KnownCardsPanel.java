@@ -75,6 +75,7 @@ public class KnownCardsPanel extends JPanel {
 				JTextField card = new JTextField();
 				card.setEditable(false);
 				card.setText(c.getCardName());
+				panel.add(card);
 				//card.setBackground(getColor(human));
 			}
 			break;
@@ -95,15 +96,38 @@ public class KnownCardsPanel extends JPanel {
 			// Add seen cards of same type
 			inSeen=new JLabel("Seen:");
 			panel.add(inSeen);
+			for (Card c : human.getSeenWeapons()) {
+				JTextField card = new JTextField();
+				card.setEditable(false);
+				card.setText(c.getCardName());
+				panel.add(card);
+				//card.setBackground(getColor(human));
+			}
 			break;
 		case ROOM:
 			panel.setBorder(new TitledBorder(new EtchedBorder(), "Rooms"));
 			// Add cards from the player's hand of the same type
 			inHand=new JLabel("In Hand:");
 			panel.add(inHand);
+			for (Card c : human.getHand()) {
+				if (c.getCardType().equals(type)) {
+					JTextField card = new JTextField();
+					card.setEditable(false);
+					card.setText(c.getCardName());
+					card.setBackground(getColor(human));
+					panel.add(card);
+				}
+			}
 			// Add seen cards of same type
 			inSeen=new JLabel("Seen:");
 			panel.add(inSeen);
+			for (Card c : human.getSeenRooms()) {
+				JTextField card = new JTextField();
+				card.setEditable(false);
+				card.setText(c.getCardName());
+				panel.add(card);
+				//card.setBackground(getColor(human));
+			}
 			break;
 		}
 		add(panel);
