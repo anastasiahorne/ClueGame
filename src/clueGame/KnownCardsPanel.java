@@ -9,50 +9,54 @@ import javax.swing.border.EtchedBorder;
 import javax.swing.border.TitledBorder;
 
 public class KnownCardsPanel extends JPanel {
+	private JPanel peoplePanel;
+	private JPanel weaponPanel;
+	private JPanel roomPanel;
 
 	// Default constructor
 	public KnownCardsPanel() {
 		setLayout(new GridLayout(3,1));
-		JPanel peoplePanel = createPeoplePanel();
-		JPanel weaponPanel = createWeaponPanel();
-		JPanel roomPanel = createRoomPanel();
-		add(peoplePanel);
-		add(weaponPanel);
-		add(roomPanel);
+		JPanel cards = new JPanel();
+		cards.setLayout(new GridLayout(3, 0));
+		cards.setBorder(new TitledBorder(new EtchedBorder(), "Known Cards"));
+		
+		peoplePanel = createPanel();
+		peoplePanel.setBorder(new TitledBorder(new EtchedBorder(), "People"));
+		weaponPanel = createPanel();
+		weaponPanel.setBorder(new TitledBorder(new EtchedBorder(), "Weapons"));
+		roomPanel = createPanel();
+		roomPanel.setBorder(new TitledBorder(new EtchedBorder(), "Rooms"));
+		cards.add(peoplePanel);
+		cards.add(weaponPanel);
+		cards.add(roomPanel);
+		
+		add(cards);
 	}
 
-	private JPanel createPeoplePanel() {
+	private JPanel createPanel() {
 		JPanel peoplePanel = new JPanel();
 		peoplePanel.setLayout(new GridLayout(0, 1));
 		peoplePanel.setBorder(new TitledBorder(new EtchedBorder(), "People"));
 		return peoplePanel;
 	}
-
-	private JPanel createRoomPanel() {
-		JPanel roomPanel = new JPanel();
-		roomPanel.setLayout(new GridLayout(0, 1));
-		roomPanel.setBorder(new TitledBorder(new EtchedBorder(), "Rooms"));
-		return roomPanel;
+	
+	private void updatePanels() {
+		updatePanel(peoplePanel, CardType.PERSON);
+		updatePanel(weaponPanel, CardType.WEAPON);
+		updatePanel(roomPanel, CardType.ROOM);
 	}
-
-	private JPanel createWeaponPanel() {
-		JPanel weaponPanel = new JPanel();
-		weaponPanel.setLayout(new GridLayout(0, 1));
-		weaponPanel.setBorder(new TitledBorder(new EtchedBorder(), "Weapons"));
-		return weaponPanel;
-	}
-
+	
 	private void updatePanel(JPanel panel, CardType type) {
 		panel.removeAll();
 		switch (type) {
 		case PERSON:
-			panel = createPeoplePanel();
+			//panel = createPeoplePanel();
 			break;
 		case WEAPON:
-			panel = createWeaponPanel();
+			//panel = createWeaponPanel();
 			break;
 		case ROOM:
-			panel = createRoomPanel();
+			//panel = createRoomPanel();
 			break;
 		}
 		add(panel);
