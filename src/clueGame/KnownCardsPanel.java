@@ -36,10 +36,10 @@ public class KnownCardsPanel extends JPanel {
 		roomPanel = new JPanel();
 		roomPanel.setLayout(new GridLayout(0, 1));
 		//roomPanel.setBorder(new TitledBorder(new EtchedBorder(), "Rooms"));
-		updatePanels();
-		//cards.add(peoplePanel);
-		//cards.add(weaponPanel);
-		//cards.add(roomPanel);
+		//updatePanels();
+		cards.add(peoplePanel);
+		cards.add(weaponPanel);
+		cards.add(roomPanel);
 	
 		
 		add(cards);
@@ -130,7 +130,7 @@ public class KnownCardsPanel extends JPanel {
 			}
 			break;
 		}
-		add(panel);
+		//add(panel);
 	}
 
 	// Get the color of the player
