@@ -338,9 +338,9 @@ public class Board {
 	}
 
 	public boolean checkAccusation(Card person, Card weapon, Card room) {
-		Card personSol=solution.getPerson();
-		Card weaponSol=solution.getWeapon();
-		Card roomSol=solution.getRoom();
+		Card personSol = solution.getPerson();
+		Card weaponSol = solution.getWeapon();
+		Card roomSol = solution.getRoom();
 		if (person.equals(personSol) && weapon.equals(weaponSol) && room.equals(roomSol)) {
 			return true;
 		}
