@@ -42,8 +42,20 @@ public class KnownCardsPanel extends JPanel {
 		return weaponPanel;
 	}
 
-	private void updatePanel(JPanel name, CardType type) {
-
+	private void updatePanel(JPanel panel, CardType type) {
+		panel.removeAll();
+		switch (type) {
+		case PERSON:
+			panel = createPeoplePanel();
+			break;
+		case WEAPON:
+			panel = createWeaponPanel();
+			break;
+		case ROOM:
+			panel = createRoomPanel();
+			break;
+		}
+		add(panel);
 	}
 
 	// Get the color of the player
@@ -100,15 +112,22 @@ public class KnownCardsPanel extends JPanel {
 		testBoard.setConfigFiles("ClueLayout.csv", "ClueSetup.txt");
 
 		testBoard.initialize();
+		
+		testBoard.deal();
+		
+		HumanPlayer human = testBoard.getHumanPlayer();
 
 		// mark all cards as seen for testing
 		for (Card c : testBoard.getPlayerCards()) {
 			switch (c.getCardType()) {
 			case PERSON:
+				human.updateSeenPeople(c);
 				break;
 			case WEAPON:
+				human.updateSeenWeapons(c);
 				break;
 			case ROOM:
+				human.updateSeenRooms(c);
 				break;
 			}
 		}
@@ -119,8 +138,5 @@ public class KnownCardsPanel extends JPanel {
 		frame.setSize(180, 650);  // size the frame
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); // allow it to close
 		frame.setVisible(true); // make it visible
-
-		// Set values
-
 	}
 }
