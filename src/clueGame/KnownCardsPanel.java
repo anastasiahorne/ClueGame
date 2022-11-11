@@ -27,15 +27,15 @@ public class KnownCardsPanel extends JPanel {
 		
 		peoplePanel = new JPanel();
 		peoplePanel.setLayout(new GridLayout(0, 1));
-		peoplePanel.setBorder(new TitledBorder(new EtchedBorder(), "People"));
+		//peoplePanel.setBorder(new TitledBorder(new EtchedBorder(), "People"));
 		
 		weaponPanel = new JPanel();
 		weaponPanel.setLayout(new GridLayout(0, 1));
-		weaponPanel.setBorder(new TitledBorder(new EtchedBorder(), "Weapons"));
+		//weaponPanel.setBorder(new TitledBorder(new EtchedBorder(), "Weapons"));
 		
 		roomPanel = new JPanel();
 		roomPanel.setLayout(new GridLayout(0, 1));
-		roomPanel.setBorder(new TitledBorder(new EtchedBorder(), "Rooms"));
+		//roomPanel.setBorder(new TitledBorder(new EtchedBorder(), "Rooms"));
 		updatePanels();
 		//cards.add(peoplePanel);
 		//cards.add(weaponPanel);
@@ -80,9 +80,30 @@ public class KnownCardsPanel extends JPanel {
 			break;
 		case WEAPON:
 			panel.setBorder(new TitledBorder(new EtchedBorder(), "Weapons"));
+			// Add cards from the player's hand of the same type
+			inHand=new JLabel("In Hand:");
+			panel.add(inHand);
+			for (Card c : human.getHand()) {
+				if (c.getCardType().equals(type)) {
+					JTextField card = new JTextField();
+					card.setEditable(false);
+					card.setText(c.getCardName());
+					card.setBackground(getColor(human));
+					panel.add(card);
+				}
+			}
+			// Add seen cards of same type
+			inSeen=new JLabel("Seen:");
+			panel.add(inSeen);
 			break;
 		case ROOM:
 			panel.setBorder(new TitledBorder(new EtchedBorder(), "Rooms"));
+			// Add cards from the player's hand of the same type
+			inHand=new JLabel("In Hand:");
+			panel.add(inHand);
+			// Add seen cards of same type
+			inSeen=new JLabel("Seen:");
+			panel.add(inSeen);
 			break;
 		}
 		add(panel);
