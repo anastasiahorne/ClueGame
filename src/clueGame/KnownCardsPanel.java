@@ -4,6 +4,7 @@ import java.awt.Color;
 import java.awt.GridLayout;
 
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.border.EtchedBorder;
@@ -35,10 +36,11 @@ public class KnownCardsPanel extends JPanel {
 		roomPanel = new JPanel();
 		roomPanel.setLayout(new GridLayout(0, 1));
 		roomPanel.setBorder(new TitledBorder(new EtchedBorder(), "Rooms"));
-		
-		cards.add(peoplePanel);
-		cards.add(weaponPanel);
-		cards.add(roomPanel);
+		updatePanels();
+		//cards.add(peoplePanel);
+		//cards.add(weaponPanel);
+		//cards.add(roomPanel);
+	
 		
 		add(cards);
 	}
@@ -55,6 +57,8 @@ public class KnownCardsPanel extends JPanel {
 		case PERSON:
 			panel.setBorder(new TitledBorder(new EtchedBorder(), "People"));
 			// Add cards from the player's hand of the same type
+			JLabel inHand=new JLabel("In Hand:");
+			panel.add(inHand);
 			for (Card c : human.getHand()) {
 				if (c.getCardType().equals(type)) {
 					JTextField card = new JTextField();
@@ -65,6 +69,8 @@ public class KnownCardsPanel extends JPanel {
 				}
 			}
 			// Add seen cards of same type
+			JLabel inSeen=new JLabel("Seen:");
+			panel.add(inSeen);
 			for (Card c : human.getSeenPeople()) {
 				JTextField card = new JTextField();
 				card.setEditable(false);
