@@ -5,6 +5,7 @@ import java.awt.GridLayout;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
+import javax.swing.JTextField;
 import javax.swing.border.EtchedBorder;
 import javax.swing.border.TitledBorder;
 
@@ -12,32 +13,34 @@ public class KnownCardsPanel extends JPanel {
 	private JPanel peoplePanel;
 	private JPanel weaponPanel;
 	private JPanel roomPanel;
+	private HumanPlayer human;
 
 	// Default constructor
-	public KnownCardsPanel() {
+	public KnownCardsPanel(HumanPlayer human) {
+		this.human = human;
+		
 		setLayout(new GridLayout(3,1));
 		JPanel cards = new JPanel();
 		cards.setLayout(new GridLayout(3, 0));
 		cards.setBorder(new TitledBorder(new EtchedBorder(), "Known Cards"));
 		
-		peoplePanel = createPanel();
+		peoplePanel = new JPanel();
+		peoplePanel.setLayout(new GridLayout(0, 1));
 		peoplePanel.setBorder(new TitledBorder(new EtchedBorder(), "People"));
-		weaponPanel = createPanel();
+		
+		weaponPanel = new JPanel();
+		weaponPanel.setLayout(new GridLayout(0, 1));
 		weaponPanel.setBorder(new TitledBorder(new EtchedBorder(), "Weapons"));
-		roomPanel = createPanel();
+		
+		roomPanel = new JPanel();
+		roomPanel.setLayout(new GridLayout(0, 1));
 		roomPanel.setBorder(new TitledBorder(new EtchedBorder(), "Rooms"));
+		
 		cards.add(peoplePanel);
 		cards.add(weaponPanel);
 		cards.add(roomPanel);
 		
 		add(cards);
-	}
-
-	private JPanel createPanel() {
-		JPanel peoplePanel = new JPanel();
-		peoplePanel.setLayout(new GridLayout(0, 1));
-		peoplePanel.setBorder(new TitledBorder(new EtchedBorder(), "People"));
-		return peoplePanel;
 	}
 	
 	private void updatePanels() {
@@ -50,13 +53,30 @@ public class KnownCardsPanel extends JPanel {
 		panel.removeAll();
 		switch (type) {
 		case PERSON:
-			//panel = createPeoplePanel();
+			panel.setBorder(new TitledBorder(new EtchedBorder(), "People"));
+			// Add cards from the player's hand of the same type
+			for (Card c : human.getHand()) {
+				if (c.getCardType().equals(type)) {
+					JTextField card = new JTextField();
+					card.setEditable(false);
+					card.setText(c.getCardName());
+					card.setBackground(getColor(human));
+					panel.add(card);
+				}
+			}
+			// Add seen cards of same type
+			for (Card c : human.getSeenPeople()) {
+				JTextField card = new JTextField();
+				card.setEditable(false);
+				card.setText(c.getCardName());
+				//card.setBackground(getColor(human));
+			}
 			break;
 		case WEAPON:
-			//panel = createWeaponPanel();
+			panel.setBorder(new TitledBorder(new EtchedBorder(), "Weapons"));
 			break;
 		case ROOM:
-			//panel = createRoomPanel();
+			panel.setBorder(new TitledBorder(new EtchedBorder(), "Rooms"));
 			break;
 		}
 		add(panel);
@@ -136,11 +156,14 @@ public class KnownCardsPanel extends JPanel {
 			}
 		}
 
-		KnownCardsPanel panel = new KnownCardsPanel();  // create the panel
+		KnownCardsPanel panel = new KnownCardsPanel(human);  // create the panel
 		JFrame frame = new JFrame();  // create the frame 
 		frame.setContentPane(panel); // put the panel in the frame
 		frame.setSize(180, 650);  // size the frame
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); // allow it to close
 		frame.setVisible(true); // make it visible
+		
+		// Add values
+		panel.updatePanels();
 	}
 }
