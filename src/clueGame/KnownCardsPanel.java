@@ -67,19 +67,12 @@ public class KnownCardsPanel extends JPanel {
 			for (Card c : human.getHand()) {
 				if (c.getCardType().equals(type)) {
 					people.add(c);
-					JTextField card = new JTextField();
-					card.setEditable(false);
-					card.setText(c.getCardName());
-					card.setBackground(getColor(c));
-					panel.add(card);
+					setCardTextAtt(panel, c);
 				}
 			}
 			// Condition for no cards of this type in hand
 			if (people.isEmpty()) {
-				JTextField none = new JTextField();
-				none.setEditable(false);
-				none.setText("None");
-				panel.add(none);
+				emptyField(panel);
 			}
 			
 			// Add seen cards of same type
@@ -87,18 +80,11 @@ public class KnownCardsPanel extends JPanel {
 			JLabel inSeen = new JLabel("Seen:");
 			panel.add(inSeen);
 			for (Card c : human.getSeenPeople()) {
-				JTextField card = new JTextField();
-				card.setEditable(false);
-				card.setText(c.getCardName());
-				card.setBackground(getColor(c));
-				panel.add(card);
+				setCardTextAtt(panel, c);
 			}
 			// Condition for no cards of this type seen
 			if (seen.isEmpty()) {
-				JTextField none = new JTextField();
-				none.setEditable(false);
-				none.setText("None");
-				panel.add(none);
+				emptyField(panel);
 			}
 			break;
 		case WEAPON:
@@ -110,19 +96,12 @@ public class KnownCardsPanel extends JPanel {
 			for (Card c : human.getHand()) {
 				if (c.getCardType().equals(type)) {
 					weapons.add(c);
-					JTextField card = new JTextField();
-					card.setEditable(false);
-					card.setText(c.getCardName());
-					card.setBackground(getColor(c));
-					panel.add(card);
+					setCardTextAtt(panel, c);
 				}
 			}
 			// Condition for no cards of this type in hand
 			if (weapons.isEmpty()) {
-				JTextField none = new JTextField();
-				none.setEditable(false);
-				none.setText("None");
-				panel.add(none);
+				emptyField(panel);
 			}
 			
 			// Add seen cards of same type
@@ -130,18 +109,11 @@ public class KnownCardsPanel extends JPanel {
 			panel.add(inSeen);
 			seen = human.getSeenWeapons();
 			for (Card c : human.getSeenWeapons()) {
-				JTextField card = new JTextField();
-				card.setEditable(false);
-				card.setText(c.getCardName());
-				card.setBackground(getColor(c));
-				panel.add(card);
+				setCardTextAtt(panel, c);
 			}
 			// Condition for no cards of this type in hand
 			if (seen.isEmpty()) {
-				JTextField none = new JTextField();
-				none.setEditable(false);
-				none.setText("None");
-				panel.add(none);
+				emptyField(panel);
 			}
 			break;
 		case ROOM:
@@ -153,18 +125,11 @@ public class KnownCardsPanel extends JPanel {
 			for (Card c : human.getHand()) {
 				if (c.getCardType().equals(type)) {
 					rooms.add(c);
-					JTextField card = new JTextField();
-					card.setEditable(false);
-					card.setText(c.getCardName());
-					card.setBackground(getColor(c));
-					panel.add(card);
+					setCardTextAtt(panel, c);
 				}
 			}
 			if (rooms.isEmpty()) {
-				JTextField none = new JTextField();
-				none.setEditable(false);
-				none.setText("None");
-				panel.add(none);
+				emptyField(panel);
 			}
 			
 			// Add seen cards of same type
@@ -172,23 +137,33 @@ public class KnownCardsPanel extends JPanel {
 			panel.add(inSeen);
 			seen = human.getSeenRooms();
 			for (Card c : human.getSeenRooms()) {
-				JTextField card = new JTextField();
-				card.setEditable(false);
-				card.setText(c.getCardName());
-				card.setBackground(getColor(c));
-				panel.add(card);
+				setCardTextAtt(panel, c);
 			}
 			// Condition for no cards of this type seen
 			if (seen.isEmpty()) {
-				JTextField none = new JTextField();
-				none.setEditable(false);
-				none.setText("None");
-				panel.add(none);
+				emptyField(panel);
 			}
 			break;
 		}
 		knownCards.add(panel);
 		panel.repaint();
+	}
+
+	//if there is no card in the hand or seen of a specific type, panel displays none
+	public void emptyField(JPanel panel) {
+		JTextField none = new JTextField();
+		none.setEditable(false);
+		none.setText("None");
+		panel.add(none);
+	}
+	
+	//sets the cards text field and color 
+	public void setCardTextAtt(JPanel panel, Card c) {
+		JTextField card = new JTextField();
+		card.setEditable(false);
+		card.setText(c.getCardName());
+		card.setBackground(getColor(c));
+		panel.add(card);
 	}
 
 	// Get the color of the player

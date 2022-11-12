@@ -27,20 +27,9 @@ public class Player {
 
 	// Add card to hand
 	public void updateHand(Card card) {
+		//set the card's color, to the person it belongs to
 		card.setColor(color);
 		hand.add(card);
-		/*
-		switch (card.getCardType()) {
-			case ROOM:
-				seenRooms.add(card);
-				break;
-			case PERSON:
-				seenPeople.add(card);
-				break;
-			case WEAPON:
-				seenWeapons.add(card);
-		}
-		*/
 	}
 
 	// Add card to hand

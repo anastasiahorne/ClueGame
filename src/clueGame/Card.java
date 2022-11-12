@@ -3,14 +3,6 @@ package clueGame;
 public class Card {
 	private String cardName;
 	private String Color;
-	public String getColor() {
-		return Color;
-	}
-
-	public void setColor(String color) {
-		Color = color;
-	}
-
 	private CardType cardType;
 
 	
@@ -38,6 +30,15 @@ public class Card {
 			return true;
 		}
 		return false;
+	}
+	
+	//set and get the color of the card
+	public String getColor() {
+		return Color;
+	}
+
+	public void setColor(String color) {
+		Color = color;
 	}
 
 	@Override
