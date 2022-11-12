@@ -252,7 +252,7 @@ public class KnownCardsPanel extends JPanel {
 		
 		HumanPlayer human = testBoard.getHumanPlayer();
 
-		// mark all cards as seen for testing
+		// Mark all cards as seen for testing
 		for (Card c : testBoard.getPlayerCards()) {
 			if (!human.getHand().contains(c) && (!testBoard.getSolution().getPerson().getCardName().equals(c.getCardName()))) {
 				human.updateSeenPeople(c);
