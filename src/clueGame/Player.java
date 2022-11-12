@@ -28,6 +28,7 @@ public class Player {
 	// Add card to hand
 	public void updateHand(Card card) {
 		hand.add(card);
+		/*
 		switch (card.getCardType()) {
 			case ROOM:
 				seenRooms.add(card);
@@ -38,6 +39,7 @@ public class Player {
 			case WEAPON:
 				seenWeapons.add(card);
 		}
+		*/
 	}
 
 	// Add card to hand
@@ -53,7 +55,7 @@ public class Player {
 		seenRooms.add(card);
 	}
 
-	// Getter for Arraylist<Card> hand
+	// Getter for ArrayList<Card> hand
 	public ArrayList<Card> getHand() {
 		return hand;
 	}
