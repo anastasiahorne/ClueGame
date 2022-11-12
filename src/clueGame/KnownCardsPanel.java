@@ -22,24 +22,22 @@ public class KnownCardsPanel extends JPanel {
 	public KnownCardsPanel(HumanPlayer human) {
 		this.human = human;
 		
-		//setLayout(new GridLayout(3,1));
 		setLayout(new GridLayout(1,0));
 		knownCards = new JPanel();
 		knownCards.setLayout(new GridLayout(3, 0));
 		knownCards.setBorder(new TitledBorder(new EtchedBorder(), "Known Cards"));
 		
+		//set up the layout of our type panels
 		peoplePanel = new JPanel();
 		peoplePanel.setLayout(new GridLayout(0, 1));
-		//peoplePanel.setBorder(new TitledBorder(new EtchedBorder(), "People"));
 		
 		weaponPanel = new JPanel();
 		weaponPanel.setLayout(new GridLayout(0, 1));
-		//weaponPanel.setBorder(new TitledBorder(new EtchedBorder(), "Weapons"));
 		
 		roomPanel = new JPanel();
 		roomPanel.setLayout(new GridLayout(0, 1));
-		//roomPanel.setBorder(new TitledBorder(new EtchedBorder(), "Rooms"));
-		//updatePanels();
+
+		//add the three panels to our main panel
 		knownCards.add(peoplePanel);
 		knownCards.add(weaponPanel);
 		knownCards.add(roomPanel);
@@ -57,11 +55,12 @@ public class KnownCardsPanel extends JPanel {
 	private void updatePanel(JPanel panel, CardType type) {
 		panel.removeAll();
 		panel.setLayout(new GridLayout(0, 1));
+		JLabel inHand = new JLabel("In Hand:");
+		JLabel inSeen = new JLabel("Seen:");
 		switch (type) {
 		case PERSON:
 			panel.setBorder(new TitledBorder(new EtchedBorder(), "People"));
-			// Add cards from the player's hand of the same type
-			JLabel inHand = new JLabel("In Hand:");
+			// Add cards from the player's hand of type Person
 			panel.add(inHand);
 			ArrayList<Card> people = new ArrayList<Card>();
 			for (Card c : human.getHand()) {
@@ -70,27 +69,26 @@ public class KnownCardsPanel extends JPanel {
 					setCardTextAtt(panel, c);
 				}
 			}
-			// Condition for no cards of this type in hand
+			// Condition for no person cards in hand
 			if (people.isEmpty()) {
 				emptyField(panel);
 			}
 			
-			// Add seen cards of same type
+			// Add seen people cards
 			ArrayList<Card> seen = human.getSeenPeople();
-			JLabel inSeen = new JLabel("Seen:");
 			panel.add(inSeen);
 			for (Card c : human.getSeenPeople()) {
 				setCardTextAtt(panel, c);
 			}
-			// Condition for no cards of this type seen
+			// Condition for no person cards seen
 			if (seen.isEmpty()) {
 				emptyField(panel);
 			}
 			break;
+			
 		case WEAPON:
 			panel.setBorder(new TitledBorder(new EtchedBorder(), "Weapons"));
-			// Add cards from the player's hand of the same type
-			inHand = new JLabel("In Hand:");
+			// Add weapon cards from the player's hand
 			panel.add(inHand);
 			ArrayList<Card> weapons = new ArrayList<Card>();
 			for (Card c : human.getHand()) {
@@ -99,28 +97,27 @@ public class KnownCardsPanel extends JPanel {
 					setCardTextAtt(panel, c);
 				}
 			}
-			// Condition for no cards of this type in hand
+			// Condition for no weapons cards in hand
 			if (weapons.isEmpty()) {
 				emptyField(panel);
 			}
 			
-			// Add seen cards of same type
-			inSeen = new JLabel("Seen:");
+			// Add seen weapon cards
 			panel.add(inSeen);
 			seen = human.getSeenWeapons();
 			for (Card c : human.getSeenWeapons()) {
 				setCardTextAtt(panel, c);
 			}
-			// Condition for no cards of this type in hand
+			// Condition for no weapon cards in hand
 			if (seen.isEmpty()) {
 				emptyField(panel);
 			}
 			break;
+			
 		case ROOM:
 			panel.setBorder(new TitledBorder(new EtchedBorder(), "Rooms"));
-			// Add cards from the player's hand of the same type
+			// Add room cards from the player's hand
 			ArrayList<Card> rooms = new ArrayList<Card>();
-			inHand = new JLabel("In Hand:");
 			panel.add(inHand);
 			for (Card c : human.getHand()) {
 				if (c.getCardType().equals(type)) {
@@ -132,14 +129,13 @@ public class KnownCardsPanel extends JPanel {
 				emptyField(panel);
 			}
 			
-			// Add seen cards of same type
-			inSeen = new JLabel("Seen:");
+			// Add seen room cards
 			panel.add(inSeen);
 			seen = human.getSeenRooms();
 			for (Card c : human.getSeenRooms()) {
 				setCardTextAtt(panel, c);
 			}
-			// Condition for no cards of this type seen
+			// Condition for no room cards seen
 			if (seen.isEmpty()) {
 				emptyField(panel);
 			}
@@ -157,7 +153,7 @@ public class KnownCardsPanel extends JPanel {
 		panel.add(none);
 	}
 	
-	//sets the cards text field and color 
+	//sets the card's text field, text and color 
 	public void setCardTextAtt(JPanel panel, Card c) {
 		JTextField card = new JTextField();
 		card.setEditable(false);
@@ -166,9 +162,9 @@ public class KnownCardsPanel extends JPanel {
 		panel.add(card);
 	}
 
-	// Get the color of the player
-	private Color getColor(Card player) {
-		String colorString = player.getColor();
+	// Get the color of the card
+	private Color getColor(Card card) {
+		String colorString = card.getColor();
 		int r = 192;
 		int b = 192;
 		int g = 192;
