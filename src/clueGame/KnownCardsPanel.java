@@ -70,7 +70,7 @@ public class KnownCardsPanel extends JPanel {
 					JTextField card = new JTextField();
 					card.setEditable(false);
 					card.setText(c.getCardName());
-					card.setBackground(getColor(human));
+					card.setBackground(getColor(c));
 					panel.add(card);
 				}
 			}
@@ -90,8 +90,8 @@ public class KnownCardsPanel extends JPanel {
 				JTextField card = new JTextField();
 				card.setEditable(false);
 				card.setText(c.getCardName());
+				card.setBackground(getColor(c));
 				panel.add(card);
-				//card.setBackground(getColor(human));
 			}
 			// Condition for no cards of this type seen
 			if (seen.isEmpty()) {
@@ -113,7 +113,7 @@ public class KnownCardsPanel extends JPanel {
 					JTextField card = new JTextField();
 					card.setEditable(false);
 					card.setText(c.getCardName());
-					card.setBackground(getColor(human));
+					card.setBackground(getColor(c));
 					panel.add(card);
 				}
 			}
@@ -133,8 +133,8 @@ public class KnownCardsPanel extends JPanel {
 				JTextField card = new JTextField();
 				card.setEditable(false);
 				card.setText(c.getCardName());
+				card.setBackground(getColor(c));
 				panel.add(card);
-				//card.setBackground(getColor(human));
 			}
 			// Condition for no cards of this type in hand
 			if (seen.isEmpty()) {
@@ -156,7 +156,7 @@ public class KnownCardsPanel extends JPanel {
 					JTextField card = new JTextField();
 					card.setEditable(false);
 					card.setText(c.getCardName());
-					card.setBackground(getColor(human));
+					card.setBackground(getColor(c));
 					panel.add(card);
 				}
 			}
@@ -175,6 +175,7 @@ public class KnownCardsPanel extends JPanel {
 				JTextField card = new JTextField();
 				card.setEditable(false);
 				card.setText(c.getCardName());
+				card.setBackground(getColor(c));
 				panel.add(card);
 			}
 			// Condition for no cards of this type seen
@@ -191,7 +192,7 @@ public class KnownCardsPanel extends JPanel {
 	}
 
 	// Get the color of the player
-	private Color getColor(Player player) {
+	private Color getColor(Card player) {
 		String colorString = player.getColor();
 		int r = 192;
 		int b = 192;

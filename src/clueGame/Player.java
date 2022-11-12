@@ -27,6 +27,7 @@ public class Player {
 
 	// Add card to hand
 	public void updateHand(Card card) {
+		card.setColor(color);
 		hand.add(card);
 		/*
 		switch (card.getCardType()) {
