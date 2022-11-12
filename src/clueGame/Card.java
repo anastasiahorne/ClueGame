@@ -2,7 +2,7 @@ package clueGame;
 
 public class Card {
 	private String cardName;
-	private String Color;
+	private String Color; //for GUI display
 	private CardType cardType;
 
 	
