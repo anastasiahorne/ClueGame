@@ -10,7 +10,9 @@ import java.util.Random;
 import java.util.Scanner;
 import java.util.Set;
 
-public class Board {
+import javax.swing.JPanel;
+
+public class Board extends JPanel{
 
 	private BoardCell[][] grid;
 	private int numRows;
