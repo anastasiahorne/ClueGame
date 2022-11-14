@@ -52,20 +52,28 @@ public class BoardCell {
 			g.setColor(Color.BLACK);
 			g.drawRect(col * width, row * height, width, height);
 			if (isDoorway) {
-			switch (doorDirection) {
-			case LEFT:
 				g.setColor(Color.BLUE);
 				Graphics2D g2D= (Graphics2D) g;
-				g2D.setStroke(new BasicStroke(2));
+			switch (doorDirection) {
+			case LEFT:
+				g2D.setStroke(new BasicStroke(4));
 				g.drawLine(col*width, row*height, col*width,row*height+ height);
 				break;
 			case RIGHT:
+				g2D.setStroke(new BasicStroke(4));
+				g.drawLine(col*width +width,row* height, col*width +width,row*height+ height);
 				break;
 			case DOWN:
+				g2D.setStroke(new BasicStroke(4));
+				g.drawLine(col*width, row*height+height, col*width +width, row*height+ height);
 				break;
 			case UP:
+				g2D.setStroke(new BasicStroke(4));
+				g.drawLine(col*width, row*height, col*width +width, row*height);
+				
 				break;
-			}		
+			}
+			g2D.setStroke(new BasicStroke(1));
 			}
 		}
 		// Rooms (Other)
