@@ -82,7 +82,6 @@ public class BoardCell {
 			break;
 		case UP:
 			g.drawLine(col*width, row*height, col*width +width, row*height);
-			
 			break;
 		}
 	}
