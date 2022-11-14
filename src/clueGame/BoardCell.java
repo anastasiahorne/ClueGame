@@ -37,7 +37,8 @@ public class BoardCell {
 	// Each BoardCell can draw itself
 	public void draw(Graphics g, int width, int height) {
 		// Draw a rectangle (X offset: col * width, Y offset: row * height)
-		g.drawRect(col * width, row * height, width, height);
+		//g.drawRect(col * width, row * height, width, height);
+		
 		// Unused spaces (X)
 		if (getInitial() == 'X') {
 			g.setColor(Color.BLACK);
@@ -47,12 +48,14 @@ public class BoardCell {
 		if (getInitial() == 'W') {
 			g.setColor(Color.YELLOW);
 			g.fillRect(col * width, row * height, width, height);
+			g.setColor(Color.BLACK);
 		}
 		// Rooms (Other)
 		else {
 			g.setColor(Color.GRAY);
 			g.fillRect(col * width, row * height, width, height);
 		}
+		g.drawRect(col * width, row * height, width, height);
 	}
 	
 	// Getter for isSecretPassage
