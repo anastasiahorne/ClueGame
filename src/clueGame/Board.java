@@ -1,5 +1,6 @@
 package clueGame;
 
+import java.awt.Color;
 import java.awt.Graphics;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
@@ -388,7 +389,8 @@ public class Board extends JPanel{
 			for (int j = 0; j < grid[0].length; j++) {
 				// If the cell is a label cell, draw the room label
 				if (grid[i][j].isLabel()) {
-					
+					g.setColor(Color.PINK);
+					g.drawString("Room", j * width, i * height);
 				}
 			}
 		}
