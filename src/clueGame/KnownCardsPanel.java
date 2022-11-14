@@ -42,7 +42,7 @@ public class KnownCardsPanel extends JPanel {
 		knownCards.add(weaponPanel);
 		knownCards.add(roomPanel);
 	
-		
+		updatePanels();
 		add(knownCards);
 	}
 	
