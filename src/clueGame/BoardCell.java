@@ -1,5 +1,6 @@
 package clueGame;
 
+import java.awt.Color;
 import java.awt.Graphics;
 import java.util.HashSet;
 import java.util.Set;
@@ -39,10 +40,19 @@ public class BoardCell {
 		g.drawRect(col * width, row * height, width, height);
 		// Unused spaces (X)
 		if (getInitial() == 'X') {
+			g.setColor(Color.BLACK);
 			g.fillRect(col * width, row * height, width, height);
 		}
 		// Walkways (W)
+		if (getInitial() == 'W') {
+			g.setColor(Color.YELLOW);
+			g.fillRect(col * width, row * height, width, height);
+		}
 		// Rooms (Other)
+		else {
+			g.setColor(Color.GRAY);
+			g.fillRect(col * width, row * height, width, height);
+		}
 	}
 	
 	// Getter for isSecretPassage
