@@ -54,25 +54,9 @@ public class BoardCell {
 			if (isDoorway) {
 				g.setColor(Color.BLUE);
 				Graphics2D g2D= (Graphics2D) g;
-			switch (doorDirection) {
-			case LEFT:
-				g2D.setStroke(new BasicStroke(4));
-				g.drawLine(col*width, row*height, col*width,row*height+ height);
-				break;
-			case RIGHT:
-				g2D.setStroke(new BasicStroke(4));
-				g.drawLine(col*width +width,row* height, col*width +width,row*height+ height);
-				break;
-			case DOWN:
-				g2D.setStroke(new BasicStroke(4));
-				g.drawLine(col*width, row*height+height, col*width +width, row*height+ height);
-				break;
-			case UP:
-				g2D.setStroke(new BasicStroke(4));
-				g.drawLine(col*width, row*height, col*width +width, row*height);
-				
-				break;
-			}
+				//extracted method, for doors
+			drawDoorLine(g, width, height, g2D);
+			//reset the line width to 1, so our black lines are not super thick
 			g2D.setStroke(new BasicStroke(1));
 			}
 		}
@@ -81,6 +65,25 @@ public class BoardCell {
 			g.setColor(Color.GRAY);
 			g.fillRect(col * width, row * height, width, height);
 			g.drawRect(col * width, row * height, width, height);
+		}
+	}
+//method to draw the blue lines that represent the door
+	public void drawDoorLine(Graphics g, int width, int height, Graphics2D g2D) {
+		g2D.setStroke(new BasicStroke(4));
+		switch (doorDirection) {
+		case LEFT:
+			g.drawLine(col*width, row*height, col*width,row*height+ height);
+			break;
+		case RIGHT:
+			g.drawLine(col*width +width,row* height, col*width +width,row*height+ height);
+			break;
+		case DOWN:
+			g.drawLine(col*width, row*height+height, col*width +width, row*height+ height);
+			break;
+		case UP:
+			g.drawLine(col*width, row*height, col*width +width, row*height);
+			
+			break;
 		}
 	}
 	
