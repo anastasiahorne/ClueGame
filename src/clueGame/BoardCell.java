@@ -1,5 +1,6 @@
 package clueGame;
 
+import java.awt.Graphics;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -33,8 +34,15 @@ public class BoardCell {
 	}
 	
 	// Each BoardCell can draw itself
-	public void draw(int width, int height) {
-		
+	public void draw(Graphics g, int width, int height) {
+		// Draw a rectangle (X offset: col * width, Y offset: row * height)
+		g.drawRect(col * width, row * height, width, height);
+		// Unused spaces (X)
+		if (getInitial() == 'X') {
+			g.fillRect(col * width, row * height, width, height);
+		}
+		// Walkways (W)
+		// Rooms (Other)
 	}
 	
 	// Getter for isSecretPassage
