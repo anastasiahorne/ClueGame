@@ -1,5 +1,6 @@
 package clueGame;
 
+import java.awt.Graphics;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.util.ArrayList;
@@ -36,7 +37,7 @@ public class Board extends JPanel{
 	private static Board theInstance = new Board();
 	// constructor is private to ensure only one can be created
 	private Board() {
-		super.paintComponent(getGraphics());;
+		super();
 	}
 
 	// this method returns the only Board
@@ -371,7 +372,8 @@ public class Board extends JPanel{
 		return null;
 	}
 	
-	public void paintComponent() {
+	public void paintComponent(Graphics g) {
+		super.paintComponent(g);
 		// Get the size of the panel to get the height and width of each cell
 		int width = getWidth() / numColumns;
 		int height = getHeight() / numRows;

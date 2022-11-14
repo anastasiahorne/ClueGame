@@ -21,6 +21,10 @@ public class ClueGame extends JFrame {
 	}
 	
 	public static void main(String[] args) {
+		Board board = Board.getInstance();
+		board.setConfigFiles("ClueLayout.csv", "ClueSetup.txt");
+		board.initialize();
+		board.deal();
 		// Create the frame
 		ClueGame gui = new ClueGame();
 		gui.setVisible(true); // make it visible
