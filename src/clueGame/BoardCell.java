@@ -1,7 +1,9 @@
 package clueGame;
 
+import java.awt.BasicStroke;
 import java.awt.Color;
 import java.awt.Graphics;
+import java.awt.Graphics2D;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -37,20 +39,25 @@ public class BoardCell {
 	// Each BoardCell can draw itself
 	public void draw(Graphics g, int width, int height) {
 		// Draw a rectangle (X offset: col * width, Y offset: row * height)
-		//g.drawRect(col * width, row * height, width, height);
-		
 		// Unused spaces (X)
 		if (getInitial() == 'X') {
 			g.setColor(Color.BLACK);
 			g.fillRect(col * width, row * height, width, height);
+			g.drawRect(col * width, row * height, width, height);
 		}
 		// Walkways (W)
 		if (getInitial() == 'W') {
-			if (isDoorway) {
 			g.setColor(Color.YELLOW);
 			g.fillRect(col * width, row * height, width, height);
+			g.setColor(Color.BLACK);
+			g.drawRect(col * width, row * height, width, height);
+			if (isDoorway) {
 			switch (doorDirection) {
 			case LEFT:
+				g.setColor(Color.BLUE);
+				Graphics2D g2D= (Graphics2D) g;
+				g2D.setStroke(new BasicStroke(2));
+				g.drawLine(col*width, row*height, col*width,row*height+ height);
 				break;
 			case RIGHT:
 				break;
@@ -58,17 +65,15 @@ public class BoardCell {
 				break;
 			case UP:
 				break;
-			}
-			g.setColor(Color.BLACK);
-			
+			}		
 			}
 		}
 		// Rooms (Other)
 		else {
 			g.setColor(Color.GRAY);
 			g.fillRect(col * width, row * height, width, height);
+			g.drawRect(col * width, row * height, width, height);
 		}
-		g.drawRect(col * width, row * height, width, height);
 	}
 	
 	// Getter for isSecretPassage
