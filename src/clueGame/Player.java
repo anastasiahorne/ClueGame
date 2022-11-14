@@ -1,6 +1,7 @@
 package clueGame;
 
 import java.awt.Color;
+import java.awt.Graphics;
 import java.util.ArrayList;
 import java.util.Random;
 
@@ -47,8 +48,10 @@ public class Player {
 	}
 	
 	// Draw self
-	public void draw() {
-		
+	public void draw(Graphics g, int width, int height) {
+		g.drawOval(column * width, row * height, width, height);
+		g.setColor(getRBGColor());
+		g.fillOval(column * width, row * height, width, height);
 	}
 
 	// Getter for ArrayList<Card> hand

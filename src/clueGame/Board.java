@@ -382,10 +382,8 @@ public class Board extends JPanel{
 				grid[i][j].draw(g, width, height);
 			}
 		}
-	}
-	
-	// Draw room names
-	public void drawRoomNames() {
+		
+		// Draw room names
 		for (int i = 0; i < grid.length; i++) {
 			for (int j = 0; j < grid[0].length; j++) {
 				// If the cell is a label cell, draw the room label
@@ -394,12 +392,10 @@ public class Board extends JPanel{
 				}
 			}
 		}
-	}
-	
-	// Walk through players and have them draw themselves
-	public void drawPlayers() {
+		
+		// Walk through players and have them draw themselves
 		for (Player player : getPlayers()) {
-			player.draw();
+			player.draw(g, width, height);
 		}
 	}
 
