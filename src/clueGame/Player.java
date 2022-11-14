@@ -1,5 +1,6 @@
 package clueGame;
 
+import java.awt.Color;
 import java.util.ArrayList;
 import java.util.Random;
 
@@ -117,5 +118,47 @@ public class Player {
 
 	public String getColor() {
 		return color;
+	}
+	
+	public Color getRBGColor() {
+		String colorString = getColor();
+		int r = 192;
+		int b = 192;
+		int g = 192;
+		switch (colorString) {
+		case "Red":
+			r = 255;
+			g = 51;
+			b = 51;
+			break;
+		case "Blue":
+			r = 102;
+			g = 178;
+			b = 255;
+			break;
+		case "White":
+			r = 255;
+			g = 255;
+			b = 255;
+			break;
+		case "Yellow":
+			r = 255;
+			g = 255;
+			b = 153;
+			break;
+		case "Purple":
+			r = 153;
+			g = 153;
+			b = 255;
+			break;
+		case "Green":
+			r = 153;
+			g = 255;
+			b = 153;
+			break;
+		default:
+			break;
+		}
+		return new Color(r, g, b);
 	}
 }
