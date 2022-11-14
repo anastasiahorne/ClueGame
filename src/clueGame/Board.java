@@ -390,7 +390,7 @@ public class Board extends JPanel{
 				// If the cell is a label cell, draw the room label
 				if (grid[i][j].isLabel()) {
 					g.setColor(Color.PINK);
-					g.drawString("Room", j * width, i * height);
+					g.drawString(getRoom(grid[i][j]).getName(), j * width, i * height);
 				}
 			}
 		}
