@@ -46,9 +46,22 @@ public class BoardCell {
 		}
 		// Walkways (W)
 		if (getInitial() == 'W') {
+			if (isDoorway) {
 			g.setColor(Color.YELLOW);
 			g.fillRect(col * width, row * height, width, height);
+			switch (doorDirection) {
+			case LEFT:
+				break;
+			case RIGHT:
+				break;
+			case DOWN:
+				break;
+			case UP:
+				break;
+			}
 			g.setColor(Color.BLACK);
+			
+			}
 		}
 		// Rooms (Other)
 		else {
