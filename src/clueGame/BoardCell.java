@@ -32,6 +32,11 @@ public class BoardCell {
 		isSecretPassage = false;
 	}
 	
+	// Each BoardCell can draw itself
+	public void draw(int width, int height) {
+		
+	}
+	
 	// Getter for isSecretPassage
 	public boolean isSecretPassage() {
 		return isSecretPassage;

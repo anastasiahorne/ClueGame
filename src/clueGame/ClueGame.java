@@ -12,7 +12,8 @@ public class ClueGame extends JFrame {
 	public ClueGame() {
 		setSize(new Dimension(900,700));
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); // allow it to close
-		// Create cards and control panel
+		// Create board, cards, and control panel
+		add(board, BorderLayout.CENTER);
 		GameControlPanel controlPanel = new GameControlPanel();
 		add(controlPanel, BorderLayout.SOUTH);
 		KnownCardsPanel cardPanel = new KnownCardsPanel(board.getHumanPlayer());

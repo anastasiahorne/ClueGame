@@ -44,6 +44,11 @@ public class Player {
 	public void updateSeenRooms(Card card) {
 		seenRooms.add(card);
 	}
+	
+	// Draw self
+	public void draw() {
+		
+	}
 
 	// Getter for ArrayList<Card> hand
 	public ArrayList<Card> getHand() {

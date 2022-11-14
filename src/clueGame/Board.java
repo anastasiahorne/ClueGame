@@ -30,14 +30,13 @@ public class Board extends JPanel{
 	private ArrayList<Card> weaponCards;
 	private ArrayList<Card> roomCards;
 
-
 	/*
 	 * variable and methods used for singleton pattern
 	 */
 	private static Board theInstance = new Board();
 	// constructor is private to ensure only one can be created
 	private Board() {
-		super() ;
+		super.paintComponent(getGraphics());;
 	}
 
 	// this method returns the only Board
@@ -370,6 +369,36 @@ public class Board extends JPanel{
 		}
 		// If no player can disprove, return null
 		return null;
+	}
+	
+	public void paintComponent() {
+		// Get the size of the panel to get the height and width of each cell
+		int width = getWidth() / numColumns;
+		int height = getHeight() / numRows;
+		for (int i = 0; i < grid.length; i++) {
+			for (int j = 0; j < grid[0].length; j++) {
+				grid[i][j].draw(width, height);
+			}
+		}
+	}
+	
+	// Draw room names
+	public void drawRoomNames() {
+		for (int i = 0; i < grid.length; i++) {
+			for (int j = 0; j < grid[0].length; j++) {
+				// If the cell is a label cell, draw the room label
+				if (grid[i][j].isLabel()) {
+					
+				}
+			}
+		}
+	}
+	
+	// Walk through players and have them draw themselves
+	public void drawPlayers() {
+		for (Player player : getPlayers()) {
+			player.draw();
+		}
 	}
 
 	// Return the number of rows in the game board
