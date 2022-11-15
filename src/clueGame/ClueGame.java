@@ -11,7 +11,7 @@ public class ClueGame extends JFrame {
 	// Default constructor
 	public ClueGame() {
 		setTitle("Clue Game - CSCI306");
-		setSize(new Dimension(570,650));
+		setSize(new Dimension(650,650));
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); // allow it to close
 		// Create board, cards, and control panel
 		KnownCardsPanel cardPanel = new KnownCardsPanel(board.getHumanPlayer());

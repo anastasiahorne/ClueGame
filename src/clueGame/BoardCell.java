@@ -4,6 +4,7 @@ import java.awt.BasicStroke;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -21,7 +22,8 @@ public class BoardCell {
 	private boolean isOccupied;
 	private boolean isDoorway;
 	private boolean isSecretPassage;
-	
+	private final static int PARTIAL_CELL = 20;
+
 	// Constructor that specifies the row and column and sets all variables to the default
 	public BoardCell(int i, int j) {
 		row = i;
@@ -35,7 +37,7 @@ public class BoardCell {
 		isDoorway = false;
 		isSecretPassage = false;
 	}
-	
+
 	// Each BoardCell can draw itself
 	public void draw(Graphics g, int width, int height) {
 		// Draw a rectangle (X offset: col * width, Y offset: row * height)
@@ -46,19 +48,19 @@ public class BoardCell {
 			g.drawRect(col * width, row * height, width, height);
 		}
 		// Walkways (W)
-		if (getInitial() == 'W') {
+		else if (getInitial() == 'W') {
 			g.setColor(Color.YELLOW);
 			g.fillRect(col * width, row * height, width, height);
 			g.setColor(Color.BLACK);
 			g.drawRect(col * width, row * height, width, height);
-			if (isDoorway) {
-				g.setColor(Color.BLUE);
-				Graphics2D g2D= (Graphics2D) g;
-				//extracted method, for doors
-			drawDoorLine(g, width, height, g2D);
-			//reset the line width to 1, so our black lines are not super thick
-			g2D.setStroke(new BasicStroke(1));
-			}
+			//if (isDoorway) {
+			//	g.setColor(Color.BLUE);
+			//	Graphics2D g2D = (Graphics2D) g;
+			//	//extracted method, for doors
+			//	drawDoorLine(g, width, height, g2D);
+			//	//reset the line width to 1, so our black lines are not super thick
+			//	g2D.setStroke(new BasicStroke(1));
+			//}
 		}
 		// Rooms (Other)
 		else {
@@ -67,25 +69,37 @@ public class BoardCell {
 			g.drawRect(col * width, row * height, width, height);
 		}
 	}
-//method to draw the blue lines that represent the door
+	//method to draw the blue lines that represent the door
 	public void drawDoorLine(Graphics g, int width, int height, Graphics2D g2D) {
 		g2D.setStroke(new BasicStroke(4));
+		g.setColor(Color.BLUE);
+		// Width and height of the rectangle / line that will be drawn to represent the door
+		int wSize = width / PARTIAL_CELL;
+		int hSize = height / PARTIAL_CELL;
 		switch (doorDirection) {
 		case LEFT:
-			g.drawLine(col*width, row*height, col*width,row*height+ height);
+			g.drawRect(col * width - wSize, row * height, wSize, height);
+			g.fillRect(col * width - wSize, row * height, wSize, height);
 			break;
 		case RIGHT:
-			g.drawLine(col*width +width,row* height, col*width +width,row*height+ height);
+			g.drawRect((col * width) + width, row * height, wSize, height);
+			g.fillRect((col * width) + width, row * height, wSize, height);
 			break;
 		case DOWN:
-			g.drawLine(col*width, row*height+height, col*width +width, row*height+ height);
+			g.drawRect(col * width, row * height + height, width, hSize);
+			g.fillRect(col * width, row * height + height, width, hSize);
 			break;
 		case UP:
-			g.drawLine(col*width, row*height, col*width +width, row*height);
+			g.drawRect(col * width, row * height - hSize, width, hSize);
+			g.fillRect(col * width, row * height - hSize, width, hSize);
+			break;
+		default:
 			break;
 		}
+		//reset the line width to 1, so our black lines are not super thick
+		g2D.setStroke(new BasicStroke(1));
 	}
-	
+
 	// Getter for isSecretPassage
 	public boolean isSecretPassage() {
 		return isSecretPassage;
@@ -100,12 +114,12 @@ public class BoardCell {
 	public void addAdjacency(BoardCell cell) {
 		adjList.add(cell);
 	}
-	
+
 	// Returns the adjacency list for the cell
 	public Set<BoardCell> getAdjList() {
 		return adjList;
 	}
-	
+
 	// Indicates that a cell is part of a room
 	public void setIsRoom(boolean room) {
 		isRoom = room;
@@ -115,12 +129,12 @@ public class BoardCell {
 	public boolean getIsRoom() {
 		return isRoom;
 	}
-		
+
 	// Setter for indicating a cell is occupied by another player
 	public void setOccupied(boolean occupied) {
 		isOccupied = occupied;
 	}
-		
+
 	// Getter for indicating a cell is occupied by another player
 	public boolean getIsOccupied() {
 		return isOccupied;
@@ -130,12 +144,12 @@ public class BoardCell {
 	public boolean isDoorway() {
 		return isDoorway;
 	}
-	
+
 	// Setter for isDoorway variable
 	public void setIsDoorway(boolean isDoorway) {
 		this.isDoorway = isDoorway;
 	}
-	
+
 	// Set door direction
 	public void setDoorwayAttributes(BoardCell cell, char doorDirection) {
 		cell.setIsDoorway(true);
@@ -159,7 +173,7 @@ public class BoardCell {
 	public DoorDirection getDoorDirection() {
 		return doorDirection;
 	}
-	
+
 	// Setter for doorDirection variable
 	public void setDoorDirection(DoorDirection doorDirection) {
 		this.doorDirection = doorDirection;
@@ -169,7 +183,7 @@ public class BoardCell {
 	public boolean isLabel() {
 		return roomLabel;
 	}
-	
+
 	// Setter for roomLabel variable
 	public void setRoomLabel(boolean roomLabel) {
 		this.roomLabel = roomLabel;
@@ -179,17 +193,17 @@ public class BoardCell {
 	public boolean isRoomCenter() {
 		return roomCenter;
 	}
-	
+
 	// Setter for roomCenter variable
 	public void setRoomCenter(boolean roomCenter) {
 		this.roomCenter = roomCenter;
 	}
-	
+
 	// Getter for secretPassage variable
 	public char getSecretPassage() {
 		return secretPassage;
 	}
-	
+
 	// Setter for secretPassage variable
 	public void setSecretPassage(char secretPassage) {
 		this.secretPassage = secretPassage;
@@ -199,17 +213,17 @@ public class BoardCell {
 	public char getInitial() {
 		return initial;
 	}
-	
+
 	// Setter for initial variable
 	public void setInitial(char initial) {
 		this.initial = initial;
 	}
-	
+
 	@Override
 	public String toString() {
 		return "(" + row + ", " + col + ")";
 	}
-	
+
 	// Set attributes of cells with special characters
 	void setSpecialRoomAttributes(Board board, char initial, char specChar) {
 		setInitial(initial);

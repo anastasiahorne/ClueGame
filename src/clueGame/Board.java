@@ -2,6 +2,7 @@ package clueGame;
 
 import java.awt.Color;
 import java.awt.Graphics;
+import java.awt.Graphics2D;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.util.ArrayList;
@@ -381,6 +382,16 @@ public class Board extends JPanel{
 		for (int i = 0; i < grid.length; i++) {
 			for (int j = 0; j < grid[0].length; j++) {
 				grid[i][j].draw(g, width, height);
+			}
+		}
+		
+		// Draw doors
+		for (int i = 0; i < grid.length; i++) {
+			for (int j = 0; j < grid[0].length; j++) {
+				if (grid[i][j].isDoorway()) {
+					Graphics2D g2D = (Graphics2D) g;
+					grid[i][j].drawDoorLine(g, width, height, g2D);
+				}
 			}
 		}
 		
