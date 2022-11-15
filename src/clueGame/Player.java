@@ -164,4 +164,9 @@ public class Player {
 		}
 		return new Color(r, g, b);
 	}
+
+	@Override
+	public String toString() {
+		return name;
+	}
 }

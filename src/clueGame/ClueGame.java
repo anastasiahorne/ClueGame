@@ -4,6 +4,7 @@ import java.awt.BorderLayout;
 import java.awt.Dimension;
 
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 
 public class ClueGame extends JFrame {
 	public static Board board = Board.getInstance();
@@ -26,6 +27,7 @@ public class ClueGame extends JFrame {
 		board.setConfigFiles("ClueLayout.csv", "ClueSetup.txt");
 		board.initialize();
 		board.deal();
+		/*
 		HumanPlayer human = board.getHumanPlayer();
 		// Mark all cards as seen for testing
 		for (Card c : board.getPlayerCards()) {
@@ -43,8 +45,10 @@ public class ClueGame extends JFrame {
 				human.updateSeenRooms(c);
 			}
 		}
+		*/
 		// Create the frame
 		ClueGame gui = new ClueGame();
 		gui.setVisible(true); // make it visible
+		JOptionPane.showMessageDialog(gui, "You are " + board.getHumanPlayer() + ".\nCan you find the solution\nbefore the Computer players?");
 	}
 }
