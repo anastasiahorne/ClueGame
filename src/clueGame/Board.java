@@ -468,6 +468,9 @@ public class Board extends JPanel{
 	public int getRoll() {
 		return roll;
 	}
+	public int getCurrentPlayerIdx() {
+		return currentPlayerIdx;
+	}
 	
 	// Return the number of rows in the game board
 	public int getNumRows() {
