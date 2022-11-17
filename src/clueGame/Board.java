@@ -33,6 +33,7 @@ public class Board extends JPanel{
 	private ArrayList<Card> weaponCards;
 	private ArrayList<Card> roomCards;
 	private int currentPlayerIdx;
+	private int roll;
 
 	/*
 	 * variable and methods used for singleton pattern
@@ -414,7 +415,10 @@ public class Board extends JPanel{
 			player.draw(g, width, height);
 		}
 	}
-	
+	public void setRoll() {
+		Random rand = new Random();
+		 roll= rand.nextInt(6) + 1;
+	}
 	// When the NEXT button is pressed, perform these actions
 	public void next() {
 		// Check if current human player is finished
@@ -424,12 +428,11 @@ public class Board extends JPanel{
 		currentPlayerIdx = (currentPlayerIdx + 1) % getPlayers().size();
 		Player currentPlayer = getPlayers().get(currentPlayerIdx);
 		// Roll the dice
-		Random rand = new Random();
-		int die = rand.nextInt(6) + 1;
+		setRoll();
 		
 		// Calc targets
 		BoardCell currentCell = getCell(currentPlayer.getRow(), currentPlayer.getColumn());
-		calcTargets(currentCell, die);
+		calcTargets(currentCell, getRoll());
 		
 		// Update game control panel
 		repaint();
@@ -460,6 +463,10 @@ public class Board extends JPanel{
 		}
 	}
 
+	public int getRoll() {
+		return roll;
+	}
+	
 	// Return the number of rows in the game board
 	public int getNumRows() {
 		return numRows;
