@@ -432,6 +432,7 @@ public class Board extends JPanel{
 		calcTargets(currentCell, die);
 		
 		// Update game control panel
+		repaint();
 		
 		// If player is HumanPlayer, display targets
 		if (currentPlayer instanceof HumanPlayer) {
@@ -439,7 +440,9 @@ public class Board extends JPanel{
 			for (BoardCell cell : getTargets()) {
 				cell.setTarget(true);
 			}
-			// Flag unfinished???
+			repaint();
+			// Flag unfinished
+			((HumanPlayer) currentPlayer).setFinished(false);
 		}
 		// If player is not human, check if accusation should be made
 		else {
@@ -452,6 +455,7 @@ public class Board extends JPanel{
 			// If in room, make a suggestion
 			if (target.getIsRoom()) {
 				Solution suggestion = ((ComputerPlayer) currentPlayer).createSuggestion();
+				handleSuggestion(suggestion.getPerson(), suggestion.getWeapon(), suggestion.getRoom(), currentPlayer);
 			}
 		}
 	}
