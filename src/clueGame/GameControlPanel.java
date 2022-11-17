@@ -20,6 +20,7 @@ public class GameControlPanel extends JPanel {
 	private JTextField roll;
 	private JButton accusation;
 	private JButton next;
+	private Board board = Board.getInstance();
 	
 	/**
 	 * Constructor for the panel, it does 90% of the work
@@ -151,8 +152,7 @@ public class GameControlPanel extends JPanel {
 	class ButtonListener implements ActionListener {
 		@Override
 		public void actionPerformed(ActionEvent e) {
-			// TODO Auto-generated method stub
-			
+			board.next();
 		}
 	}
 	

@@ -415,10 +415,7 @@ public class Board extends JPanel{
 			player.draw(g, width, height);
 		}
 	}
-	public void setRoll() {
-		Random rand = new Random();
-		 roll= rand.nextInt(6) + 1;
-	}
+	
 	// When the NEXT button is pressed, perform these actions
 	public void next() {
 		Player currentPlayer = getPlayers().get(currentPlayerIdx);
@@ -465,9 +462,18 @@ public class Board extends JPanel{
 		}
 	}
 
+	// Getter for roll
 	public int getRoll() {
 		return roll;
 	}
+	
+	// Setter for roll
+	public void setRoll() {
+		Random rand = new Random();
+		 roll = rand.nextInt(6) + 1;
+	}
+	
+	// Getter for currentPlayerIdx
 	public int getCurrentPlayerIdx() {
 		return currentPlayerIdx;
 	}
