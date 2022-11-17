@@ -2,6 +2,8 @@ package clueGame;
 
 import java.awt.Color;
 import java.awt.GridLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -143,6 +145,15 @@ public class GameControlPanel extends JPanel {
 			break;
 		}
 		return new Color(r, g, b);
+	}
+	
+	// What to do when the user presses a button
+	class ButtonListener implements ActionListener {
+		@Override
+		public void actionPerformed(ActionEvent e) {
+			// TODO Auto-generated method stub
+			
+		}
 	}
 	
 	/**

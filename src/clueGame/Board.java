@@ -411,6 +411,21 @@ public class Board extends JPanel{
 			player.draw(g, width, height);
 		}
 	}
+	
+	// When the NEXT button is pressed, perform these actions
+	public void next() {
+		// Check if current human player is finished
+			// If no, error
+		// Update the current player
+		// Roll the dice
+		// Calc targets
+		// Update game control panel
+		// If player is HumanPlayer, display targets
+			// Flag unfinished???
+		// If player is not human, check if accusation should be made
+			// Move the player
+			// If in room, make a suggestion
+	}
 
 	// Return the number of rows in the game board
 	public int getNumRows() {

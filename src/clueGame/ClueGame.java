@@ -50,5 +50,7 @@ public class ClueGame extends JFrame {
 		ClueGame gui = new ClueGame();
 		gui.setVisible(true); // make it visible
 		JOptionPane.showMessageDialog(gui, "You are " + board.getHumanPlayer() + ".\nCan you find the solution\nbefore the Computer players?");
+		// Process first player's turn
+		// 
 	}
 }
