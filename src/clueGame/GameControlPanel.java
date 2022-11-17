@@ -87,7 +87,7 @@ public class GameControlPanel extends JPanel {
 	}
 	
 	// Setter for turn
-	private void setTurn(Player player, int r) {
+	public void setTurn(Player player, int r) {
 		String name = player.getName();
 		turn.setText(name);
 		turn.setBackground(getColor(player));
@@ -95,12 +95,12 @@ public class GameControlPanel extends JPanel {
 	}
 
 	// Setter for guess
-	private void setGuess(String message) {
+	public void setGuess(String message) {
 		guess.setText(message);
 	}
 	
 	// Setter for result
-	private void setResult(String message) {
+	public void setResult(String message) {
 		result.setText(message);
 	}
 	

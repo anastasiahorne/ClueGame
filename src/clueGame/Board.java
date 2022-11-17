@@ -32,6 +32,7 @@ public class Board extends JPanel{
 	private ArrayList<Card> playerCards;
 	private ArrayList<Card> weaponCards;
 	private ArrayList<Card> roomCards;
+	private int currentPlayerIdx;
 
 	/*
 	 * variable and methods used for singleton pattern
@@ -323,6 +324,8 @@ public class Board extends JPanel{
 			// Increment player index
 			playerNum = (playerNum + 1) % players.size();
 		}
+		// Current player set to the first in the array
+		currentPlayerIdx = 0;
 	}
 
 	public void setSolution() {
@@ -415,13 +418,25 @@ public class Board extends JPanel{
 	// When the NEXT button is pressed, perform these actions
 	public void next() {
 		// Check if current human player is finished
+		
 			// If no, error
 		// Update the current player
+		currentPlayerIdx = (currentPlayerIdx + 1) % getPlayers().size();
+		Player currentPlayer = getPlayers().get(currentPlayerIdx);
 		// Roll the dice
+		Random rand = new Random();
+		int die = rand.nextInt(6) + 1;
+		
 		// Calc targets
+		BoardCell currentCell = getCell(currentPlayer.getRow(), currentPlayer.getColumn());
+		calcTargets(currentCell, die);
+		
 		// Update game control panel
 		// If player is HumanPlayer, display targets
+		if (currentPlayer instanceof HumanPlayer) {
+			// Display targets
 			// Flag unfinished???
+		}
 		// If player is not human, check if accusation should be made
 			// Move the player
 			// If in room, make a suggestion
