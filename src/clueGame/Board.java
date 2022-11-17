@@ -432,14 +432,28 @@ public class Board extends JPanel{
 		calcTargets(currentCell, die);
 		
 		// Update game control panel
+		
 		// If player is HumanPlayer, display targets
 		if (currentPlayer instanceof HumanPlayer) {
 			// Display targets
+			for (BoardCell cell : getTargets()) {
+				cell.setTarget(true);
+			}
 			// Flag unfinished???
 		}
 		// If player is not human, check if accusation should be made
+		else {
+			// Should accusation be made?
 			// Move the player
+			BoardCell target = ((ComputerPlayer) currentPlayer).selectAMoveTarget(targets);
+			int row = target.getRow();
+			int col = target.getCol();
+			currentPlayer.setLocation(row, col);
 			// If in room, make a suggestion
+			if (target.getIsRoom()) {
+				Solution suggestion = ((ComputerPlayer) currentPlayer).createSuggestion();
+			}
+		}
 	}
 
 	// Return the number of rows in the game board

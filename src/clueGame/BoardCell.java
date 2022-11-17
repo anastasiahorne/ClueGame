@@ -22,6 +22,7 @@ public class BoardCell {
 	private boolean isOccupied;
 	private boolean isDoorway;
 	private boolean isSecretPassage;
+	private boolean isTarget;
 	private final static int PARTIAL_CELL = 20;
 
 	// Constructor that specifies the row and column and sets all variables to the default
@@ -217,6 +218,21 @@ public class BoardCell {
 	// Setter for initial variable
 	public void setInitial(char initial) {
 		this.initial = initial;
+	}
+
+	// Setter for isTarget
+	public void setTarget(boolean isTarget) {
+		this.isTarget = isTarget;
+	}
+
+	// Getter for int row
+	public int getRow() {
+		return row;
+	}
+
+	// Getter for int col
+	public int getCol() {
+		return col;
 	}
 
 	@Override
