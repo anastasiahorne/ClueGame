@@ -69,6 +69,10 @@ public class BoardCell {
 			g.fillRect(col * width, row * height, width, height);
 			g.drawRect(col * width, row * height, width, height);
 		}
+		if (isTarget()) {
+			g.setColor(Color.CYAN);
+			g.fillRect(col * width, row * height, width, height);
+		}
 	}
 	//method to draw the blue lines that represent the door
 	public void drawDoorLine(Graphics g, int width, int height, Graphics2D g2D) {
@@ -223,6 +227,11 @@ public class BoardCell {
 	// Setter for isTarget
 	public void setTarget(boolean isTarget) {
 		this.isTarget = isTarget;
+	}
+
+	// Getter for isTarget
+	public boolean isTarget() {
+		return isTarget;
 	}
 
 	// Getter for int row

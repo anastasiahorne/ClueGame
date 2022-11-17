@@ -421,12 +421,14 @@ public class Board extends JPanel{
 	}
 	// When the NEXT button is pressed, perform these actions
 	public void next() {
-		// Check if current human player is finished
-		
-			// If no, error
+		Player currentPlayer = getPlayers().get(currentPlayerIdx);
+		// If current player is human and is not finished, error
+		if (!(currentPlayer instanceof HumanPlayer) && !((HumanPlayer) currentPlayer).isFinished()) {
+			
+		}
 		// Update the current player
 		currentPlayerIdx = (currentPlayerIdx + 1) % getPlayers().size();
-		Player currentPlayer = getPlayers().get(currentPlayerIdx);
+		currentPlayer = getPlayers().get(currentPlayerIdx);
 		// Roll the dice
 		setRoll();
 		
