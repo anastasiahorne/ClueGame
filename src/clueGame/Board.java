@@ -487,18 +487,20 @@ public class Board extends JPanel{
 			// Get the cell where the click occurred
 			int i = y /(getHeight()/ board.getNumRows());
 			int j = x /(getWidth()/ board.getNumColumns());
-			//set this clicked component as a boardcell
-			BoardCell clickCell= new BoardCell(i,j);
 			
 			System.out.println("x: " + x);
 			System.out.println("y: " + y);
 			System.out.println("i: " + i);
 			System.out.println("j: " + j);
-			System.out.println(clickCell);
 			
 			// If cell is not a target, error
-			//FIXME target.contains is only returning false
-			if(targets.contains(clickCell) && (getPlayers().get(currentPlayerIdx) == board.getHumanPlayer())) {
+			boolean validTarget=false;
+			for (BoardCell cell :targets) {
+				if (cell.getCol()==j && cell.getRow()==i) {
+					validTarget=true;
+				}
+			}
+			if(validTarget && (getPlayers().get(currentPlayerIdx) == board.getHumanPlayer())) {
 			// Move the player
 			board.getHumanPlayer().move(i, j);
 			
