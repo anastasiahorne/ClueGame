@@ -13,6 +13,7 @@ import java.util.Random;
 import java.util.Scanner;
 import java.util.Set;
 
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
 public class Board extends JPanel{
@@ -421,7 +422,7 @@ public class Board extends JPanel{
 		Player currentPlayer = getPlayers().get(currentPlayerIdx);
 		// If current player is human and is not finished, error
 		if (!(currentPlayer instanceof HumanPlayer) && !((HumanPlayer) currentPlayer).isFinished()) {
-			
+			JOptionPane.showMessageDialog(null, "Turn must be finished before\nthe next player can have a turn.");
 		}
 		// Update the current player
 		currentPlayerIdx = (currentPlayerIdx + 1) % getPlayers().size();

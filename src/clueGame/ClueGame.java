@@ -2,12 +2,16 @@ package clueGame;
 
 import java.awt.BorderLayout;
 import java.awt.Dimension;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.util.Random;
 
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 
 public class ClueGame extends JFrame {
 	public static Board board = Board.getInstance();
+	private GameControlPanel controlPanel = new GameControlPanel();
 	
 	// Default constructor
 	public ClueGame() {
@@ -18,9 +22,20 @@ public class ClueGame extends JFrame {
 		KnownCardsPanel cardPanel = new KnownCardsPanel(board.getHumanPlayer());
 		add(cardPanel, BorderLayout.EAST);
 		add(board, BorderLayout.CENTER);
-		GameControlPanel controlPanel = new GameControlPanel();
 		controlPanel.setTurn(board.getPlayers().get(board.getCurrentPlayerIdx()), board.getRoll());
 		add(controlPanel, BorderLayout.SOUTH);
+	}
+
+	public GameControlPanel getControlPanel() {
+		return controlPanel;
+	}
+
+	// What to do when the user presses a button
+	class ButtonListener implements ActionListener {
+		@Override
+		public void actionPerformed(ActionEvent e) {
+			board.next();
+		}
 	}
 	
 	public static void main(String[] args) {
@@ -28,30 +43,23 @@ public class ClueGame extends JFrame {
 		board.setConfigFiles("ClueLayout.csv", "ClueSetup.txt");
 		board.initialize();
 		board.deal();
-		/*
-		HumanPlayer human = board.getHumanPlayer();
-		// Mark all cards as seen for testing
-		for (Card c : board.getPlayerCards()) {
-			if (!human.getHand().contains(c) && (!board.getSolution().getPerson().getCardName().equals(c.getCardName()))) {
-				human.updateSeenPeople(c);
-			}
-		}
-		for (Card c : board.getWeaponCards()) {
-			if (!human.getHand().contains(c) && (!board.getSolution().getWeapon().getCardName().equals(c.getCardName()))) {
-				human.updateSeenWeapons(c);
-			}
-		}
-		for (Card c : board.getRoomCards()) {
-			if (!human.getHand().contains(c) && (!board.getSolution().getRoom().getCardName().equals(c.getCardName()))) {
-				human.updateSeenRooms(c);
-			}
-		}
-		*/
+		
 		// Create the frame
 		ClueGame gui = new ClueGame();
 		gui.setVisible(true); // make it visible
 		JOptionPane.showMessageDialog(gui, "You are " + board.getHumanPlayer() + ".\nCan you find the solution\nbefore the Computer players?");
 		// Process first player's turn
-		// 
+		Player firstPlayer = board.getPlayers().get(board.getCurrentPlayerIdx());
+		Random rand = new Random();
+		int die = rand.nextInt(6) + 1;
+		int row = firstPlayer.getRow();
+		int col = firstPlayer.getColumn();
+		// Get targets for player
+		board.calcTargets(board.getCell(row, col), die);
+		for (BoardCell cell : board.getTargets()) {
+			cell.setTarget(true);
+		}
+		gui.getControlPanel().setTurn(firstPlayer, die);
+		gui.repaint();
 	}
 }

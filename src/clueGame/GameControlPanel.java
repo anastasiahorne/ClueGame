@@ -148,14 +148,6 @@ public class GameControlPanel extends JPanel {
 		return new Color(r, g, b);
 	}
 	
-	// What to do when the user presses a button
-	class ButtonListener implements ActionListener {
-		@Override
-		public void actionPerformed(ActionEvent e) {
-			board.next();
-		}
-	}
-	
 	/**
 	 * Main to test the panel
 	 * 
