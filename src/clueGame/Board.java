@@ -482,9 +482,9 @@ public class Board extends JPanel{
 			int x = e.getX();
 			int y = e.getY();
 			// Get the cell where the click occurred
-			int i = y / board.getNumRows() + 1;
+			int i = y /(getHeight()/ board.getNumRows());
 			// FIXME player does not always end up in clicked cell
-			int j = x / board.getNumColumns() + 1;
+			int j = x /(getWidth()/ board.getNumColumns());
 			
 			System.out.println("x: " + x);
 			System.out.println("y: " + y);
