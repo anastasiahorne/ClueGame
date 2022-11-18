@@ -14,6 +14,7 @@ public class Player {
 	protected ArrayList<Card> seenPeople;
 	protected ArrayList<Card> seenWeapons;
 	protected ArrayList<Card> seenRooms;
+	private boolean isFinished;
 
 	// Constructor
 	public Player(String name, String color, int row, int column) {

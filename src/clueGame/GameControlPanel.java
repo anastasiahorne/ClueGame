@@ -31,6 +31,9 @@ public class GameControlPanel extends JPanel {
 		JPanel bottomPanel = createBottomPanel();
 		add(topPanel);
 		add(bottomPanel);
+		// Add button listener
+		ButtonListener listener = new ButtonListener();
+		next.addActionListener(listener);
 	}
 
 	private JPanel createTopPanel() {
@@ -146,6 +149,14 @@ public class GameControlPanel extends JPanel {
 			break;
 		}
 		return new Color(r, g, b);
+	}
+
+	// What to do when the user presses a button
+	class ButtonListener implements ActionListener {
+		@Override
+		public void actionPerformed(ActionEvent e) {
+			board.next();
+		}
 	}
 	
 	/**

@@ -29,14 +29,6 @@ public class ClueGame extends JFrame {
 	public GameControlPanel getControlPanel() {
 		return controlPanel;
 	}
-
-	// What to do when the user presses a button
-	class ButtonListener implements ActionListener {
-		@Override
-		public void actionPerformed(ActionEvent e) {
-			board.next();
-		}
-	}
 	
 	public static void main(String[] args) {
 		Board board = Board.getInstance();

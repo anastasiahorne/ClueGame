@@ -37,6 +37,8 @@ public class Board extends JPanel{
 	private ArrayList<Card> roomCards;
 	private int currentPlayerIdx;
 	private int roll;
+	private int width;
+	private int height;
 
 	/*
 	 * variable and methods used for singleton pattern
@@ -70,6 +72,9 @@ public class Board extends JPanel{
 
 		// Calculate adjacencies for each cell
 		calculateAdjacencies();
+		
+		// Add MouseListener
+		addMouseListener(new CellSelector());
 	}
 
 	public void setConfigFiles(String layoutConfigFile,String setupConfigFile) {
@@ -384,8 +389,8 @@ public class Board extends JPanel{
 	public void paintComponent(Graphics g) {
 		super.paintComponent(g);
 		// Get the size of the panel to get the height and width of each cell
-		int width = getWidth() / numColumns;
-		int height = getHeight() / numRows;
+		width = getWidth() / numColumns;
+		height = getHeight() / numRows;
 		for (int i = 0; i < grid.length; i++) {
 			for (int j = 0; j < grid[0].length; j++) {
 				grid[i][j].draw(g, width, height);
@@ -421,10 +426,13 @@ public class Board extends JPanel{
 	
 	// When the NEXT button is pressed, perform these actions
 	public void next() {
+		System.out.println("NEXT");
 		Player currentPlayer = getPlayers().get(currentPlayerIdx);
 		// If current player is human and is not finished, error
-		if (!(currentPlayer instanceof HumanPlayer) && !((HumanPlayer) currentPlayer).isFinished()) {
-			JOptionPane.showMessageDialog(null, "Turn must be finished before\nthe next player can have a turn.");
+		if (currentPlayer instanceof HumanPlayer) {
+			if (!((HumanPlayer) currentPlayer).isFinished()) {
+				JOptionPane.showMessageDialog(null, "Turn must be finished before\nthe next player can have a turn.");
+			}
 		}
 		// Update the current player
 		currentPlayerIdx = (currentPlayerIdx + 1) % getPlayers().size();
@@ -445,9 +453,9 @@ public class Board extends JPanel{
 			for (BoardCell cell : getTargets()) {
 				cell.setTarget(true);
 			}
-			repaint();
 			// Flag unfinished
 			((HumanPlayer) currentPlayer).setFinished(false);
+			repaint();
 		}
 		// If player is not human, check if accusation should be made
 		else {
@@ -465,38 +473,44 @@ public class Board extends JPanel{
 		}
 	}
 	
-	class ClickListener implements MouseListener {
-
+	class CellSelector implements MouseListener {
+		private Board board = Board.getInstance();
+		
 		@Override
 		public void mouseClicked(MouseEvent e) {
-			// TODO Auto-generated method stub
+			// Find the x and y positions of where the user clicked
+			int x = e.getX();
+			int y = e.getY();
+			// Get the cell where the click occurred
+			int i = y / board.getNumRows() + 1;
+			// FIXME player does not always end up in clicked cell
+			int j = x / board.getNumColumns() + 1;
 			
+			System.out.println("x: " + x);
+			System.out.println("y: " + y);
+			System.out.println("i: " + i);
+			System.out.println("j: " + j);
+			
+			// If cell is not a target, error
+			
+			// Move the player
+			board.getHumanPlayer().move(i, j);
+			
+			// Stop displaying targets
+			for (BoardCell cell : board.getTargets()) {
+				cell.setTarget(false);
+			}
+			repaint(); // MUST CALL REPAINT
 		}
 
 		@Override
-		public void mousePressed(MouseEvent e) {
-			// TODO Auto-generated method stub
-			
-		}
-
+		public void mousePressed(MouseEvent e) {}
 		@Override
-		public void mouseReleased(MouseEvent e) {
-			// TODO Auto-generated method stub
-			
-		}
-
+		public void mouseReleased(MouseEvent e) {}
 		@Override
-		public void mouseEntered(MouseEvent e) {
-			// TODO Auto-generated method stub
-			
-		}
-
+		public void mouseEntered(MouseEvent e) {}
 		@Override
-		public void mouseExited(MouseEvent e) {
-			// TODO Auto-generated method stub
-			
-		}
-		
+		public void mouseExited(MouseEvent e) {}
 	}
 
 	// Getter for roll
