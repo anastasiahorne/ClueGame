@@ -432,6 +432,7 @@ public class Board extends JPanel{
 		if (currentPlayer instanceof HumanPlayer) {
 			if (!((HumanPlayer) currentPlayer).isFinished()) {
 				JOptionPane.showMessageDialog(null, "Turn must be finished before\nthe next player can have a turn.");
+				return;
 			}
 		}
 		// Update the current player
