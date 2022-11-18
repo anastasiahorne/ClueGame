@@ -72,6 +72,8 @@ public class BoardCell {
 		if (isTarget()) {
 			g.setColor(Color.CYAN);
 			g.fillRect(col * width, row * height, width, height);
+			g.setColor(Color.BLACK);
+			g.drawRect(col * width, row * height, width, height);
 		}
 	}
 	//method to draw the blue lines that represent the door
