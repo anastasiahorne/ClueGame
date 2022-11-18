@@ -483,16 +483,18 @@ public class Board extends JPanel{
 			int y = e.getY();
 			// Get the cell where the click occurred
 			int i = y /(getHeight()/ board.getNumRows());
-			// FIXME player does not always end up in clicked cell
 			int j = x /(getWidth()/ board.getNumColumns());
+			//set this clicked component as a boardcell
+			BoardCell clickCell= new BoardCell(i,j);
 			
 			System.out.println("x: " + x);
 			System.out.println("y: " + y);
 			System.out.println("i: " + i);
 			System.out.println("j: " + j);
+			System.out.println(clickCell);
 			
 			// If cell is not a target, error
-			
+			if(targets.contains(clickCell) && (getPlayers().get(currentPlayerIdx) == board.getHumanPlayer())) {
 			// Move the player
 			board.getHumanPlayer().move(i, j);
 			
@@ -501,6 +503,13 @@ public class Board extends JPanel{
 				cell.setTarget(false);
 			}
 			repaint(); // MUST CALL REPAINT
+			}
+			else if (!(getPlayers().get(currentPlayerIdx) == board.getHumanPlayer())) {
+				JOptionPane.showMessageDialog(null, "Patience you must have my young Padawan -Yoda, it is not your turn.");
+			}
+			else {
+				JOptionPane.showMessageDialog(null, "Invalid location selected.");
+			}
 		}
 
 		@Override
