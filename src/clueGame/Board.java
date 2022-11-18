@@ -72,7 +72,7 @@ public class Board extends JPanel{
 
 		// Calculate adjacencies for each cell
 		calculateAdjacencies();
-		
+
 		// Add MouseListener
 		addMouseListener(new CellSelector());
 	}
@@ -385,7 +385,7 @@ public class Board extends JPanel{
 		// If no player can disprove, return null
 		return null;
 	}
-	
+
 	public void paintComponent(Graphics g) {
 		super.paintComponent(g);
 		// Get the size of the panel to get the height and width of each cell
@@ -396,7 +396,7 @@ public class Board extends JPanel{
 				grid[i][j].draw(g, width, height);
 			}
 		}
-		
+
 		// Draw doors
 		for (int i = 0; i < grid.length; i++) {
 			for (int j = 0; j < grid[0].length; j++) {
@@ -406,7 +406,7 @@ public class Board extends JPanel{
 				}
 			}
 		}
-		
+
 		// Draw room names
 		for (int i = 0; i < grid.length; i++) {
 			for (int j = 0; j < grid[0].length; j++) {
@@ -417,16 +417,15 @@ public class Board extends JPanel{
 				}
 			}
 		}
-		
+
 		// Walk through players and have them draw themselves
 		for (Player player : getPlayers()) {
 			player.draw(g, width, height);
 		}
 	}
-	
+
 	// When the NEXT button is pressed, perform these actions
 	public void next() {
-		System.out.println("NEXT");
 		Player currentPlayer = getPlayers().get(currentPlayerIdx);
 		// If current player is human and is not finished, error
 		if (currentPlayer instanceof HumanPlayer) {
@@ -440,16 +439,17 @@ public class Board extends JPanel{
 		currentPlayer = getPlayers().get(currentPlayerIdx);
 		// Roll the dice
 		setRoll();
-		
+
 		// Calc targets
 		BoardCell currentCell = getCell(currentPlayer.getRow(), currentPlayer.getColumn());
 		calcTargets(currentCell, getRoll());
-		
+
 		// Update game control panel
 		repaint();
-		
+
 		// If player is HumanPlayer, display targets
 		if (currentPlayer instanceof HumanPlayer) {
+			((HumanPlayer) currentPlayer).setMoved(false);
 			// Display targets
 			for (BoardCell cell : getTargets()) {
 				cell.setTarget(true);
@@ -473,10 +473,10 @@ public class Board extends JPanel{
 			}
 		}
 	}
-	
+
 	class CellSelector implements MouseListener {
 		private Board board = Board.getInstance();
-		
+
 		/**
 		 *
 		 */
@@ -486,31 +486,27 @@ public class Board extends JPanel{
 			int x = e.getX();
 			int y = e.getY();
 			// Get the cell where the click occurred
-			int i = y /(getHeight()/ board.getNumRows());
-			int j = x /(getWidth()/ board.getNumColumns());
-			
-			System.out.println("x: " + x);
-			System.out.println("y: " + y);
-			System.out.println("i: " + i);
-			System.out.println("j: " + j);
-			
+			int i = y / (getHeight() / board.getNumRows());
+			int j = x / (getWidth() / board.getNumColumns());
+
 			// If cell is not a target, error
-			boolean validTarget=false;
-			for (BoardCell cell :targets) {
-				if (cell.getCol()==j && cell.getRow()==i) {
-					validTarget=true;
+			boolean validTarget = false;
+			for (BoardCell cell : targets) {
+				if (cell.getCol() == j && cell.getRow() == i) {
+					validTarget = true;
 				}
 			}
-			if(validTarget && (getPlayers().get(currentPlayerIdx) == board.getHumanPlayer())) {
-			// Move the player
-			board.getHumanPlayer().move(i, j);
-			
-			// Stop displaying targets
-			for (BoardCell cell : board.getTargets()) {
-				cell.setTarget(false);
-			}
-			repaint(); // MUST CALL REPAINT
-			return;
+			if(validTarget && (getPlayers().get(currentPlayerIdx) == board.getHumanPlayer()) && !getHumanPlayer().isMoved()) {
+				// Move the player
+				board.getHumanPlayer().move(i, j);
+				board.getHumanPlayer().setMoved(true);
+
+				// Stop displaying targets
+				for (BoardCell cell : board.getTargets()) {
+					cell.setTarget(false);
+				}
+				repaint(); // MUST CALL REPAINT
+				return;
 			}
 			else if (!(getPlayers().get(currentPlayerIdx) == board.getHumanPlayer())) {
 				JOptionPane.showMessageDialog(null, "Patience you must have my young Padawan -Yoda, it is not your turn.");
@@ -534,18 +530,18 @@ public class Board extends JPanel{
 	public int getRoll() {
 		return roll;
 	}
-	
+
 	// Setter for roll
 	public void setRoll() {
 		Random rand = new Random();
-		 roll = rand.nextInt(6) + 1;
+		roll = rand.nextInt(6) + 1;
 	}
-	
+
 	// Getter for currentPlayerIdx
 	public int getCurrentPlayerIdx() {
 		return currentPlayerIdx;
 	}
-	
+
 	// Return the number of rows in the game board
 	public int getNumRows() {
 		return numRows;

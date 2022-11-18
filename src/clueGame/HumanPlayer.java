@@ -3,10 +3,12 @@ package clueGame;
 public class HumanPlayer extends Player{
 	private Board board = Board.getInstance();
 	private boolean isFinished;
+	private boolean moved;
 	
 	public HumanPlayer(String name, String color, int row, int column) {
 		super(name, color, row, column);
 		isFinished = false;
+		moved = false;
 	}
 	
 	public void move(int newRow, int newCol) {
@@ -28,5 +30,13 @@ public class HumanPlayer extends Player{
 
 	public void setFinished(boolean isFinished) {
 		this.isFinished = isFinished;
+	}
+
+	public boolean isMoved() {
+		return moved;
+	}
+
+	public void setMoved(boolean moved) {
+		this.moved = moved;
 	}
 }
