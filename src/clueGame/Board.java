@@ -476,6 +476,9 @@ public class Board extends JPanel{
 	class CellSelector implements MouseListener {
 		private Board board = Board.getInstance();
 		
+		/**
+		 *
+		 */
 		@Override
 		public void mouseClicked(MouseEvent e) {
 			// Find the x and y positions of where the user clicked
@@ -494,6 +497,7 @@ public class Board extends JPanel{
 			System.out.println(clickCell);
 			
 			// If cell is not a target, error
+			//FIXME target.contains is only returning false
 			if(targets.contains(clickCell) && (getPlayers().get(currentPlayerIdx) == board.getHumanPlayer())) {
 			// Move the player
 			board.getHumanPlayer().move(i, j);
