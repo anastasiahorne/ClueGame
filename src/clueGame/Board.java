@@ -509,6 +509,7 @@ public class Board extends JPanel{
 				cell.setTarget(false);
 			}
 			repaint(); // MUST CALL REPAINT
+			return;
 			}
 			else if (!(getPlayers().get(currentPlayerIdx) == board.getHumanPlayer())) {
 				JOptionPane.showMessageDialog(null, "Patience you must have my young Padawan -Yoda, it is not your turn.");
