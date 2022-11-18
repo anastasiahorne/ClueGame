@@ -391,6 +391,7 @@ public class Board extends JPanel{
 		// Get the size of the panel to get the height and width of each cell
 		width = getWidth() / numColumns;
 		height = getHeight() / numRows;
+		
 		for (int i = 0; i < grid.length; i++) {
 			for (int j = 0; j < grid[0].length; j++) {
 				grid[i][j].draw(g, width, height);
@@ -453,6 +454,17 @@ public class Board extends JPanel{
 			// Display targets
 			for (BoardCell cell : getTargets()) {
 				cell.setTarget(true);
+				// If a target is a room, mark the whole room as a target
+				if (cell.getIsRoom()) {
+					char initial = cell.getInitial();
+					for (int i = 0; i < grid.length; i++) {
+						for (int j = 0; j < grid[0].length; j++) {
+							if (grid[i][j].getInitial() == initial) {
+								grid[i][j].setTarget(true);
+							}
+						}
+					}
+				}
 			}
 			// Flag unfinished
 			((HumanPlayer) currentPlayer).setFinished(false);
@@ -486,24 +498,35 @@ public class Board extends JPanel{
 			int x = e.getX();
 			int y = e.getY();
 			// Get the cell where the click occurred
-			int i = y / (getHeight() / board.getNumRows());
-			int j = x / (getWidth() / board.getNumColumns());
+			int row = y / (getHeight() / board.getNumRows());
+			int col = x / (getWidth() / board.getNumColumns());
 
 			// If cell is not a target, error
 			boolean validTarget = false;
 			for (BoardCell cell : targets) {
-				if (cell.getCol() == j && cell.getRow() == i) {
+				if (cell.getCol() == col && cell.getRow() == row) {
 					validTarget = true;
+				}
+				// If room is clicked move player to center
+				else if (cell.getIsRoom()) {
+					// If the clicked cell is the same room as the target cell, update
+					if (getCell(row, col).getIsRoom() && (cell.getInitial() == getCell(row, col).getInitial())) {
+						validTarget = true;
+						row = cell.getRow();
+						col = cell.getCol();
+					}
 				}
 			}
 			if(validTarget && (getPlayers().get(currentPlayerIdx) == board.getHumanPlayer()) && !getHumanPlayer().isMoved()) {
 				// Move the player
-				board.getHumanPlayer().move(i, j);
+				board.getHumanPlayer().move(row, col);
 				board.getHumanPlayer().setMoved(true);
 
 				// Stop displaying targets
-				for (BoardCell cell : board.getTargets()) {
-					cell.setTarget(false);
+				for (int i = 0; i < grid.length; i++) {
+					for (int j = 0; j < grid[0].length; j++) {
+						grid[i][j].setTarget(false);
+					}
 				}
 				repaint(); // MUST CALL REPAINT
 				return;
