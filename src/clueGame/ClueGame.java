@@ -52,6 +52,7 @@ public class ClueGame extends JFrame {
 			cell.setTarget(true);
 		}
 		gui.getControlPanel().setTurn(firstPlayer, die);
+		board.setGame(gui);
 		gui.repaint();
 	}
 }

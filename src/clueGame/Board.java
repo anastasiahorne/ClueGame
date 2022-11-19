@@ -39,6 +39,7 @@ public class Board extends JPanel{
 	private int roll;
 	private int width;
 	private int height;
+	private ClueGame game;
 
 	/*
 	 * variable and methods used for singleton pattern
@@ -446,7 +447,8 @@ public class Board extends JPanel{
 		calcTargets(currentCell, getRoll());
 
 		// Update game control panel
-		repaint();
+		game.getControlPanel().setTurn(currentPlayer, roll);
+		game.repaint();
 
 		// If player is HumanPlayer, display targets
 		if (currentPlayer instanceof HumanPlayer) {
@@ -542,7 +544,7 @@ public class Board extends JPanel{
 		@Override
 		public void mousePressed(MouseEvent e) {}
 		@Override
-		public void mouseReleased(MouseEvent e) {}
+		public void mouseReleased(MouseEvent e6) {}
 		@Override
 		public void mouseEntered(MouseEvent e) {}
 		@Override
@@ -653,5 +655,15 @@ public class Board extends JPanel{
 	// Getter for the array of roomCards
 	public ArrayList<Card> getRoomCards() {
 		return roomCards;
+	}
+
+	// Getter for ClueGame
+	public ClueGame getGame() {
+		return game;
+	}
+
+	// Setter for ClueGame
+	public void setGame(ClueGame game) {
+		this.game = game;
 	}
 }
