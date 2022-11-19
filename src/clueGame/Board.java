@@ -487,7 +487,7 @@ public class Board extends JPanel{
 			}
 		}
 	}
-
+//listener for when the user clicks on the board
 	class CellSelector implements MouseListener {
 		private Board board = Board.getInstance();
 
@@ -533,9 +533,12 @@ public class Board extends JPanel{
 				repaint(); // MUST CALL REPAINT
 				return;
 			}
+			//if the player clicks on the board when it is not their turn
 			else if (!(getPlayers().get(currentPlayerIdx) == board.getHumanPlayer())) {
 				JOptionPane.showMessageDialog(null, "Patience you must have my young Padawan -Yoda, it is not your turn.");
 			}
+			
+			//player selects a target that is not an option
 			else {
 				JOptionPane.showMessageDialog(null, "Invalid location selected.");
 			}
