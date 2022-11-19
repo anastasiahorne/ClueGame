@@ -20,10 +20,10 @@ public class HumanPlayer extends Player{
 		// If player is in a room, they can make a suggestion
 		
 		// Human is done
-		board.getHumanPlayer().setFinished(true);
-		
+		board.getHumanPlayer().setFinished(true);	
 	}
 	
+	//error flag to make sure the human finishes their turn before next is processed
 	public boolean isFinished() {
 		return isFinished;
 	}
@@ -32,6 +32,7 @@ public class HumanPlayer extends Player{
 		this.isFinished = isFinished;
 	}
 
+	//ensures the human player can't move twice in one turn
 	public boolean isMoved() {
 		return moved;
 	}

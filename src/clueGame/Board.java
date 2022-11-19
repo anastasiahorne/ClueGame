@@ -518,7 +518,10 @@ public class Board extends JPanel{
 					}
 				}
 			}
-			if(validTarget && (getPlayers().get(currentPlayerIdx) == board.getHumanPlayer()) && !getHumanPlayer().isMoved()) {
+			
+			//if current player is the human player, and they have not moved/clicked on another cell yet, move them
+			Player currPlayer = getPlayers().get(currentPlayerIdx);
+			if(validTarget && (currPlayer == board.getHumanPlayer()) && !getHumanPlayer().isMoved()) { 
 				// Move the player
 				board.getHumanPlayer().move(row, col);
 				board.getHumanPlayer().setMoved(true);
@@ -533,7 +536,7 @@ public class Board extends JPanel{
 				return;
 			}
 			//if the player clicks on the board when it is not their turn
-			else if (!(getPlayers().get(currentPlayerIdx) == board.getHumanPlayer())) {
+			else if (!(currPlayer == board.getHumanPlayer())) {
 				JOptionPane.showMessageDialog(null, "Patience you must have my young Padawan -Yoda, it is not your turn.");
 			}
 			
