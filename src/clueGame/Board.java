@@ -545,7 +545,7 @@ public class Board extends JPanel{
 				JOptionPane.showMessageDialog(null, "Invalid location selected.");
 			}
 		}
-
+		//not used mouse methods
 		@Override
 		public void mousePressed(MouseEvent e) {}
 		@Override
