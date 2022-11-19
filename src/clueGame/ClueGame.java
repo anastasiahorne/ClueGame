@@ -51,6 +51,7 @@ public class ClueGame extends JFrame {
 		for (BoardCell cell : board.getTargets()) {
 			cell.setTarget(true);
 		}
+		// Update GameControlPanel
 		gui.getControlPanel().setTurn(firstPlayer, die);
 		board.setGame(gui);
 		gui.repaint();
