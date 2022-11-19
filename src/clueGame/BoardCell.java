@@ -4,7 +4,6 @@ import java.awt.BasicStroke;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
-import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -54,14 +53,6 @@ public class BoardCell {
 			g.fillRect(col * width, row * height, width, height);
 			g.setColor(Color.BLACK);
 			g.drawRect(col * width, row * height, width, height);
-			//if (isDoorway) {
-			//	g.setColor(Color.BLUE);
-			//	Graphics2D g2D = (Graphics2D) g;
-			//	//extracted method, for doors
-			//	drawDoorLine(g, width, height, g2D);
-			//	//reset the line width to 1, so our black lines are not super thick
-			//	g2D.setStroke(new BasicStroke(1));
-			//}
 		}
 		// Rooms (Other)
 		else {
