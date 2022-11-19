@@ -22,7 +22,7 @@ public class ClueGame extends JFrame {
 		KnownCardsPanel cardPanel = new KnownCardsPanel(board.getHumanPlayer());
 		add(cardPanel, BorderLayout.EAST);
 		add(board, BorderLayout.CENTER);
-		controlPanel.setTurn(board.getPlayers().get(board.getCurrentPlayerIdx()), board.getRoll());
+		getControlPanel().setTurn(board.getPlayers().get(board.getCurrentPlayerIdx()), board.getRoll());
 		add(controlPanel, BorderLayout.SOUTH);
 	}
 
