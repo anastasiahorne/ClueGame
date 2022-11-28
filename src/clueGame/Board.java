@@ -486,7 +486,12 @@ public class Board extends JPanel{
 			}
 		}
 	}
-//listener for when the user clicks on the board
+	
+	public void accuse() {
+		
+	}
+	
+	//listener for when the user clicks on the board
 	class CellSelector implements MouseListener {
 		private Board board = Board.getInstance();
 
