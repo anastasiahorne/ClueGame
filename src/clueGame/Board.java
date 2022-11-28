@@ -488,7 +488,17 @@ public class Board extends JPanel{
 	}
 	
 	public void accuse() {
-		
+		// If it is not the human player's turn error
+		if (getPlayers().get(currentPlayerIdx) instanceof ComputerPlayer) {
+			JOptionPane.showMessageDialog(null, "You cannot make an accusation\nwhen it is not your turn!");
+			return;
+		}
+		// If the player has moved, error because accusations must be made at the start of the turn
+		if (((HumanPlayer) getPlayers().get(currentPlayerIdx)).isMoved()) {
+			JOptionPane.showMessageDialog(null, "You cannot make an accusation\nafter you have moved!");
+			return;
+		}
+		// Else, allow the player to make an accusation
 	}
 	
 	//listener for when the user clicks on the board
