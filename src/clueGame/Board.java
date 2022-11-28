@@ -413,7 +413,7 @@ public class Board extends JPanel{
 			for (int j = 0; j < grid[0].length; j++) {
 				// If the cell is a label cell, draw the room label
 				if (grid[i][j].isLabel()) {
-					g.setColor(Color.PINK);
+					g.setColor(Color.BLUE);
 					g.drawString(getRoom(grid[i][j]).getName(), j * width, i * height);
 				}
 			}
@@ -499,6 +499,7 @@ public class Board extends JPanel{
 			return;
 		}
 		// Else, allow the player to make an accusation
+		Solution accusation = accusation();
 	}
 	
 	//listener for when the user clicks on the board
@@ -548,6 +549,9 @@ public class Board extends JPanel{
 					}
 				}
 				repaint(); // MUST CALL REPAINT
+				
+				// If player is in a room, let them make a suggestion
+				Solution suggestion = suggestion();
 				return;
 			}
 			//if the player clicks on the board when it is not their turn
@@ -564,11 +568,19 @@ public class Board extends JPanel{
 		@Override
 		public void mousePressed(MouseEvent e) {}
 		@Override
-		public void mouseReleased(MouseEvent e6) {}
+		public void mouseReleased(MouseEvent e) {}
 		@Override
 		public void mouseEntered(MouseEvent e) {}
 		@Override
 		public void mouseExited(MouseEvent e) {}
+	}
+	
+	public Solution suggestion() {
+		return solution;
+	}
+	
+	public Solution accusation() {
+		return solution;
 	}
 
 	// Getter for roll

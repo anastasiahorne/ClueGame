@@ -61,7 +61,7 @@ public class BoardCell {
 			g.drawRect(col * width, row * height, width, height);
 		}
 		if (isSecretPassage()) {
-			g.setColor(Color.PINK);
+			g.setColor(Color.BLUE);
 			g.drawString("S", col * width, row * height + (height / 2));
 			g.setColor(Color.BLACK);
 			g.drawRect(col * width, row * height, width, height);
