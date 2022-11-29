@@ -682,10 +682,10 @@ public class Board extends JPanel{
 			public void actionPerformed(ActionEvent e) {
 				Solution accusation = new Solution(rooms.getItemAt(rooms.getSelectedIndex()), people.getItemAt(people.getSelectedIndex()), weapons.getItemAt(weapons.getSelectedIndex()));
 				if (accusation.equals(solution)) {
-					end("won");
+					end(true);
 				}
 				else {
-					end("lost");
+					end(false);
 				}
 				game.repaint();
 				dialog.dispose();
@@ -715,18 +715,18 @@ public class Board extends JPanel{
 	}
 	
 	// End dialog
-	public void end(String status) {
+	public void end(boolean status) {
 		JDialog end = new JDialog(game, "The End!");
-		if (status.equals("lost")) {
+		if (status) {
+			JLabel win = new JLabel("Congratuations, you win!");
+			end.add(win);
+		}
+		else {
 			JLabel lose = new JLabel("Sorry, you lose!\nThe correct answer is\n"
 					+ solution.getPerson() + " with the "
 					+ solution.getWeapon() + " in "
 					+ solution.getRoom());
 			end.add(lose);
-		}
-		else {
-			JLabel win = new JLabel("Congratuations, you win!");
-			end.add(win);
 		}
 		end.setSize(300,300);
 		end.setVisible(true);

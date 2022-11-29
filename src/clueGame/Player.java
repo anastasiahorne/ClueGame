@@ -15,6 +15,7 @@ public class Player {
 	protected ArrayList<Card> seenWeapons;
 	protected ArrayList<Card> seenRooms;
 	private boolean isFinished;
+	private boolean pulled;
 
 	// Constructor
 	public Player(String name, String color, int row, int column) {
@@ -124,6 +125,14 @@ public class Player {
 		return color;
 	}
 	
+	public boolean isPulled() {
+		return pulled;
+	}
+
+	public void setPulled(boolean pulled) {
+		this.pulled = pulled;
+	}
+
 	public Color getRBGColor() {
 		String colorString = getColor();
 		int r = 192;
