@@ -25,6 +25,7 @@ import javax.swing.JDialog;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.JTextField;
 import javax.swing.border.EtchedBorder;
 import javax.swing.border.TitledBorder;
 
@@ -800,17 +801,21 @@ public class Board extends JPanel{
 	public void end(boolean status) {
 		JDialog end = new JDialog(game, "The End!");
 		end.setLayout(new GridLayout(2,0));
+		JLabel result=new JLabel("Result:");
+		end.add(result);
 		if (status) {
 			JLabel win = new JLabel("Congratuations, you win!");
 			end.add(win);
 		}
 		else {
-			JLabel lose = new JLabel("Sorry, you lose!"
+			JTextField  lost= new JTextField();
+			lost.setEditable(false);
+			lost.setText("Sorry, you lose!\n"
 					+ " The correct answer is "
-					+ solution.getPerson() + " with the "
-					+ solution.getWeapon() + " in "
+					+ solution.getPerson() + " with the \n"
+					+ solution.getWeapon() + " in \n"
 					+ solution.getRoom());
-			end.add(lose);
+			end.add(lost);
 		}
 		// Button that closes the entire game
 		JButton ok = new JButton("OK");
