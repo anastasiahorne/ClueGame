@@ -782,6 +782,9 @@ public class Board extends JPanel{
 		 * dialog.add(right);
 		 */
 		dialog.setSize(300,200);
+		roomLabel.setBorder(new TitledBorder(new EtchedBorder()));
+		personLabel.setBorder(new TitledBorder(new EtchedBorder()));
+		weaponLabel.setBorder(new TitledBorder(new EtchedBorder()));
 		dialog.add(roomLabel);
 		dialog.add(rooms);
 		dialog.add(personLabel);
