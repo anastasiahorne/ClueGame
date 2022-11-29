@@ -383,17 +383,17 @@ public class Board extends JPanel{
 		}
 		// Get the index of the next player
 		int nextIdx = (playerIdx + 1) % getPlayers().size();
-		game.getControlPanel().setGuess(person + " with the " + weapon + " in the " + room);
+		game.getControlPanel().setGuess(person + " with the " + weapon + " in " + room);
 		game.repaint();
 		// Check if players can disprove
 		while (nextIdx != playerIdx) {
 			Card disproval = getPlayers().get(nextIdx).disproveSuggestion(person, weapon, room);
 			if (disproval != null) {
 				if (suggester instanceof HumanPlayer) {
-					game.getControlPanel().setResult(getPlayers().get(nextIdx).getName() + " showed you the " + disproval + " card");
+					game.getControlPanel().setResult(disproval.getCardName());
 				}
 				else {
-					game.getControlPanel().setResult(getPlayers().get(nextIdx).getName() + " showed a card to " + suggester);
+					game.getControlPanel().setResult("Suggestion disproved by " + getPlayers().get(nextIdx));
 				}
 				game.repaint();
 				return disproval;
@@ -401,7 +401,7 @@ public class Board extends JPanel{
 			nextIdx = (nextIdx + 1) % getPlayers().size();
 		}
 		// If no player can disprove, return null
-		game.getControlPanel().setResult("No one could disprove!");
+		game.getControlPanel().setResult("No new clue");
 		game.repaint();
 		return null;
 	}
@@ -520,7 +520,7 @@ public class Board extends JPanel{
 			return;
 		}
 		// Else, allow the player to make an accusation
-		Solution accusation = accusation();
+		accusation(getPlayers().get(currentPlayerIdx));
 	}
 	
 	//listener for when the user clicks on the board
@@ -604,11 +604,10 @@ public class Board extends JPanel{
 		for (Card card : getWeaponCards()) {
 			weapons.addItem(card);
 		}
-		ClueGame gui = getGame();
 		int row = getPlayers().get(currentPlayerIdx).getRow();
 		int col = getPlayers().get(currentPlayerIdx).getColumn();
 		Room room = getRoom(getCell(row, col));
-		JDialog dialog = new JDialog(gui, "Make a Suggestion");
+		JDialog dialog = new JDialog(game, "Make a Suggestion");
 		dialog.setLayout(new GridLayout(0,2));
 		JLabel roomLabel = new JLabel("Room");
 		JLabel personLabel = new JLabel("Person");
@@ -656,8 +655,81 @@ public class Board extends JPanel{
 	}
 	
 	// Dialog for getting the accusation from the user
-	public Solution accusation() {
-		return solution;
+	public void accusation(Player player) {
+		JComboBox<Card> people = new JComboBox<Card>();
+		for (Card card : getPlayerCards()) {
+			people.addItem(card);
+		}
+		JComboBox<Card> weapons = new JComboBox<Card>();
+		for (Card card : getWeaponCards()) {
+			weapons.addItem(card);
+		}
+		JComboBox<Card> rooms = new JComboBox<Card>();
+		for (Card card : getRoomCards()) {
+			rooms.addItem(card);
+		}
+		int row = getPlayers().get(currentPlayerIdx).getRow();
+		int col = getPlayers().get(currentPlayerIdx).getColumn();
+		Room room = getRoom(getCell(row, col));
+		JDialog dialog = new JDialog(game, "Make an Accusation");
+		dialog.setLayout(new GridLayout(0,2));
+		JLabel roomLabel = new JLabel("Room");
+		JLabel personLabel = new JLabel("Person");
+		JLabel weaponLabel = new JLabel("Weapon");
+		JButton submit = new JButton("Submit");
+		submit.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				Solution accusation = new Solution(rooms.getItemAt(rooms.getSelectedIndex()), people.getItemAt(people.getSelectedIndex()), weapons.getItemAt(weapons.getSelectedIndex()));
+				if (accusation.equals(solution)) {
+					end("won");
+				}
+				else {
+					end("lost");
+				}
+				game.repaint();
+				dialog.dispose();
+			}
+		});
+		JButton cancel = new JButton("Cancel");
+		cancel.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				dialog.dispose();
+			}
+		});
+		JPanel left = new JPanel();
+		JPanel right = new JPanel();
+		left.add(roomLabel, BorderLayout.CENTER);
+		left.add(personLabel, BorderLayout.SOUTH);
+		left.add(weaponLabel, BorderLayout.SOUTH);
+		left.add(submit, BorderLayout.SOUTH);
+		right.add(rooms, BorderLayout.CENTER);
+		right.add(people, BorderLayout.SOUTH);
+		right.add(weapons, BorderLayout.SOUTH);
+		right.add(cancel, BorderLayout.SOUTH);
+		dialog.add(left);
+		dialog.add(right);
+		dialog.setSize(300,300);
+		dialog.setVisible(true);
+	}
+	
+	// End dialog
+	public void end(String status) {
+		JDialog end = new JDialog(game, "The End!");
+		if (status.equals("lost")) {
+			JLabel lose = new JLabel("Sorry, you lose!\nThe correct answer is\n"
+					+ solution.getPerson() + " with the "
+					+ solution.getWeapon() + " in "
+					+ solution.getRoom());
+			end.add(lose);
+		}
+		else {
+			JLabel win = new JLabel("Congratuations, you win!");
+			end.add(win);
+		}
+		end.setSize(300,300);
+		end.setVisible(true);
 	}
 
 	// Getter for roll
