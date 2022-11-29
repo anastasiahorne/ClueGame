@@ -72,4 +72,15 @@ public class ComputerPlayer extends Player {
 		}
 		return targetList.get(rand.nextInt(targetList.size()));
 	}
+	
+	// Check if the computer player should make an accusation
+	public void shouldAccuse() {
+		Card person = null;
+		Card weapon = null;
+		Card room = null;
+		if ((board.getPlayerCards().size() == getSeenPeople().size()) && (board.getWeaponCards().size() == getSeenWeapons().size()) && (board.getRoomCards().size() == getSeenRooms().size())) {
+			board.computerEnd(true, this);
+		}
+		
+	}
 }

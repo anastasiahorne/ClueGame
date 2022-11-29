@@ -46,7 +46,7 @@ public class KnownCardsPanel extends JPanel {
 		add(knownCards);
 	}
 	
-	private void updatePanels() {
+	public void updatePanels() {
 		updatePanel(peoplePanel, CardType.PERSON);
 		updatePanel(weaponPanel, CardType.WEAPON);
 		updatePanel(roomPanel, CardType.ROOM);

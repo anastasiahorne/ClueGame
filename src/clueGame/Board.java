@@ -411,7 +411,7 @@ public class Board extends JPanel{
 		// Get the size of the panel to get the height and width of each cell
 		width = getWidth() / numColumns;
 		height = getHeight() / numRows;
-		
+
 		for (int i = 0; i < grid.length; i++) {
 			for (int j = 0; j < grid[0].length; j++) {
 				grid[i][j].draw(g, width, height);
@@ -502,7 +502,7 @@ public class Board extends JPanel{
 		// If player is not human, check if accusation should be made
 		else {
 			// Check if accusation should be made
-			
+			((ComputerPlayer) currentPlayer).shouldAccuse();
 			// Check if the player was pulled into the room on the previous turn
 			if (currentPlayer.isPulled()) {
 				targets.add(getCell(currentPlayer.getRow(), currentPlayer.getColumn()));
@@ -522,15 +522,29 @@ public class Board extends JPanel{
 						getCell(p.getRow(), p.getColumn()).setOccupied(false);
 						p.setLocation(row, col);
 						getCell(row, col).setOccupied(true);
-						System.out.println(p.getName() + " moved to " + getCell(row, col));
 						p.setPulled(true);
 					}
 				}
-				handleSuggestion(suggestion.getPerson(), suggestion.getWeapon(), suggestion.getRoom(), currentPlayer);
+				Card disproval = handleSuggestion(suggestion.getPerson(), suggestion.getWeapon(), suggestion.getRoom(), currentPlayer);
+				if (disproval != null) {
+					switch (disproval.getCardType()) {
+					case PERSON:
+						currentPlayer.updateSeenPeople(disproval);
+						break;
+					case WEAPON:
+						currentPlayer.updateSeenWeapons(disproval);
+						break;
+					case ROOM:
+						currentPlayer.updateSeenRooms(disproval);
+						break;
+					default:
+						break;
+					}
+				}
 			}
 		}
 	}
-	
+
 	public void accuse() {
 		// If it is not the human player's turn error
 		if (getPlayers().get(currentPlayerIdx) instanceof ComputerPlayer) {
@@ -545,7 +559,7 @@ public class Board extends JPanel{
 		// Else, allow the player to make an accusation
 		accusation(getPlayers().get(currentPlayerIdx));
 	}
-	
+
 	//listener for when the user clicks on the board
 	class CellSelector implements MouseListener {
 		private Board board = Board.getInstance();
@@ -574,7 +588,7 @@ public class Board extends JPanel{
 					}
 				}
 			}
-			
+
 			//if current player is the human player, and they have not moved/clicked on another cell yet, move them
 			Player currPlayer = getPlayers().get(currentPlayerIdx);
 			if(validTarget && (currPlayer == board.getHumanPlayer()) && !getHumanPlayer().isMoved()) { 
@@ -589,7 +603,7 @@ public class Board extends JPanel{
 					}
 				}
 				repaint(); // MUST CALL REPAINT
-				
+
 				// If player is in a room, let them make a suggestion
 				if (getCell(row, col).getIsRoom()) {
 					suggestion();
@@ -600,7 +614,7 @@ public class Board extends JPanel{
 			else if (!(currPlayer == board.getHumanPlayer())) {
 				JOptionPane.showMessageDialog(null, "Patience you must have my young Padawan -Yoda\n It is not your turn.");
 			}
-			
+
 			//player selects a target that is not an option
 			else {
 				JOptionPane.showMessageDialog(null, "Invalid location selected.");
@@ -616,7 +630,7 @@ public class Board extends JPanel{
 		@Override
 		public void mouseExited(MouseEvent e) {}
 	}
-	
+
 	// Dialog for getting the suggestion from the user
 	public void suggestion() {
 		JComboBox<Card> people = new JComboBox<Card>();
@@ -658,7 +672,23 @@ public class Board extends JPanel{
 						}
 					}
 				}
-				handleSuggestion(people.getItemAt(people.getSelectedIndex()), weapons.getItemAt(weapons.getSelectedIndex()), roomCard, getHumanPlayer());
+				Card disproval = handleSuggestion(people.getItemAt(people.getSelectedIndex()), weapons.getItemAt(weapons.getSelectedIndex()), roomCard, getHumanPlayer());
+				if (disproval != null) {
+					switch (disproval.getCardType()) {
+					case PERSON:
+						getHumanPlayer().updateSeenPeople(disproval);
+						break;
+					case WEAPON:
+						getHumanPlayer().updateSeenWeapons(disproval);
+						break;
+					case ROOM:
+						getHumanPlayer().updateSeenRooms(disproval);
+						break;
+					default:
+						break;
+					}
+				}
+				game.getCardPanel().updatePanels();
 				game.repaint();
 				dialog.dispose();
 			}
@@ -685,7 +715,7 @@ public class Board extends JPanel{
 		dialog.setSize(300,300);
 		dialog.setVisible(true);
 	}
-	
+
 	// Dialog for getting the accusation from the user
 	public void accusation(Player player) {
 		JComboBox<Card> people = new JComboBox<Card>();
@@ -745,12 +775,30 @@ public class Board extends JPanel{
 		dialog.setSize(300,300);
 		dialog.setVisible(true);
 	}
-	
+
 	// End dialog
 	public void end(boolean status) {
 		JDialog end = new JDialog(game, "The End!");
 		if (status) {
 			JLabel win = new JLabel("Congratuations, you win!");
+			end.add(win);
+		}
+		else {
+			JLabel lose = new JLabel("Sorry, you lose!\nThe correct answer is\n"
+					+ solution.getPerson() + " with the "
+					+ solution.getWeapon() + " in "
+					+ solution.getRoom());
+			end.add(lose);
+		}
+		end.setSize(300,300);
+		end.setVisible(true);
+	}
+
+	// End dialog
+	public void computerEnd(boolean status, ComputerPlayer player) {
+		JDialog end = new JDialog(game, "The End!");
+		if (status) {
+			JLabel win = new JLabel("The computer won!");
 			end.add(win);
 		}
 		else {
