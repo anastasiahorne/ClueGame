@@ -1,8 +1,12 @@
 package clueGame;
 
+import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
+import java.awt.GridLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.io.FileNotFoundException;
@@ -14,6 +18,11 @@ import java.util.Map;
 import java.util.Random;
 import java.util.Scanner;
 import java.util.Set;
+
+import javax.swing.JButton;
+import javax.swing.JComboBox;
+import javax.swing.JDialog;
+import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
@@ -374,15 +383,26 @@ public class Board extends JPanel{
 		}
 		// Get the index of the next player
 		int nextIdx = (playerIdx + 1) % getPlayers().size();
+		game.getControlPanel().setGuess(person + " with the " + weapon + " in the " + room);
+		game.repaint();
 		// Check if players can disprove
 		while (nextIdx != playerIdx) {
 			Card disproval = getPlayers().get(nextIdx).disproveSuggestion(person, weapon, room);
 			if (disproval != null) {
+				if (suggester instanceof HumanPlayer) {
+					game.getControlPanel().setResult(getPlayers().get(nextIdx).getName() + " showed you the " + disproval + " card");
+				}
+				else {
+					game.getControlPanel().setResult(getPlayers().get(nextIdx).getName() + " showed a card to " + suggester);
+				}
+				game.repaint();
 				return disproval;
 			}
 			nextIdx = (nextIdx + 1) % getPlayers().size();
 		}
 		// If no player can disprove, return null
+		game.getControlPanel().setResult("No one could disprove!");
+		game.repaint();
 		return null;
 	}
 
@@ -445,7 +465,9 @@ public class Board extends JPanel{
 		BoardCell currentCell = getCell(currentPlayer.getRow(), currentPlayer.getColumn());
 		calcTargets(currentCell, getRoll());
 
-		// Update game control panel
+		// Update panels
+		game.getControlPanel().setGuess("");
+		game.getControlPanel().setResult("");
 		game.getControlPanel().setTurn(currentPlayer, roll);
 		game.repaint();
 
@@ -473,7 +495,6 @@ public class Board extends JPanel{
 		}
 		// If player is not human, check if accusation should be made
 		else {
-			// Should accusation be made?
 			// Move the player
 			BoardCell target = ((ComputerPlayer) currentPlayer).selectAMoveTarget(targets);
 			int row = target.getRow();
@@ -505,10 +526,6 @@ public class Board extends JPanel{
 	//listener for when the user clicks on the board
 	class CellSelector implements MouseListener {
 		private Board board = Board.getInstance();
-
-		/**
-		 *
-		 */
 		@Override
 		public void mouseClicked(MouseEvent e) {
 			// Find the x and y positions of where the user clicked
@@ -551,7 +568,9 @@ public class Board extends JPanel{
 				repaint(); // MUST CALL REPAINT
 				
 				// If player is in a room, let them make a suggestion
-				Solution suggestion = suggestion();
+				if (getCell(row, col).getIsRoom()) {
+					suggestion((HumanPlayer) currPlayer);
+				}
 				return;
 			}
 			//if the player clicks on the board when it is not their turn
@@ -575,10 +594,68 @@ public class Board extends JPanel{
 		public void mouseExited(MouseEvent e) {}
 	}
 	
-	public Solution suggestion() {
-		return solution;
+	// Dialog for getting the suggestion from the user
+	public void suggestion(HumanPlayer player) {
+		JComboBox<Card> people = new JComboBox<Card>();
+		for (Card card : getPlayerCards()) {
+			people.addItem(card);
+		}
+		JComboBox<Card> weapons = new JComboBox<Card>();
+		for (Card card : getWeaponCards()) {
+			weapons.addItem(card);
+		}
+		ClueGame gui = getGame();
+		int row = getPlayers().get(currentPlayerIdx).getRow();
+		int col = getPlayers().get(currentPlayerIdx).getColumn();
+		Room room = getRoom(getCell(row, col));
+		JDialog dialog = new JDialog(gui, "Make a Suggestion");
+		dialog.setLayout(new GridLayout(0,2));
+		JLabel roomLabel = new JLabel("Room");
+		JLabel personLabel = new JLabel("Person");
+		JLabel weaponLabel = new JLabel("Weapon");
+		JLabel currentRoom = new JLabel(room.getName());
+		JButton submit = new JButton("Submit");
+		submit.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				System.out.println(people.getItemAt(people.getSelectedIndex()));
+				System.out.println(weapons.getItemAt(weapons.getSelectedIndex()));
+				Card roomCard = null;
+				for (Card card : getRoomCards()) {
+					if (room.getName() == card.getCardName()) {
+						roomCard = card;
+					}
+				}
+				System.out.println(roomCard);
+				handleSuggestion(people.getItemAt(people.getSelectedIndex()), weapons.getItemAt(weapons.getSelectedIndex()), roomCard, player);
+				game.repaint();
+				dialog.dispose();
+			}
+		});
+		JButton cancel = new JButton("Cancel");
+		cancel.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				dialog.dispose();
+			}
+		});
+		JPanel left = new JPanel();
+		JPanel right = new JPanel();
+		left.add(roomLabel, BorderLayout.CENTER);
+		left.add(personLabel, BorderLayout.SOUTH);
+		left.add(weaponLabel, BorderLayout.SOUTH);
+		left.add(submit, BorderLayout.SOUTH);
+		right.add(currentRoom, BorderLayout.CENTER);
+		right.add(people, BorderLayout.SOUTH);
+		right.add(weapons, BorderLayout.SOUTH);
+		right.add(cancel, BorderLayout.SOUTH);
+		dialog.add(left);
+		dialog.add(right);
+		dialog.setSize(300,300);
+		dialog.setVisible(true);
 	}
 	
+	// Dialog for getting the accusation from the user
 	public Solution accusation() {
 		return solution;
 	}

@@ -9,6 +9,7 @@ import clueGame.Board;
 import clueGame.BoardCell;
 import clueGame.Card;
 import clueGame.CardType;
+import clueGame.ClueGame;
 import clueGame.ComputerPlayer;
 import clueGame.HumanPlayer;
 import clueGame.Player;
@@ -93,6 +94,7 @@ class GameSolutionTest {
 	
 	@Test
 	void testSuggestionHandled() {
+		board.setGame(new ClueGame());
 		HumanPlayer test2 = (HumanPlayer) board.getPlayers().get(0);
 		Card testPerson = new Card ("test2",CardType.PERSON);
 		Card testWeapon = new Card("test2",CardType.WEAPON);

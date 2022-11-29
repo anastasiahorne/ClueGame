@@ -30,7 +30,7 @@ public class GameControlPanel extends JPanel {
 		JPanel bottomPanel = createBottomPanel();
 		add(topPanel);
 		add(bottomPanel);
-		// Add button listener
+		// Add button listeners
 		NextButtonListener nextListener = new NextButtonListener();
 		AccusationButtonListener accusationListener = new AccusationButtonListener();
 		next.addActionListener(nextListener);
@@ -97,16 +97,19 @@ public class GameControlPanel extends JPanel {
 		turn.setText(name);
 		turn.setBackground(getColor(player));
 		roll.setText(String.valueOf(r));
+		repaint();
 	}
 
 	// Setter for guess
 	public void setGuess(String message) {
 		guess.setText(message);
+		repaint();
 	}
 	
 	// Setter for result
 	public void setResult(String message) {
 		result.setText(message);
+		repaint();
 	}
 	
 	// Get the color of the player

@@ -10,6 +10,7 @@ import javax.swing.JOptionPane;
 public class ClueGame extends JFrame {
 	public static Board board = Board.getInstance();
 	private GameControlPanel controlPanel = new GameControlPanel();
+	private KnownCardsPanel cardPanel = new KnownCardsPanel(board.getHumanPlayer());
 	
 	// Default constructor
 	public ClueGame() {
@@ -17,7 +18,6 @@ public class ClueGame extends JFrame {
 		setSize(new Dimension(650,650));
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); // allow it to close
 		// Create board, cards, and control panel
-		KnownCardsPanel cardPanel = new KnownCardsPanel(board.getHumanPlayer());
 		add(cardPanel, BorderLayout.EAST);
 		add(board, BorderLayout.CENTER);
 		getControlPanel().setTurn(board.getPlayers().get(board.getCurrentPlayerIdx()), board.getRoll());
@@ -28,6 +28,10 @@ public class ClueGame extends JFrame {
 		return controlPanel;
 	}
 	
+	public KnownCardsPanel getCardPanel() {
+		return cardPanel;
+	}
+
 	public static void main(String[] args) {
 		Board board = Board.getInstance();
 		board.setConfigFiles("ClueLayout.csv", "ClueSetup.txt");
