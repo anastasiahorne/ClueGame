@@ -393,6 +393,23 @@ public class Board extends JPanel{
 			if (disproval != null) {
 				if (suggester instanceof HumanPlayer) {
 					game.getControlPanel().setResult(disproval.getCardName());
+					switch (disproval.getCardType()) {
+					case PERSON:
+						if (getHumanPlayer().getSeenPeople().contains(disproval)) {
+							game.getControlPanel().setResult("No new clue");
+						}
+						break;
+					case WEAPON:
+						if (getHumanPlayer().getSeenWeapons().contains(disproval)) {
+							game.getControlPanel().setResult("No new clue");
+						}
+						break;
+					case ROOM:
+						if (getHumanPlayer().getSeenRooms().contains(disproval)) {
+							game.getControlPanel().setResult("No new clue");
+						}
+						break;
+					}
 				}
 				else {
 					game.getControlPanel().setResult("Suggestion disproved by " + getPlayers().get(nextIdx));
@@ -779,16 +796,6 @@ public class Board extends JPanel{
 				dialog.dispose();
 			}
 		});
-		JPanel left = new JPanel();
-		JPanel right = new JPanel();
-		/*
-		 * left.add(roomLabel, BorderLayout.CENTER); left.add(personLabel,
-		 * BorderLayout.SOUTH); left.add(weaponLabel, BorderLayout.SOUTH);
-		 * left.add(submit, BorderLayout.SOUTH); right.add(rooms, BorderLayout.CENTER);
-		 * right.add(people, BorderLayout.SOUTH); right.add(weapons,
-		 * BorderLayout.SOUTH); right.add(cancel, BorderLayout.SOUTH); dialog.add(left);
-		 * dialog.add(right);
-		 */
 		dialog.setSize(300,200);
 		roomLabel.setBorder(new TitledBorder(new EtchedBorder()));
 		personLabel.setBorder(new TitledBorder(new EtchedBorder()));
@@ -812,7 +819,8 @@ public class Board extends JPanel{
 			end.add(win);
 		}
 		else {
-			JLabel lose = new JLabel("Sorry, you lose!\nThe correct answer is\n"
+			JLabel lose = new JLabel("Sorry, you lose!"
+					+ " The correct answer is "
 					+ solution.getPerson() + " with the "
 					+ solution.getWeapon() + " in "
 					+ solution.getRoom());
