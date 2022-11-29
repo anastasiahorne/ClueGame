@@ -38,15 +38,21 @@ public class Player {
 
 	// Add card to hand
 	public void updateSeenPeople(Card card) {
-		seenPeople.add(card);
+		if (!getSeenPeople().contains(card)) {
+			seenPeople.add(card);
+		}
 	}
 	// Add card to hand
 	public void updateSeenWeapons(Card card) {
-		seenWeapons.add(card);
+		if (!getSeenWeapons().contains(card)) {
+			seenWeapons.add(card);
+		}
 	}
 	// Add card to hand
 	public void updateSeenRooms(Card card) {
-		seenRooms.add(card);
+		if (!getSeenRooms().contains(card)) {
+			seenRooms.add(card);
+		}
 	}
 	
 	// Draw self

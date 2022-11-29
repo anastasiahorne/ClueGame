@@ -75,9 +75,6 @@ public class ComputerPlayer extends Player {
 	
 	// Check if the computer player should make an accusation
 	public void shouldAccuse() {
-		Card person = null;
-		Card weapon = null;
-		Card room = null;
 		int totalPersonCards = board.getPlayerCards().size();
 		int totalWeaponCards = board.getWeaponCards().size();
 		int totalRoomCards = board.getRoomCards().size();

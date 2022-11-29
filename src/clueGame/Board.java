@@ -695,19 +695,13 @@ public class Board extends JPanel{
 				if (disproval != null) {
 					switch (disproval.getCardType()) {
 					case PERSON:
-						if (!getHumanPlayer().getSeenPeople().contains(disproval)) {
-							getHumanPlayer().updateSeenPeople(disproval);
-						}
+						getHumanPlayer().updateSeenPeople(disproval);
 						break;
 					case WEAPON:
-						if (!getHumanPlayer().getSeenWeapons().contains(disproval)) {
-							getHumanPlayer().updateSeenWeapons(disproval);
-						}
+						getHumanPlayer().updateSeenWeapons(disproval);
 						break;
 					case ROOM:
-						if (!getHumanPlayer().getSeenRooms().contains(disproval)) {
-							getHumanPlayer().updateSeenRooms(disproval);
-						}
+						getHumanPlayer().updateSeenRooms(disproval);
 						break;
 					default:
 						break;
@@ -725,15 +719,6 @@ public class Board extends JPanel{
 				dialog.dispose();
 			}
 		});
-		/*
-		 * JPanel left = new JPanel(); JPanel right = new JPanel(); left.add(roomLabel,
-		 * BorderLayout.CENTER); left.add(personLabel, BorderLayout.SOUTH);
-		 * left.add(weaponLabel, BorderLayout.SOUTH); left.add(submit,
-		 * BorderLayout.SOUTH); right.add(currentRoom, BorderLayout.CENTER);
-		 * right.add(people, BorderLayout.SOUTH); right.add(weapons,
-		 * BorderLayout.SOUTH); right.add(cancel, BorderLayout.SOUTH); dialog.add(left);
-		 * dialog.add(right);
-		 */
 		roomLabel.setBorder(new TitledBorder(new EtchedBorder()));
 		personLabel.setBorder(new TitledBorder(new EtchedBorder()));
 		weaponLabel.setBorder(new TitledBorder(new EtchedBorder()));
