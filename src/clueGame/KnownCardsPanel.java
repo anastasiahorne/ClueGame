@@ -144,7 +144,8 @@ public class KnownCardsPanel extends JPanel {
 		}
 		panel.repaint();
 		knownCards.add(panel);
-		panel.repaint();
+		panel.setVisible(false);
+		panel.setVisible(true);
 	}
 
 	//if there is no card in the hand or seen of a specific type, panel displays none
@@ -153,6 +154,7 @@ public class KnownCardsPanel extends JPanel {
 		none.setEditable(false);
 		none.setText("None");
 		panel.add(none);
+		panel.repaint();
 	}
 	
 	//sets the card's text field, text and color 
@@ -162,6 +164,7 @@ public class KnownCardsPanel extends JPanel {
 		card.setText(c.getCardName());
 		card.setBackground(getColor(c));
 		panel.add(card);
+		panel.repaint();
 	}
 
 	// Get the color of the card

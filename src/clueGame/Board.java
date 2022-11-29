@@ -416,6 +416,8 @@ public class Board extends JPanel{
 				else {
 					game.getControlPanel().setResult("Suggestion disproved by " + getPlayers().get(nextIdx));
 				}
+				game.getCardPanel().updatePanels();
+				game.getCardPanel().repaint();
 				game.repaint();
 				return disproval;
 			}
@@ -490,6 +492,8 @@ public class Board extends JPanel{
 		game.getControlPanel().setGuess("");
 		game.getControlPanel().setResult("");
 		game.getControlPanel().setTurn(currentPlayer, roll);
+		game.getControlPanel().repaint();
+		game.getCardPanel().repaint();
 		game.repaint();
 
 		// If player is HumanPlayer, display targets
@@ -564,6 +568,10 @@ public class Board extends JPanel{
 				}
 			}
 		}
+		game.getControlPanel().repaint();
+		game.getCardPanel().updatePanels();
+		game.getCardPanel().repaint();
+		game.repaint();
 	}
 
 	public void accuse() {
