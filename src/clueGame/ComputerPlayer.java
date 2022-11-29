@@ -78,8 +78,28 @@ public class ComputerPlayer extends Player {
 		Card person = null;
 		Card weapon = null;
 		Card room = null;
-		if ((board.getPlayerCards().size() == getSeenPeople().size()) && (board.getWeaponCards().size() == getSeenWeapons().size()) && (board.getRoomCards().size() == getSeenRooms().size())) {
-			board.computerEnd(true, this);
+		int totalPersonCards = board.getPlayerCards().size();
+		int totalWeaponCards = board.getWeaponCards().size();
+		int totalRoomCards = board.getRoomCards().size();
+		int numPersonCards = getSeenPeople().size();
+		int numWeaponCards = getSeenWeapons().size();
+		int numRoomCards = getSeenRooms().size();
+		// Add cards from hand to the count of that type of card
+		for (Card c : getHand()) {
+			switch (c.getCardType()) {
+			case PERSON:
+				numPersonCards++;
+				break;
+			case WEAPON:
+				numWeaponCards++;
+				break;
+			case ROOM:
+				numRoomCards++;
+				break;
+			}
+		}
+		if ((totalPersonCards == numPersonCards + 1) && (totalWeaponCards == numWeaponCards + 1) && (totalRoomCards == numRoomCards + 1)) {
+			board.computerEnd(this);
 		}
 		
 	}

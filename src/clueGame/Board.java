@@ -842,19 +842,25 @@ public class Board extends JPanel{
 	}
 
 	// End dialog
-	public void computerEnd(boolean status, ComputerPlayer player) {
+	public void computerEnd(ComputerPlayer player) {
 		JDialog end = new JDialog(game, "The End!");
-		if (status) {
-			JLabel win = new JLabel("The computer won!");
-			end.add(win);
-		}
-		else {
-			JLabel lose = new JLabel("Sorry, you lose!\nThe correct answer is\n"
-					+ solution.getPerson() + " with the "
-					+ solution.getWeapon() + " in "
-					+ solution.getRoom());
-			end.add(lose);
-		}
+		JLabel win = new JLabel(player.getName() + " won!");
+		end.add(win);
+		JLabel lose = new JLabel("Sorry, you lose!\nThe correct answer is\n"
+				+ solution.getPerson() + " with the "
+				+ solution.getWeapon() + " in "
+				+ solution.getRoom());
+		end.add(lose);
+		// Button that closes the entire game
+		JButton ok = new JButton("OK");
+		ok.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				end.dispose();
+				game.dispose();
+			}
+		});
+		end.add(ok);
 		end.setSize(300,300);
 		end.setVisible(true);
 	}
