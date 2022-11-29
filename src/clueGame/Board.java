@@ -25,6 +25,8 @@ import javax.swing.JDialog;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.border.EtchedBorder;
+import javax.swing.border.TitledBorder;
 
 public class Board extends JPanel{
 
@@ -709,6 +711,10 @@ public class Board extends JPanel{
 		 * BorderLayout.SOUTH); right.add(cancel, BorderLayout.SOUTH); dialog.add(left);
 		 * dialog.add(right);
 		 */
+		roomLabel.setBorder(new TitledBorder(new EtchedBorder()));
+		personLabel.setBorder(new TitledBorder(new EtchedBorder()));
+		weaponLabel.setBorder(new TitledBorder(new EtchedBorder()));
+		currentRoom.setBorder(new TitledBorder(new EtchedBorder()));
 		dialog.setSize(300,300);
 		dialog.add(roomLabel);
 		dialog.add(currentRoom);
