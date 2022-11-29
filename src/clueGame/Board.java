@@ -474,6 +474,11 @@ public class Board extends JPanel{
 		// If player is HumanPlayer, display targets
 		if (currentPlayer instanceof HumanPlayer) {
 			((HumanPlayer) currentPlayer).setMoved(false);
+			// Check if the player was pulled into the room on the previous turn
+			if (currentPlayer.isPulled()) {
+				targets.add(getCell(currentPlayer.getRow(), currentPlayer.getColumn()));
+				currentPlayer.setPulled(false);
+			}
 			// Display targets
 			for (BoardCell cell : getTargets()) {
 				cell.setTarget(true);
@@ -489,20 +494,38 @@ public class Board extends JPanel{
 					}
 				}
 			}
+			//targets.remove(getCell(currentPlayer.getRow(), currentPlayer.getColumn()));
 			// Flag unfinished
 			((HumanPlayer) currentPlayer).setFinished(false);
 			repaint();
 		}
 		// If player is not human, check if accusation should be made
 		else {
-			// Move the player
+			// Check if accusation should be made
+			
+			// Check if the player was pulled into the room on the previous turn
+			if (currentPlayer.isPulled()) {
+				targets.add(getCell(currentPlayer.getRow(), currentPlayer.getColumn()));
+				currentPlayer.setPulled(false);
+			}
 			BoardCell target = ((ComputerPlayer) currentPlayer).selectAMoveTarget(targets);
+			//targets.remove(getCell(currentPlayer.getRow(), currentPlayer.getColumn()));
 			int row = target.getRow();
 			int col = target.getCol();
+			// Move the player
 			currentPlayer.setLocation(row, col);
 			// If in room, make a suggestion
 			if (target.getIsRoom()) {
 				Solution suggestion = ((ComputerPlayer) currentPlayer).createSuggestion();
+				for (Player p : getPlayers()) {
+					if (suggestion.getPerson().getCardName().equals(p.getName())) {
+						getCell(p.getRow(), p.getColumn()).setOccupied(false);
+						p.setLocation(row, col);
+						getCell(row, col).setOccupied(true);
+						System.out.println(p.getName() + " moved to " + getCell(row, col));
+						p.setPulled(true);
+					}
+				}
 				handleSuggestion(suggestion.getPerson(), suggestion.getWeapon(), suggestion.getRoom(), currentPlayer);
 			}
 		}
@@ -569,7 +592,7 @@ public class Board extends JPanel{
 				
 				// If player is in a room, let them make a suggestion
 				if (getCell(row, col).getIsRoom()) {
-					suggestion((HumanPlayer) currPlayer);
+					suggestion();
 				}
 				return;
 			}
@@ -595,7 +618,7 @@ public class Board extends JPanel{
 	}
 	
 	// Dialog for getting the suggestion from the user
-	public void suggestion(HumanPlayer player) {
+	public void suggestion() {
 		JComboBox<Card> people = new JComboBox<Card>();
 		for (Card card : getPlayerCards()) {
 			people.addItem(card);
@@ -617,16 +640,25 @@ public class Board extends JPanel{
 		submit.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				System.out.println(people.getItemAt(people.getSelectedIndex()));
-				System.out.println(weapons.getItemAt(weapons.getSelectedIndex()));
 				Card roomCard = null;
 				for (Card card : getRoomCards()) {
 					if (room.getName() == card.getCardName()) {
 						roomCard = card;
 					}
 				}
-				System.out.println(roomCard);
-				handleSuggestion(people.getItemAt(people.getSelectedIndex()), weapons.getItemAt(weapons.getSelectedIndex()), roomCard, player);
+				// Move the player from the suggestion to the room if the suggested player is not the suggester
+				if (!people.getItemAt(people.getSelectedIndex()).getCardName().equals(getHumanPlayer().getName())) {
+					for (Player p : getPlayers()) {
+						if (people.getItemAt(people.getSelectedIndex()).getCardName().equals(p.getName())) {
+							getCell(p.getRow(), p.getColumn()).setOccupied(false);
+							p.setLocation(row, col);
+							getCell(row, col).setOccupied(true);
+							System.out.println(p.getName() + " moved to " + getCell(row, col));
+							p.setPulled(true);
+						}
+					}
+				}
+				handleSuggestion(people.getItemAt(people.getSelectedIndex()), weapons.getItemAt(weapons.getSelectedIndex()), roomCard, getHumanPlayer());
 				game.repaint();
 				dialog.dispose();
 			}
