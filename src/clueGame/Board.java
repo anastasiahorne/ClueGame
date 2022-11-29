@@ -678,13 +678,19 @@ public class Board extends JPanel{
 				if (disproval != null) {
 					switch (disproval.getCardType()) {
 					case PERSON:
-						getHumanPlayer().updateSeenPeople(disproval);
+						if (!getHumanPlayer().getSeenPeople().contains(disproval)) {
+							getHumanPlayer().updateSeenPeople(disproval);
+						}
 						break;
 					case WEAPON:
-						getHumanPlayer().updateSeenWeapons(disproval);
+						if (!getHumanPlayer().getSeenWeapons().contains(disproval)) {
+							getHumanPlayer().updateSeenWeapons(disproval);
+						}
 						break;
 					case ROOM:
-						getHumanPlayer().updateSeenRooms(disproval);
+						if (!getHumanPlayer().getSeenRooms().contains(disproval)) {
+							getHumanPlayer().updateSeenRooms(disproval);
+						}
 						break;
 					default:
 						break;
@@ -753,8 +759,10 @@ public class Board extends JPanel{
 		submit.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				Solution accusation = new Solution(rooms.getItemAt(rooms.getSelectedIndex()), people.getItemAt(people.getSelectedIndex()), weapons.getItemAt(weapons.getSelectedIndex()));
-				if (accusation.equals(solution)) {
+				Card p = people.getItemAt(people.getSelectedIndex());
+				Card w = weapons.getItemAt(weapons.getSelectedIndex());
+				Card r = rooms.getItemAt(rooms.getSelectedIndex());
+				if (checkAccusation(p, w, r)) {
 					end(true);
 				}
 				else {
