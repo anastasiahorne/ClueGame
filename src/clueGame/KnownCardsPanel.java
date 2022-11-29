@@ -50,6 +50,7 @@ public class KnownCardsPanel extends JPanel {
 		updatePanel(peoplePanel, CardType.PERSON);
 		updatePanel(weaponPanel, CardType.WEAPON);
 		updatePanel(roomPanel, CardType.ROOM);
+		repaint();
 	}
 	
 	private void updatePanel(JPanel panel, CardType type) {
@@ -141,6 +142,7 @@ public class KnownCardsPanel extends JPanel {
 			}
 			break;
 		}
+		panel.repaint();
 		knownCards.add(panel);
 		panel.repaint();
 	}
