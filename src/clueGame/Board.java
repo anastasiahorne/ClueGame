@@ -814,6 +814,7 @@ public class Board extends JPanel{
 	// End dialog
 	public void end(boolean status) {
 		JDialog end = new JDialog(game, "The End!");
+		end.setLayout(new GridLayout(2,0));
 		if (status) {
 			JLabel win = new JLabel("Congratuations, you win!");
 			end.add(win);
@@ -826,6 +827,16 @@ public class Board extends JPanel{
 					+ solution.getRoom());
 			end.add(lose);
 		}
+		// Button that closes the entire game
+		JButton ok = new JButton("OK");
+		ok.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				end.dispose();
+				game.dispose();
+			}
+		});
+		end.add(ok);
 		end.setSize(300,300);
 		end.setVisible(true);
 	}
