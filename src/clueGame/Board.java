@@ -745,7 +745,7 @@ public class Board extends JPanel{
 		int col = getPlayers().get(currentPlayerIdx).getColumn();
 		Room room = getRoom(getCell(row, col));
 		JDialog dialog = new JDialog(game, "Make an Accusation");
-		dialog.setLayout(new GridLayout(0,2));
+		dialog.setLayout(new GridLayout(4,2));
 		JLabel roomLabel = new JLabel("Room");
 		JLabel personLabel = new JLabel("Person");
 		JLabel weaponLabel = new JLabel("Weapon");
@@ -773,17 +773,23 @@ public class Board extends JPanel{
 		});
 		JPanel left = new JPanel();
 		JPanel right = new JPanel();
-		left.add(roomLabel, BorderLayout.CENTER);
-		left.add(personLabel, BorderLayout.SOUTH);
-		left.add(weaponLabel, BorderLayout.SOUTH);
-		left.add(submit, BorderLayout.SOUTH);
-		right.add(rooms, BorderLayout.CENTER);
-		right.add(people, BorderLayout.SOUTH);
-		right.add(weapons, BorderLayout.SOUTH);
-		right.add(cancel, BorderLayout.SOUTH);
-		dialog.add(left);
-		dialog.add(right);
-		dialog.setSize(300,300);
+		/*
+		 * left.add(roomLabel, BorderLayout.CENTER); left.add(personLabel,
+		 * BorderLayout.SOUTH); left.add(weaponLabel, BorderLayout.SOUTH);
+		 * left.add(submit, BorderLayout.SOUTH); right.add(rooms, BorderLayout.CENTER);
+		 * right.add(people, BorderLayout.SOUTH); right.add(weapons,
+		 * BorderLayout.SOUTH); right.add(cancel, BorderLayout.SOUTH); dialog.add(left);
+		 * dialog.add(right);
+		 */
+		dialog.setSize(300,200);
+		dialog.add(roomLabel);
+		dialog.add(rooms);
+		dialog.add(personLabel);
+		dialog.add(people);
+		dialog.add(weaponLabel);
+		dialog.add(weapons);
+		dialog.add(submit);
+		dialog.add(cancel);
 		dialog.setVisible(true);
 	}
 
