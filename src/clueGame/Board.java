@@ -489,8 +489,8 @@ public class Board extends JPanel{
 		calcTargets(currentCell, getRoll());
 
 		// Update panels
-		game.getControlPanel().setGuess("");
-		game.getControlPanel().setResult("");
+		game.getControlPanel().setGuess("\t");
+		game.getControlPanel().setResult("\t");
 		game.getControlPanel().setTurn(currentPlayer, roll);
 		game.getControlPanel().repaint();
 		game.getCardPanel().repaint();
@@ -569,6 +569,8 @@ public class Board extends JPanel{
 			}
 		}
 		game.getControlPanel().repaint();
+		game.getControlPanel().setVisible(false);
+		game.getControlPanel().setVisible(true);
 		game.getCardPanel().updatePanels();
 		game.getCardPanel().repaint();
 		game.repaint();
@@ -718,6 +720,8 @@ public class Board extends JPanel{
 					}
 				}
 				game.getCardPanel().updatePanels();
+				game.getControlPanel().setVisible(false);
+				game.getControlPanel().setVisible(true);
 				game.repaint();
 				dialog.dispose();
 			}
