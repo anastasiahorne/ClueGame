@@ -734,6 +734,8 @@ public class Board extends JPanel{
 		weaponLabel.setBorder(new TitledBorder(new EtchedBorder()));
 		currentRoom.setBorder(new TitledBorder(new EtchedBorder()));
 		dialog.setSize(300,200);
+		dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
+		dialog.setModal(true);
 		dialog.add(roomLabel);
 		dialog.add(currentRoom);
 		dialog.add(personLabel);
@@ -792,6 +794,7 @@ public class Board extends JPanel{
 			}
 		});
 		dialog.setSize(300,200);
+		dialog.setModal(true);
 		roomLabel.setBorder(new TitledBorder(new EtchedBorder()));
 		personLabel.setBorder(new TitledBorder(new EtchedBorder()));
 		weaponLabel.setBorder(new TitledBorder(new EtchedBorder()));
@@ -809,6 +812,7 @@ public class Board extends JPanel{
 	// End dialog
 	public void end(boolean status) {
 		JDialog end = new JDialog(game, "The End!");
+		end.setModal(true);
 		end.setLayout(new GridLayout(2,0));
 		if (status) {
 			JLabel win = new JLabel("Congratuations, you win!");
@@ -841,6 +845,7 @@ public class Board extends JPanel{
 	// End dialog
 	public void computerEnd(ComputerPlayer player) {
 		JDialog end = new JDialog(game, "The End!");
+		end.setModal(true);
 		JLabel win = new JLabel(player.getName() + " won!");
 		end.add(win);
 		JLabel lose = new JLabel("Sorry, you lose!\nThe correct answer is\n"
