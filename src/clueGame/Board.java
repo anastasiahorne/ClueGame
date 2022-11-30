@@ -398,17 +398,17 @@ public class Board extends JPanel{
 					switch (disproval.getCardType()) {
 					case PERSON:
 						if (getHumanPlayer().getSeenPeople().contains(disproval)) {
-							game.getControlPanel().setResult("No new clue");
+							game.getControlPanel().setResult(disproval.getCardName() + " - No new clue");
 						}
 						break;
 					case WEAPON:
 						if (getHumanPlayer().getSeenWeapons().contains(disproval)) {
-							game.getControlPanel().setResult("No new clue");
+							game.getControlPanel().setResult(disproval.getCardName() + " - No new clue");
 						}
 						break;
 					case ROOM:
 						if (getHumanPlayer().getSeenRooms().contains(disproval)) {
-							game.getControlPanel().setResult("No new clue");
+							game.getControlPanel().setResult(disproval.getCardName() + " - No new clue");
 						}
 						break;
 					}
@@ -698,7 +698,6 @@ public class Board extends JPanel{
 							getCell(p.getRow(), p.getColumn()).setOccupied(false);
 							p.setLocation(row, col);
 							getCell(row, col).setOccupied(true);
-							System.out.println(p.getName() + " moved to " + getCell(row, col));
 							p.setPulled(true);
 						}
 					}
@@ -850,6 +849,7 @@ public class Board extends JPanel{
 	public void computerEnd(ComputerPlayer player) {
 		JDialog end = new JDialog(game, "The End!");
 		end.setModal(true);
+		end.setLayout(new GridLayout());
 		JLabel win = new JLabel(player.getName() + " won!");
 		end.add(win);
 		JLabel lose = new JLabel("Sorry, you lose!\nThe correct answer is\n"
