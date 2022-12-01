@@ -524,7 +524,7 @@ public class Board extends JPanel{
 			((HumanPlayer) currentPlayer).setFinished(false);
 			repaint();
 		}
-		// If player is not human, check if accusation should be made
+		// If player is not human, check if accusation or suggestion should be made
 		else {
 			// Check if accusation should be made
 			((ComputerPlayer) currentPlayer).shouldAccuse();
@@ -551,7 +551,7 @@ public class Board extends JPanel{
 					}
 				}
 				
-				//if a player disproves our suggestion, update our seen cards of that type
+				//if a player disproves computer suggestion, update players seen cards of that type
 				Card disproval = handleSuggestion(suggestion.getPerson(), suggestion.getWeapon(), suggestion.getRoom(), currentPlayer);
 				if (disproval != null) {
 					switch (disproval.getCardType()) {
@@ -719,6 +719,7 @@ public class Board extends JPanel{
 						}
 					}
 				}
+				//if the human player makes a suggestion, and it is disproved, update seen cards
 				Card disproval = handleSuggestion(people.getItemAt(people.getSelectedIndex()), weapons.getItemAt(weapons.getSelectedIndex()), roomCard, getHumanPlayer());
 				if (disproval != null) {
 					switch (disproval.getCardType()) {
@@ -735,6 +736,8 @@ public class Board extends JPanel{
 						break;
 					}
 				}
+				
+				//update our panels, ensure they display new versions without resizing the game window
 				game.getCardPanel().updatePanels();
 				game.getControlPanel().setVisible(false);
 				game.getControlPanel().setVisible(true);
@@ -742,6 +745,8 @@ public class Board extends JPanel{
 				dialog.dispose();
 			}
 		});
+		
+		//allow the player to not make suggestion if they change their mind
 		JButton cancel = new JButton("Cancel");
 		cancel.addActionListener(new ActionListener() {
 			@Override
@@ -749,13 +754,17 @@ public class Board extends JPanel{
 				dialog.dispose();
 			}
 		});
+		
+		//set borders for our labels and current room box
 		roomLabel.setBorder(new TitledBorder(new EtchedBorder()));
 		personLabel.setBorder(new TitledBorder(new EtchedBorder()));
 		weaponLabel.setBorder(new TitledBorder(new EtchedBorder()));
 		currentRoom.setBorder(new TitledBorder(new EtchedBorder()));
+		//size and close option
 		dialog.setSize(300,200);
 		dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
 		dialog.setModal(true);
+		//add our labels and combo boxes to the suggestion window
 		dialog.add(roomLabel);
 		dialog.add(currentRoom);
 		dialog.add(personLabel);
