@@ -26,7 +26,6 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextArea;
-import javax.swing.JTextField;
 import javax.swing.border.EtchedBorder;
 import javax.swing.border.TitledBorder;
 
@@ -395,6 +394,7 @@ public class Board extends JPanel{
 			if (disproval != null) {
 				if (suggester instanceof HumanPlayer) {
 					game.getControlPanel().setResult(disproval.getCardName());
+				//if player can't disprove set message
 					switch (disproval.getCardType()) {
 					case PERSON:
 						if (getHumanPlayer().getSeenPeople().contains(disproval)) {
@@ -416,6 +416,7 @@ public class Board extends JPanel{
 				else {
 					game.getControlPanel().setResult("Suggestion disproved by " + getPlayers().get(nextIdx));
 				}
+				//update panels
 				game.getCardPanel().updatePanels();
 				game.getCardPanel().repaint();
 				game.repaint();
