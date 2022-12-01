@@ -394,21 +394,21 @@ public class Board extends JPanel{
 			if (disproval != null) {
 				if (suggester instanceof HumanPlayer) {
 					game.getControlPanel().setResult(disproval.getCardName());
-				//if player can't disprove set message
+				//if human player already saw a card and they guess something similar, we don't see a new clue
 					switch (disproval.getCardType()) {
 					case PERSON:
 						if (getHumanPlayer().getSeenPeople().contains(disproval)) {
-							game.getControlPanel().setResult(disproval.getCardName() + " - No new clue");
+							noNewClue(disproval);
 						}
 						break;
 					case WEAPON:
 						if (getHumanPlayer().getSeenWeapons().contains(disproval)) {
-							game.getControlPanel().setResult(disproval.getCardName() + " - No new clue");
+							noNewClue(disproval);
 						}
 						break;
 					case ROOM:
 						if (getHumanPlayer().getSeenRooms().contains(disproval)) {
-							game.getControlPanel().setResult(disproval.getCardName() + " - No new clue");
+							noNewClue(disproval);
 						}
 						break;
 					}
@@ -428,6 +428,10 @@ public class Board extends JPanel{
 		game.getControlPanel().setResult("No new clue");
 		game.repaint();
 		return null;
+	}
+	//method to set the guessResult to no new clue
+	public void noNewClue(Card disproval) {
+		game.getControlPanel().setResult(disproval.getCardName() + " - No new clue");
 	}
 
 	public void paintComponent(Graphics g) {
