@@ -853,6 +853,7 @@ public class Board extends JPanel{
 	public void end(boolean status) {
 		JDialog end = new JDialog(game, "The End!");
 		end.setModal(true);
+		end.setUndecorated(true);
 		end.setLayout(new GridLayout(2,0));
 		if (status) {
 			JLabel win = new JLabel("Congratuations, you win!");
@@ -886,7 +887,8 @@ public class Board extends JPanel{
 	public void computerEnd(ComputerPlayer player) {
 		JDialog end = new JDialog(game, "The End!");
 		end.setModal(true);
-		end.setLayout(new GridLayout());
+		end.setUndecorated(true);
+		end.setLayout(new GridLayout(3, 0));
 		JLabel win = new JLabel(player.getName() + " won!");
 		end.add(win);
 		
