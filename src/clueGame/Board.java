@@ -671,17 +671,25 @@ public class Board extends JPanel{
 
 	// Dialog for getting the suggestion from the user
 	public void suggestion() {
+		
+		//set combo box for the possible players
 		JComboBox<Card> people = new JComboBox<Card>();
 		for (Card card : getPlayerCards()) {
 			people.addItem(card);
 		}
+		//set combo box for the possible weapons
 		JComboBox<Card> weapons = new JComboBox<Card>();
 		for (Card card : getWeaponCards()) {
 			weapons.addItem(card);
 		}
+		//no need for room choice, that is decided by what room the player is in
+		
+		//determine the room the suggester is in
 		int row = getPlayers().get(currentPlayerIdx).getRow();
 		int col = getPlayers().get(currentPlayerIdx).getColumn();
 		Room room = getRoom(getCell(row, col));
+		
+		//set up the suggestion window dialog
 		JDialog dialog = new JDialog(game, "Make a Suggestion");
 		dialog.setLayout(new GridLayout(4,2));
 		JLabel roomLabel = new JLabel("Room");
@@ -689,6 +697,8 @@ public class Board extends JPanel{
 		JLabel weaponLabel = new JLabel("Weapon");
 		JLabel currentRoom = new JLabel(room.getName());
 		JButton submit = new JButton("Submit");
+		
+		//if suggester submits, handle the suggestion
 		submit.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
