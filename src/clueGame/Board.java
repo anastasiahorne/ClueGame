@@ -849,7 +849,7 @@ public class Board extends JPanel{
 		dialog.setVisible(true);
 	}
 
-	// End dialog
+	// End dialog for player accusation
 	public void end(boolean status) {
 		JDialog end = new JDialog(game, "The End!");
 		end.setModal(true);
@@ -882,7 +882,7 @@ public class Board extends JPanel{
 		end.setVisible(true);
 	}
 
-	// End dialog
+	// End dialog for computer accusation
 	public void computerEnd(ComputerPlayer player) {
 		JDialog end = new JDialog(game, "The End!");
 		end.setModal(true);
