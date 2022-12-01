@@ -889,6 +889,8 @@ public class Board extends JPanel{
 		end.setLayout(new GridLayout());
 		JLabel win = new JLabel(player.getName() + " won!");
 		end.add(win);
+		
+		//text if you lose
 		JLabel lose = new JLabel("Sorry, you lose!\nThe correct answer is\n"
 				+ solution.getPerson() + " with the "
 				+ solution.getWeapon() + " in "
