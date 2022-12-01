@@ -550,6 +550,8 @@ public class Board extends JPanel{
 						p.setPulled(true);
 					}
 				}
+				
+				//if a player disproves our suggestion, update our seen cards of that type
 				Card disproval = handleSuggestion(suggestion.getPerson(), suggestion.getWeapon(), suggestion.getRoom(), currentPlayer);
 				if (disproval != null) {
 					switch (disproval.getCardType()) {
@@ -568,9 +570,14 @@ public class Board extends JPanel{
 				}
 			}
 		}
+		//update the control panel, to display next roll and player
 		game.getControlPanel().repaint();
+		
+		//ensure the panels show the updated versions without having to resize the entire game window
 		game.getControlPanel().setVisible(false);
 		game.getControlPanel().setVisible(true);
+		
+		//update card panel values and gui
 		game.getCardPanel().updatePanels();
 		game.getCardPanel().repaint();
 		game.repaint();
