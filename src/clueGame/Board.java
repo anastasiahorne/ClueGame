@@ -720,6 +720,7 @@ public class Board extends JPanel{
 					}
 				}
 				//if the human player makes a suggestion, and it is disproved, update seen cards
+				
 				Card disproval = handleSuggestion(people.getItemAt(people.getSelectedIndex()), weapons.getItemAt(weapons.getSelectedIndex()), roomCard, getHumanPlayer());
 				if (disproval != null) {
 					switch (disproval.getCardType()) {
