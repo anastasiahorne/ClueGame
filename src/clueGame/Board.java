@@ -779,6 +779,8 @@ public class Board extends JPanel{
 
 	// Dialog for getting the accusation from the user
 	public void accusation(Player player) {
+		
+		//combo boxes for weapon,room and player choices
 		JComboBox<Card> people = new JComboBox<Card>();
 		for (Card card : getPlayerCards()) {
 			people.addItem(card);
@@ -791,21 +793,24 @@ public class Board extends JPanel{
 		for (Card card : getRoomCards()) {
 			rooms.addItem(card);
 		}
-		int row = getPlayers().get(currentPlayerIdx).getRow();
-		int col = getPlayers().get(currentPlayerIdx).getColumn();
-		Room room = getRoom(getCell(row, col));
+		
+		//window for accusation selection
 		JDialog dialog = new JDialog(game, "Make an Accusation");
 		dialog.setLayout(new GridLayout(4,2));
 		JLabel roomLabel = new JLabel("Room");
 		JLabel personLabel = new JLabel("Person");
 		JLabel weaponLabel = new JLabel("Weapon");
 		JButton submit = new JButton("Submit");
+		
+		//listener for submit button
 		submit.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
+				//get who, how and where from the combo box selections
 				Card p = people.getItemAt(people.getSelectedIndex());
 				Card w = weapons.getItemAt(weapons.getSelectedIndex());
 				Card r = rooms.getItemAt(rooms.getSelectedIndex());
+				//check if accusation is the same as the solution
 				if (checkAccusation(p, w, r)) {
 					end(true);
 				}
@@ -816,6 +821,8 @@ public class Board extends JPanel{
 				dialog.dispose();
 			}
 		});
+		
+		//allow person to cancel making a suggestion
 		JButton cancel = new JButton("Cancel");
 		cancel.addActionListener(new ActionListener() {
 			@Override
@@ -823,11 +830,14 @@ public class Board extends JPanel{
 				dialog.dispose();
 			}
 		});
+		
 		dialog.setSize(300,200);
 		dialog.setModal(true);
+		//add borders to labels
 		roomLabel.setBorder(new TitledBorder(new EtchedBorder()));
 		personLabel.setBorder(new TitledBorder(new EtchedBorder()));
 		weaponLabel.setBorder(new TitledBorder(new EtchedBorder()));
+		//add labels an combo boxes to the window
 		dialog.add(roomLabel);
 		dialog.add(rooms);
 		dialog.add(personLabel);
