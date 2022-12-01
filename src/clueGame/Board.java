@@ -519,7 +519,7 @@ public class Board extends JPanel{
 					}
 				}
 			}
-			//targets.remove(getCell(currentPlayer.getRow(), currentPlayer.getColumn()));
+	
 			// Flag unfinished
 			((HumanPlayer) currentPlayer).setFinished(false);
 			repaint();
@@ -534,7 +534,7 @@ public class Board extends JPanel{
 				currentPlayer.setPulled(false);
 			}
 			BoardCell target = ((ComputerPlayer) currentPlayer).selectAMoveTarget(targets);
-			//targets.remove(getCell(currentPlayer.getRow(), currentPlayer.getColumn()));
+			
 			int row = target.getRow();
 			int col = target.getCol();
 			// Move the player
